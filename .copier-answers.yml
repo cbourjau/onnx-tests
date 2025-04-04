@@ -1,0 +1,21 @@
+# This file is managed by Copier; DO NOT EDIT OR REMOVE.
+_commit: v0.13.0
+_src_path: git@github.com:Quantco/copier-template-python.git
+add_windows_tests_to_ci: true
+application: false
+build_conda_package: true
+build_docs: false
+github_url: https://github.com/quantco/onnx-tests
+github_user: cbourjau
+lint_sql_dialect: none
+minimal_python_version: py310
+project_short_description: Property-based tests for the ONNX standard
+project_slug: onnx-tests
+run_daily_tests: false
+strip_jupyter_notebook_output: true
+test_against_nightlies: false
+use_changelog: true
+use_committed: false
+use_conda_comply: false
+use_conventional_commits: false
+use_devcontainer: false
