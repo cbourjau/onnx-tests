@@ -35,6 +35,7 @@ FLOAT_DTYPES = [np.dtype(el) for el in ["float16", "float32", "float64"]]
 
 INTEGER_DTYPES = SIGNED_INTEGER_DTYPES + UNSIGNED_INTEGER_DTYPES
 NUMERIC_DTYPES = INTEGER_DTYPES + FLOAT_DTYPES
+NUMERIC_AND_BOOL_DTYPES = NUMERIC_DTYPES + [np.dtype("bool")]
 
 DTYPES = NUMERIC_DTYPES + [np.dtype("str"), np.dtype(bool)]
 
@@ -184,7 +185,18 @@ def assert_binary_against_reference(
     x1, x2 = arr1.spox_argument, arr2.spox_argument
     model = spox.build({"x1": x1, "x2": x2}, {"res": spox_fun(x1, x2)})
 
-    expected, *_ = run_reference(model, x1=arr1.array, x2=arr2.array).values()
-    candidate, *_ = run(model, x1=arr1.array, x2=arr2.array).values()
+    x1_arr = arr1.array
+    x2_arr = arr2.array
+    # Reference runtime cannot handle NumPy string types of different width
+    if x1_arr.dtype.kind == "U":
+        x1_arr = x1_arr.astype(object)
+    if x2_arr.dtype.kind == "U":
+        x2_arr = x2_arr.astype(object)
+    kwargs = {
+        "x1": x1_arr,
+        "x2": x2_arr,
+    }
+    expected, *_ = run_reference(model, **kwargs).values()
+    candidate, *_ = run(model, **kwargs).values()
 
     np.testing.assert_equal(candidate, expected)
