@@ -67,23 +67,6 @@ def starts_stops_steps(draw: st.DrawFn, data: np.ndarray) -> SliceInfo:
     )
 
 
-def slices(info: SliceInfo):
-    out = []
-    axes = list(range(len(info.starts.array))) if info.axes is None else info.axes.array
-    steps = [1 for _ in info.starts.array] if info.steps is None else info.steps.array
-
-    for start, end, step in zip(info.starts.array, info.ends.array, steps):
-        out.append(slice(start, end, step))
-
-    if len(out) == 0:
-        return out
-    # apply axes sorting
-    padded_out = [slice(None) for _ in range(np.max(axes) + 1)]
-    for ax, s in zip(axes, out):
-        padded_out[ax] = s
-    return padded_out
-
-
 @given(data=st.data())
 @pytest.mark.parametrize("dtype", h.DTYPES)
 def test_slice(data, dtype: np.dtype):
@@ -124,14 +107,15 @@ def test_slice(data, dtype: np.dtype):
         {"res": res},
     )
 
-    candidate, *_ = h.run(
-        model,
-        data=array.array,
-        starts=info.starts.array,
-        ends=info.ends.array,
+    kwargs = {
+        "model": model,
+        "data": array.array,
+        "starts": info.starts.array,
+        "ends": info.ends.array,
         **steps_arr_arg,
         **axes_arr_arg,
-    ).values()
-    expected = array.array[*slices(info)]
+    }
+    expected, *_ = h.run_reference(**kwargs).values()
+    candidate, *_ = h.run(**kwargs).values()
 
     np.testing.assert_array_equal(candidate, expected)

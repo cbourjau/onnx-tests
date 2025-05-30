@@ -79,7 +79,7 @@ def conv_kwargs(data: st.DataObject, dtype: np.dtype) -> Conv2DTestCase:
 
 
 @given(data=st.data())
-@pytest.mark.parametrize("dtype", ["float32"], ids=str)
+@pytest.mark.parametrize("dtype", h.FLOAT_DTYPES, ids=str)
 def test_conv_11(data: st.DataObject, dtype: str):
     # Opsets reexport earlier definitions if there has not been an
     # update. In the case of `Conv` this means that opset 17

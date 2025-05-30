@@ -25,6 +25,7 @@ def test_where(data, dtype: np.dtype):
     )
 
     candidate, *_ = h.run(model, cond=cond.array, x=x.array, y=y.array).values()
+    # ONNX standard explicitly references `numpy.where` semantics
     expected = np.where(cond.array, x.array, y.array)
 
     np.testing.assert_array_equal(candidate, expected)

@@ -104,7 +104,7 @@ def arrays(
 def broadcastable_arrays(
     draw: st.DrawFn, dtype: np.dtype
 ) -> tuple[ArrayWrapper, ArrayWrapper]:
-    shapes = draw(hyn.mutually_broadcastable_shapes(num_shapes=2))
+    shapes = draw(hyn.mutually_broadcastable_shapes(num_shapes=2, min_side=0))
 
     array1 = draw(arrays(dtype, shape=shapes.input_shapes[0]))
     array2 = draw(arrays(dtype, shape=shapes.input_shapes[1]))
