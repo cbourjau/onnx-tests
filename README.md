@@ -21,7 +21,7 @@ This Proof of concept implements such a hypothesis-based test suite for the ONNX
 
 ## State of this project
 
-An overview of the tested operators can be found [here](https://github.com/cbourjau/onnx-tests/covered_operators.md).
+An overview of the tested operators can be found [here](https://github.com/cbourjau/onnx-tests/blob/main/covered_operators.md).
 The tested runtime is currently hard-coded to be the onnxruntime but should naturally be configurable such that the test suite is easy to use by any implementation of the ONNX standard.
 
 A common pattern in property-based testing is to compare candidate-output against a "source-of-truth".
