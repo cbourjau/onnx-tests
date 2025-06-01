@@ -30,26 +30,33 @@ def conv_kwargs(data: st.DataObject, dtype: np.dtype) -> Conv2DTestCase:
             st.integers(min_value=4, max_value=32),
             st.integers(min_value=1, max_value=3),
             st.integers(min_value=1, max_value=3),  # number of feature maps
-        )
+        ),
+        label="X-shape",
     )
     k_h, k_w = data.draw(
         st.tuples(
             st.integers(min_value=1, max_value=4), st.integers(min_value=1, max_value=4)
-        )
+        ),
+        label="kernel-shape",
     )
 
     x = data.draw(h.arrays(dtype, shape=(N, C, H, W)))
     w = data.draw(h.arrays(dtype, (M, int(C / group), k_h, k_w)))
 
     # Optional bias
-    b = data.draw(h.arrays(dtype, (M,))) if data.draw(st.booleans()) else None
+    b = (
+        data.draw(h.arrays(dtype, (M,)))
+        if data.draw(st.booleans(), label="with-bias")
+        else None
+    )
 
     strides = data.draw(
         st.tuples(
             st.integers(min_value=1, max_value=2), st.integers(min_value=1, max_value=2)
-        )
+        ),
+        "strides",
     )
-    if data.draw(st.booleans()):
+    if data.draw(st.booleans(), "with-explicit-padding"):
         # Set pads and thus not auto_pad
         pads = list(
             data.draw(
@@ -58,13 +65,16 @@ def conv_kwargs(data: st.DataObject, dtype: np.dtype) -> Conv2DTestCase:
                     st.integers(min_value=0, max_value=2),
                     st.integers(min_value=0, max_value=2),
                     st.integers(min_value=0, max_value=2),
-                )
+                ),
+                label="pads",
             )
         )
         auto_pad = "NOTSET"
     else:
         pads = None
-        auto_pad = data.draw(st.sampled_from(["SAME_UPPER", "SAME_LOWER", "VALID"]))
+        auto_pad = data.draw(
+            st.sampled_from(["SAME_UPPER", "SAME_LOWER", "VALID"]), "auto_pad"
+        )
 
     return Conv2DTestCase(
         x=x,
@@ -79,7 +89,9 @@ def conv_kwargs(data: st.DataObject, dtype: np.dtype) -> Conv2DTestCase:
 
 
 @given(data=st.data())
-@pytest.mark.parametrize("dtype", h.FLOAT_DTYPES, ids=str)
+@pytest.mark.parametrize(
+    "dtype", h.SCHEMAS["ai.onnx"]["Conv"][11].dtype_constraints["T"], ids=str
+)
 def test_conv_11(data: st.DataObject, dtype: str):
     # Opsets reexport earlier definitions if there has not been an
     # update. In the case of `Conv` this means that opset 17
