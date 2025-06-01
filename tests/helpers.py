@@ -9,6 +9,7 @@ import onnx
 import spox
 from hypothesis import strategies as st
 from hypothesis.extra import numpy as hyn
+from onnx.defs import OpSchema, get_all_schemas_with_history
 from onnx.reference import ReferenceEvaluator
 from spox import Tensor, Var, argument
 
@@ -200,3 +201,55 @@ def assert_binary_against_reference(
     candidate, *_ = run(model, **kwargs).values()
 
     np.testing.assert_equal(candidate, expected)
+
+
+Domain = str
+Version = int
+Name = str
+
+
+class SchemaWrapper:
+    _schema: OpSchema
+
+    def __init__(self, schema: OpSchema):
+        self._schema = schema
+
+    @property
+    def dtype_constraints(self) -> dict[str, list[np.dtype]]:
+        # TODO: support all data types
+        dtype_map: dict[str, np.dtype] = {
+            "tensor(uint8)": np.dtype("uint8"),
+            "tensor(uint16)": np.dtype("uint16"),
+            "tensor(uint32)": np.dtype("uint32"),
+            "tensor(uint64)": np.dtype("uint64"),
+            "tensor(int8)": np.dtype("int8"),
+            "tensor(int16)": np.dtype("int16"),
+            "tensor(int32)": np.dtype("int32"),
+            "tensor(int64)": np.dtype("int64"),
+            "tensor(float16)": np.dtype("float16"),
+            "tensor(float)": np.dtype("float32"),
+            "tensor(double)": np.dtype("float64"),
+            "tesnsor(string)": np.dtype("str"),
+            "tesnsor(bool)": np.dtype("bool"),
+        }
+
+        out = {}
+        for item in self._schema.type_constraints:
+            out[item.type_param_str] = [
+                dtype_map[ty] for ty in item.allowed_type_strs if ty in dtype_map
+            ]
+        return out
+
+
+def _get_op_schemas() -> dict[Domain, dict[Name, dict[Version, SchemaWrapper]]]:
+    ALL_SCHEMAS: list[OpSchema] = get_all_schemas_with_history()  # type: ignore
+    out: dict[Domain, dict[Name, dict[Version, SchemaWrapper]]] = {}
+    for schema in ALL_SCHEMAS:
+        domain_name = schema.domain or "ai.onnx"
+        domain = out.setdefault(domain_name, {})
+        versions_of_op = domain.setdefault(schema.name, {})
+        versions_of_op[schema.since_version] = SchemaWrapper(schema)
+    return out
+
+
+SCHEMAS = _get_op_schemas()

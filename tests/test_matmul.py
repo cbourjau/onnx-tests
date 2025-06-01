@@ -8,7 +8,9 @@ from . import helpers as h
 
 
 @given(data=st.data(), shapes=h.matmul_shapes())
-@pytest.mark.parametrize("dtype", h.FLOAT_DTYPES, ids=str)
+@pytest.mark.parametrize(
+    "dtype", h.SCHEMAS["ai.onnx"]["MatMul"][13].dtype_constraints["T"], ids=str
+)
 def test_matmul_13(data, dtype: np.dtype, shapes):
     op = op17
     array1 = data.draw(h.arrays(dtype, shape=shapes[0]))

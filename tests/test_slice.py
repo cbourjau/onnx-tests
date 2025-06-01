@@ -68,8 +68,10 @@ def starts_stops_steps(draw: st.DrawFn, data: np.ndarray) -> SliceInfo:
 
 
 @given(data=st.data())
-@pytest.mark.parametrize("dtype", h.DTYPES)
-def test_slice(data, dtype: np.dtype):
+@pytest.mark.parametrize(
+    "dtype", h.SCHEMAS["ai.onnx"]["Slice"][13].dtype_constraints["T"]
+)
+def test_slice_v13(data, dtype: np.dtype):
     shape = data.draw(hyn.array_shapes(min_dims=1))
     array = data.draw(h.arrays(dtype=dtype, shape=shape))
 

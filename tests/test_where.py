@@ -10,8 +10,10 @@ from . import helpers as h
 
 
 @given(data=st.data())
-@pytest.mark.parametrize("dtype", h.DTYPES, ids=str)
-def test_where(data, dtype: np.dtype):
+@pytest.mark.parametrize(
+    "dtype", h.SCHEMAS["ai.onnx"]["Where"][16].dtype_constraints["T"], ids=str
+)
+def test_where_v16(data, dtype: np.dtype):
     shapes = data.draw(hyn.mutually_broadcastable_shapes(num_shapes=3))
 
     cond = data.draw(h.arrays(np.dtype(bool), shape=shapes.input_shapes[0]))

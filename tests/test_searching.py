@@ -46,7 +46,9 @@ def assert_against_reference(
 
 
 @given(data=st.data())
-@pytest.mark.parametrize("dtype", h.NUMERIC_DTYPES, ids=str)
+@pytest.mark.parametrize(
+    "dtype", h.SCHEMAS["ai.onnx"]["ArgMax"][13].dtype_constraints["T"], ids=str
+)
 def test_argmax_v13(data, dtype):
     # TODO: onnxruntime and reference produce yield different results with NaN values
     params = make_params(data, dtype)
@@ -63,7 +65,9 @@ def test_argmax_v13(data, dtype):
 
 
 @given(data=st.data())
-@pytest.mark.parametrize("dtype", h.NUMERIC_DTYPES, ids=str)
+@pytest.mark.parametrize(
+    "dtype", h.SCHEMAS["ai.onnx"]["ArgMax"][13].dtype_constraints["T"], ids=str
+)
 def test_argmin_v13(data, dtype):
     # TODO: onnxruntime and reference produce yield different results with NaN values
     params = make_params(data, dtype)

@@ -37,13 +37,20 @@ def arrays(dtype: np.dtype) -> st.SearchStrategy[h.ArrayWrapper]:
     )
 
 
+def dtypes(op_name: str, version: int, param_name: str) -> list[np.dtype]:
+    # Identity uses "V" as the type parameter name (rather than "T" like everywhere else)
+    return h.SCHEMAS["ai.onnx"][op_name][version].dtype_constraints[param_name]
+
+
 def unary_element_wise_test(
-    dtypes: list[np.dtype],
+    op_name: str,
+    version: int,
     op: Callable[[Var], Var],
     test: Callable[[np.ndarray, np.ndarray], None] = np.testing.assert_almost_equal,
+    param_name: str = "T",
 ) -> Callable:
     @given(data=st.data())
-    @pytest.mark.parametrize("dtype", dtypes, ids=str)
+    @pytest.mark.parametrize("dtype", dtypes(op_name, version, param_name), ids=str)
     def test_function(data, dtype: np.dtype):
         array = data.draw(arrays(dtype))
         assert_unary_against_reference(op, array, test=test)
@@ -68,56 +75,52 @@ def assert_allclose(actual: np.ndarray, desired: np.ndarray, /):
 
 
 test_abs_v13 = unary_element_wise_test(
-    h.NUMERIC_DTYPES, op17.abs, np.testing.assert_array_equal
+    "Abs", 13, op17.abs, np.testing.assert_array_equal
 )
-test_acos_v7 = unary_element_wise_test(h.FLOAT_DTYPES, op17.acos, assert_allclose)
-test_acosh_v9 = unary_element_wise_test(h.FLOAT_DTYPES, op17.acos, assert_allclose)
-test_asin_v7 = unary_element_wise_test(h.FLOAT_DTYPES, op17.asin, assert_allclose)
-test_asinh_v9 = unary_element_wise_test(h.FLOAT_DTYPES, op17.asin, assert_allclose)
-test_atan_v7 = unary_element_wise_test(h.FLOAT_DTYPES, op17.atan, assert_allclose)
-test_atanh_v9 = unary_element_wise_test(h.FLOAT_DTYPES, op17.atan, assert_allclose)
+test_acos_v7 = unary_element_wise_test("Acos", 7, op17.acos, assert_allclose)
+test_acosh_v9 = unary_element_wise_test("Acosh", 9, op17.acos, assert_allclose)
+test_asin_v7 = unary_element_wise_test("Asin", 7, op17.asin, assert_allclose)
+test_asinh_v9 = unary_element_wise_test("Asinh", 9, op17.asin, assert_allclose)
+test_atan_v7 = unary_element_wise_test("Atan", 7, op17.atan, assert_allclose)
+test_atanh_v9 = unary_element_wise_test("Atanh", 9, op17.atan, assert_allclose)
 
 test_ceil_v13 = unary_element_wise_test(
-    h.FLOAT_DTYPES, op17.ceil, np.testing.assert_array_equal
+    "Ceil", 13, op17.ceil, np.testing.assert_array_equal
 )
-test_cos_v7 = unary_element_wise_test(h.FLOAT_DTYPES, op17.cos, assert_allclose)
-test_cosh_v9 = unary_element_wise_test(h.FLOAT_DTYPES, op17.cos, assert_allclose)
-test_erf_v13 = unary_element_wise_test(h.NUMERIC_DTYPES, op17.erf, assert_allclose)
+test_cos_v7 = unary_element_wise_test("Cos", 7, op17.cos, assert_allclose)
+test_cosh_v9 = unary_element_wise_test("Cosh", 9, op17.cos, assert_allclose)
+test_erf_v13 = unary_element_wise_test("Erf", 13, op17.erf, assert_allclose)
 test_floor_v13 = unary_element_wise_test(
-    h.FLOAT_DTYPES, op17.floor, np.testing.assert_array_equal
+    "Floor", 13, op17.floor, np.testing.assert_array_equal
 )
 test_identity_v16 = unary_element_wise_test(
-    h.DTYPES, op17.identity, np.testing.assert_array_equal
+    "Identity", 16, op17.identity, np.testing.assert_array_equal, param_name="V"
 )
 test_isinf_v10 = unary_element_wise_test(
-    [np.dtype(np.float32), np.dtype(np.float64)],
-    op17.isinf,
-    np.testing.assert_array_equal,
+    "IsInf", 10, op17.isinf, np.testing.assert_array_equal, param_name="T1"
 )
 test_isinf_v20 = unary_element_wise_test(
-    h.FLOAT_DTYPES, op20.isinf, np.testing.assert_array_equal
+    "IsInf", 20, op20.isinf, np.testing.assert_array_equal, param_name="T1"
 )
 test_isnan_v13 = unary_element_wise_test(
-    h.FLOAT_DTYPES, op17.isnan, np.testing.assert_array_equal
+    "IsNaN", 13, op17.isnan, np.testing.assert_array_equal, param_name="T1"
 )
-test_log_v13 = unary_element_wise_test(h.FLOAT_DTYPES, op17.log, assert_allclose)
+test_log_v13 = unary_element_wise_test("Log", 13, op17.log, assert_allclose)
 test_reciprocal_v13 = unary_element_wise_test(
-    h.FLOAT_DTYPES, op17.reciprocal, assert_allclose
+    "Reciprocal", 13, op17.reciprocal, assert_allclose
 )
 test_round_v11 = unary_element_wise_test(
-    h.FLOAT_DTYPES, op17.round, np.testing.assert_array_equal
+    "Round", 11, op17.round, np.testing.assert_array_equal
 )
 # Bug in reference of sigmoid?
-test_sigmoid_v13 = unary_element_wise_test(
-    h.FLOAT_DTYPES, op17.sigmoid, assert_allclose
-)
+test_sigmoid_v13 = unary_element_wise_test("Sigmoid", 13, op17.sigmoid, assert_allclose)
 # Standard does not specify NaN behavior. Presumably it should take the sign-bit, but does not say so.
-test_sign_v13 = unary_element_wise_test(h.FLOAT_DTYPES, op17.sign, assert_allclose)
+test_sign_v13 = unary_element_wise_test("Sign", 13, op17.sign, assert_allclose)
 
-test_sin_v7 = unary_element_wise_test(h.FLOAT_DTYPES, op17.sin, assert_allclose)
-test_sinh_v9 = unary_element_wise_test(h.FLOAT_DTYPES, op17.sinh, assert_allclose)
-test_sqrt_v13 = unary_element_wise_test(h.FLOAT_DTYPES, op17.sqrt, assert_allclose)
-test_tan_v7 = unary_element_wise_test(h.FLOAT_DTYPES, op17.tan, assert_allclose)
-test_tanh_v13 = unary_element_wise_test(h.FLOAT_DTYPES, op17.tanh, assert_allclose)
-# Bug in reference implementation of Mish
-test_mish_v18 = unary_element_wise_test(h.FLOAT_DTYPES, op18.mish, assert_allclose)
+test_sin_v7 = unary_element_wise_test("Sin", 7, op17.sin, assert_allclose)
+test_sinh_v9 = unary_element_wise_test("Sinh", 9, op17.sinh, assert_allclose)
+test_sqrt_v13 = unary_element_wise_test("Sqrt", 13, op17.sqrt, assert_allclose)
+test_tan_v7 = unary_element_wise_test("Tan", 7, op17.tan, assert_allclose)
+test_tanh_v13 = unary_element_wise_test("Tanh", 13, op17.tanh, assert_allclose)
+# TODO: Bug in reference implementation of Mish
+test_mish_v18 = unary_element_wise_test("Mish", 18, op18.mish, assert_allclose)
