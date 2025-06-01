@@ -7,6 +7,7 @@ from hypothesis import strategies as st
 from hypothesis.extra import numpy as hyn
 
 from . import helpers as h
+from .config import run_candidate
 
 
 @given(data=st.data())
@@ -26,7 +27,7 @@ def test_where_v16(data, dtype: np.dtype):
         {"res": res},
     )
 
-    candidate, *_ = h.run(model, cond=cond.array, x=x.array, y=y.array).values()
+    candidate, *_ = run_candidate(model, cond=cond.array, x=x.array, y=y.array).values()
     # ONNX standard explicitly references `numpy.where` semantics
     expected = np.where(cond.array, x.array, y.array)
 

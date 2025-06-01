@@ -65,15 +65,12 @@ no_implicit_optional = true
 check_untyped_defs = true
 
 
-# If you run into `missing library stubs or py.typed marker` errors
-# and no stubs are available for this library, you can add an override
-# to ignore the missing imports.
-# [[tool.mypy.overrides]]
-# module = ["my_module"]
-# ignore_missing_imports = true
+[[tool.mypy.overrides]]
+module = ["onnxruntime", "jaxonnxruntime"]
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["onnx_tests"]
 
 
 [tool.typos]

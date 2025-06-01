@@ -5,13 +5,14 @@ from math import prod
 from typing import Any
 
 import numpy as np
-import onnx
 import spox
 from hypothesis import strategies as st
 from hypothesis.extra import numpy as hyn
 from onnx.defs import OpSchema, get_all_schemas_with_history
-from onnx.reference import ReferenceEvaluator
 from spox import Tensor, Var, argument
+
+from .config import run_candidate
+from .runtime_wrappers import run_reference
 
 
 @dataclass
@@ -106,36 +107,6 @@ def matmul_shapes(draw: st.DrawFn) -> tuple[tuple[int, ...], tuple[int, ...]]:
     return shape1, shape2
 
 
-def create_session(model: onnx.ModelProto):
-    import onnxruntime as ort  # type: ignore
-
-    return ort.InferenceSession(model.SerializeToString())
-
-
-def run(model: onnx.ModelProto, **kwargs: np.ndarray) -> dict[str, np.ndarray]:
-    sess = create_session(model)
-    output_names = [meta.name for meta in sess.get_outputs()]
-    return {k: v for k, v in zip(output_names, sess.run(None, kwargs))}
-
-
-def run_reference(
-    model: onnx.ModelProto, **kwargs: np.ndarray
-) -> dict[str, np.ndarray]:
-    sess = ReferenceEvaluator(model, optimized=False)
-    result_list = sess.run(None, kwargs)
-    if not isinstance(result_list, list):
-        raise TypeError(
-            f"expected reference results as 'list', got `{type(result_list)}`"
-        )
-
-    non_str_names = [type(el) for el in sess.output_names if not isinstance(el, str)]
-    if non_str_names:
-        raise TypeError(
-            f"expected output names to be of type 'str', got `{non_str_names}`"
-        )
-    return {k: v for k, v in zip(sess.output_names, result_list)}  # type: ignore
-
-
 def assert_binary_numpy(
     np_fun: Callable[[np.ndarray, np.ndarray], np.ndarray],
     spox_fun: Callable[[Var, Var], Var],
@@ -146,7 +117,7 @@ def assert_binary_numpy(
     model = spox.build({"x1": x1, "x2": x2}, {"res": spox_fun(x1, x2)})
 
     expected = np_fun(arr1.array, arr2.array)
-    candidate, *_ = run(model, x1=arr1.array, x2=arr2.array).values()
+    candidate, *_ = run_candidate(model, x1=arr1.array, x2=arr2.array).values()
 
     np.testing.assert_allclose(candidate, expected)
 
@@ -171,7 +142,7 @@ def assert_binary_against_reference(
         "x2": x2_arr,
     }
     expected, *_ = run_reference(model, **kwargs).values()
-    candidate, *_ = run(model, **kwargs).values()
+    candidate, *_ = run_candidate(model, **kwargs).values()
 
     np.testing.assert_equal(candidate, expected)
 

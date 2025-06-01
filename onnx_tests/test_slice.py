@@ -9,6 +9,7 @@ from hypothesis import given
 from hypothesis import strategies as st
 
 from . import helpers as h
+from .config import run_candidate
 
 _MAX_INT64 = np.iinfo(np.int64).max
 _MIN_INT64 = np.iinfo(np.int64).min
@@ -118,6 +119,6 @@ def test_slice_v13(data, dtype: np.dtype):
         **axes_arr_arg,
     }
     expected, *_ = h.run_reference(**kwargs).values()
-    candidate, *_ = h.run(**kwargs).values()
+    candidate, *_ = run_candidate(**kwargs).values()
 
     np.testing.assert_array_equal(candidate, expected)

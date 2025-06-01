@@ -7,6 +7,13 @@ platforms = ["osx-arm64", "osx-64", "linux-64", "linux-aarch64", "win-64"]
 [tasks]
 postinstall = "pip install --no-build-isolation --no-deps --disable-pip-version-check -e ."
 
+[tasks.test-reference]
+cmd = "pytest onnx_tests"
+env = { "RUN_CANDIDATE" = "onnx_tests.runtime_wrappers.run_reference" }
+[tasks.test-ort]
+cmd = "pytest onnx_tests"
+env = { "RUN_CANDIDATE" = "onnx_tests.runtime_wrappers.run_ort" }
+
 [dependencies]
 python = ">=3.10"
 hypothesis = ">=6.130.4"
@@ -33,6 +40,7 @@ mypy = "*"
 [feature.test.tasks]
 test = "pytest"
 test-coverage = "pytest --cov=onnx_tests --cov-report=xml --cov-report=term-missing"
+
 
 [feature.lint.dependencies]
 pre-commit = "*"

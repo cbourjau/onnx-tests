@@ -8,6 +8,7 @@ from hypothesis import given
 from hypothesis import strategies as st
 
 from . import helpers as h
+from .config import run_candidate
 
 
 class Conv2DTestCase(NamedTuple):
@@ -123,6 +124,6 @@ def test_conv_11(data: st.DataObject, dtype: str):
         "W": w.array,
     } | ({} if b is None else {"B": b.array})
     expected, *_ = h.run_reference(model, **array_args).values()
-    candidate, *_ = h.run(model, **array_args).values()
+    candidate, *_ = run_candidate(model, **array_args).values()
 
     np.testing.assert_equal(candidate, expected)

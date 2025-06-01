@@ -13,6 +13,7 @@ from hypothesis import strategies as st
 from spox import Var
 
 from . import helpers as h
+from .config import run_candidate
 
 
 def assert_unary_against_reference(
@@ -22,7 +23,7 @@ def assert_unary_against_reference(
 ):
     model = spox.build({"x": x.spox_argument}, {"res": spox_fun(x.spox_argument)})
 
-    expected, *_ = h.run(model, x=x.array).values()
+    expected, *_ = run_candidate(model, x=x.array).values()
     candidate, *_ = h.run_reference(model, x=x.array).values()
 
     test(candidate, expected)

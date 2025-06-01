@@ -8,6 +8,8 @@ from hypothesis import given
 from hypothesis import strategies as st
 
 from . import helpers as h
+from .config import run_candidate
+from .runtime_wrappers import run_reference
 
 
 class AveragePool2DTestCase(NamedTuple):
@@ -119,7 +121,7 @@ def test_average_pool_19(data: st.DataObject, dtype: str):
     model = spox.build({"X": x.spox_argument}, {"res": res})
 
     array_args = {"X": x.array}
-    expected, *_ = h.run_reference(model, **array_args).values()
-    candidate, *_ = h.run(model, **array_args).values()
+    expected, *_ = run_reference(model, **array_args).values()
+    candidate, *_ = run_candidate(model, **array_args).values()
 
     np.testing.assert_equal(candidate, expected)
