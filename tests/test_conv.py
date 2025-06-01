@@ -22,6 +22,8 @@ class Conv2DTestCase(NamedTuple):
 
 
 def conv_kwargs(data: st.DataObject, dtype: np.dtype) -> Conv2DTestCase:
+    # TODO: Test different groups
+    # TODO: Test dilation
     group = 1
     N, H, W, C, M = data.draw(
         st.tuples(

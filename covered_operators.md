@@ -1,0 +1,795 @@
+# ai.onnx
+
+- Abs
+  - [ ] 1
+  - [ ] 6
+  - [x] 13
+- Acos
+  - [x] 7
+  - [ ] 22
+- Acosh
+  - [x] 9
+  - [ ] 22
+- Add
+  - [ ] 1
+  - [ ] 6
+  - [ ] 7
+  - [ ] 13
+  - [x] 14
+- AffineGrid
+  - [ ] 20
+- And
+  - [ ] 1
+  - [x] 7
+- ArgMax
+  - [ ] 1
+  - [ ] 11
+  - [ ] 12
+  - [x] 13
+- ArgMin
+  - [ ] 1
+  - [ ] 11
+  - [ ] 12
+  - [x] 13
+- Asin
+  - [x] 7
+  - [ ] 22
+- Asinh
+  - [x] 9
+  - [ ] 22
+- Atan
+  - [x] 7
+  - [ ] 22
+- Atanh
+  - [x] 9
+  - [ ] 22
+- AveragePool
+  - [ ] 1
+  - [ ] 7
+  - [ ] 10
+  - [ ] 11
+  - [x] 19
+  - [ ] 22
+- BatchNormalization
+  - [ ] 1
+  - [ ] 6
+  - [ ] 7
+  - [ ] 9
+  - [ ] 14
+  - [ ] 15
+- Bernoulli
+  - [ ] 15
+  - [ ] 22
+- BitShift
+  - [x] 11
+- BitwiseAnd
+  - [x] 18
+- BitwiseNot
+  - [x] 18
+- BitwiseOr
+  - [x] 18
+- BitwiseXor
+  - [x] 18
+- BlackmanWindow
+  - [ ] 17
+- Cast
+  - [ ] 1
+  - [ ] 6
+  - [ ] 9
+  - [ ] 13
+  - [ ] 19
+  - [ ] 21
+- CastLike
+  - [ ] 15
+  - [ ] 19
+  - [ ] 21
+- Ceil
+  - [ ] 1
+  - [ ] 6
+  - [x] 13
+- Celu
+  - [ ] 12
+- CenterCropPad
+  - [ ] 18
+- Clip
+  - [ ] 1
+  - [ ] 6
+  - [ ] 11
+  - [ ] 12
+  - [ ] 13
+- Col2Im
+  - [ ] 18
+- Compress
+  - [ ] 9
+  - [ ] 11
+- Concat
+  - [ ] 1
+  - [ ] 4
+  - [ ] 11
+  - [ ] 13
+- ConcatFromSequence
+  - [ ] 11
+- Constant
+  - [ ] 1
+  - [ ] 9
+  - [ ] 11
+  - [ ] 12
+  - [ ] 13
+  - [ ] 19
+  - [ ] 21
+- ConstantOfShape
+  - [ ] 9
+  - [ ] 20
+  - [ ] 21
+- Conv
+  - [ ] 1
+  - [x] 11
+  - [ ] 22
+- ConvInteger
+  - [ ] 10
+- ConvTranspose
+  - [ ] 1
+  - [ ] 11
+  - [ ] 22
+- Cos
+  - [x] 7
+  - [ ] 22
+- Cosh
+  - [x] 9
+  - [ ] 22
+- CumSum
+  - [ ] 11
+  - [ ] 14
+- DFT
+  - [ ] 17
+  - [ ] 20
+- DeformConv
+  - [ ] 19
+  - [ ] 22
+- DepthToSpace
+  - [ ] 1
+  - [ ] 11
+  - [ ] 13
+- DequantizeLinear
+  - [ ] 10
+  - [ ] 13
+  - [ ] 19
+  - [ ] 21
+- Det
+  - [ ] 11
+  - [ ] 22
+- Div
+  - [ ] 1
+  - [ ] 6
+  - [ ] 7
+  - [ ] 13
+  - [ ] 14
+- Dropout
+  - [ ] 1
+  - [ ] 6
+  - [ ] 7
+  - [ ] 10
+  - [ ] 12
+  - [ ] 13
+  - [ ] 22
+- DynamicQuantizeLinear
+  - [ ] 11
+- Einsum
+  - [ ] 12
+- Elu
+  - [ ] 1
+  - [ ] 6
+  - [ ] 22
+- Equal
+  - [ ] 1
+  - [ ] 7
+  - [ ] 11
+  - [x] 13
+  - [x] 19
+- Erf
+  - [ ] 9
+  - [ ] 13
+- Exp
+  - [ ] 1
+  - [ ] 6
+  - [x] 13
+- Expand
+  - [ ] 8
+  - [ ] 13
+- EyeLike
+  - [ ] 9
+  - [ ] 22
+- Flatten
+  - [ ] 1
+  - [ ] 9
+  - [ ] 11
+  - [ ] 13
+  - [ ] 21
+- Floor
+  - [ ] 1
+  - [ ] 6
+  - [x] 13
+- GRU
+  - [ ] 1
+  - [ ] 3
+  - [ ] 7
+  - [ ] 14
+  - [ ] 22
+- Gather
+  - [ ] 1
+  - [ ] 11
+  - [ ] 13
+- GatherElements
+  - [ ] 11
+  - [ ] 13
+- GatherND
+  - [ ] 11
+  - [ ] 12
+  - [ ] 13
+- Gelu
+  - [ ] 20
+- Gemm
+  - [ ] 1
+  - [ ] 6
+  - [ ] 7
+  - [ ] 9
+  - [ ] 11
+  - [ ] 13
+- GlobalAveragePool
+  - [ ] 1
+  - [ ] 22
+- GlobalLpPool
+  - [ ] 1
+  - [ ] 2
+  - [ ] 22
+- GlobalMaxPool
+  - [ ] 1
+  - [ ] 22
+- Greater
+  - [ ] 1
+  - [ ] 7
+  - [ ] 9
+  - [x] 13
+- GreaterOrEqual
+  - [ ] 12
+  - [x] 16
+- GridSample
+  - [ ] 16
+  - [ ] 20
+  - [ ] 22
+- GroupNormalization
+  - [ ] 18
+  - [ ] 21
+- HammingWindow
+  - [ ] 17
+- HannWindow
+  - [ ] 17
+- HardSigmoid
+  - [ ] 1
+  - [ ] 6
+  - [ ] 22
+- HardSwish
+  - [ ] 14
+  - [ ] 22
+- Hardmax
+  - [ ] 1
+  - [ ] 11
+  - [ ] 13
+- Identity
+  - [ ] 1
+  - [ ] 13
+  - [ ] 14
+  - [x] 16
+  - [ ] 19
+  - [ ] 21
+- If
+  - [ ] 1
+  - [ ] 11
+  - [ ] 13
+  - [ ] 16
+  - [ ] 19
+  - [ ] 21
+- ImageDecoder
+  - [ ] 20
+- InstanceNormalization
+  - [ ] 1
+  - [ ] 6
+  - [ ] 22
+- IsInf
+  - [ ] 10
+  - [x] 20
+- IsNaN
+  - [ ] 9
+  - [x] 13
+  - [x] 20
+- LRN
+  - [ ] 1
+  - [ ] 13
+- LSTM
+  - [ ] 1
+  - [ ] 7
+  - [ ] 14
+  - [ ] 22
+- LayerNormalization
+  - [ ] 17
+- LeakyRelu
+  - [ ] 1
+  - [ ] 6
+  - [ ] 16
+- Less
+  - [ ] 1
+  - [ ] 7
+  - [ ] 9
+  - [x] 13
+- LessOrEqual
+  - [ ] 12
+  - [x] 16
+- Log
+  - [ ] 1
+  - [ ] 6
+  - [x] 13
+- LogSoftmax
+  - [ ] 1
+  - [ ] 11
+  - [ ] 13
+- Loop
+  - [ ] 1
+  - [ ] 11
+  - [ ] 13
+  - [ ] 16
+  - [ ] 19
+  - [ ] 21
+- LpNormalization
+  - [ ] 1
+  - [ ] 22
+- LpPool
+  - [ ] 1
+  - [ ] 2
+  - [ ] 11
+  - [ ] 18
+  - [ ] 22
+- MatMul
+  - [ ] 1
+  - [ ] 9
+  - [x] 13
+- MatMulInteger
+  - [ ] 10
+- Max
+  - [ ] 1
+  - [ ] 6
+  - [ ] 8
+  - [ ] 12
+  - [ ] 13
+- MaxPool
+  - [ ] 1
+  - [ ] 8
+  - [ ] 10
+  - [ ] 11
+  - [ ] 12
+  - [ ] 22
+- MaxRoiPool
+  - [ ] 1
+  - [ ] 22
+- MaxUnpool
+  - [ ] 9
+  - [ ] 11
+  - [ ] 22
+- Mean
+  - [ ] 1
+  - [ ] 6
+  - [ ] 8
+  - [ ] 13
+- MeanVarianceNormalization
+  - [ ] 9
+  - [ ] 13
+- MelWeightMatrix
+  - [ ] 17
+- Min
+  - [ ] 1
+  - [ ] 6
+  - [ ] 8
+  - [ ] 12
+  - [ ] 13
+- Mish
+  - [ ] 18
+  - [ ] 22
+- Mod
+  - [ ] 10
+  - [x] 13
+- Mul
+  - [ ] 1
+  - [ ] 6
+  - [ ] 7
+  - [ ] 13
+  - [x] 14
+- Multinomial
+  - [ ] 7
+  - [ ] 22
+- Neg
+  - [ ] 1
+  - [ ] 6
+  - [x] 13
+- NegativeLogLikelihoodLoss
+  - [ ] 12
+  - [ ] 13
+  - [ ] 22
+- NonMaxSuppression
+  - [ ] 10
+  - [ ] 11
+- NonZero
+  - [ ] 9
+  - [ ] 13
+- Not
+  - [x] 1
+- OneHot
+  - [ ] 9
+  - [ ] 11
+- Optional
+  - [ ] 15
+- OptionalGetElement
+  - [ ] 15
+  - [ ] 18
+- OptionalHasElement
+  - [ ] 15
+  - [ ] 18
+- Or
+  - [ ] 1
+  - [x] 7
+- PRelu
+  - [ ] 1
+  - [ ] 6
+  - [ ] 7
+  - [ ] 9
+  - [ ] 16
+- Pad
+  - [ ] 1
+  - [ ] 2
+  - [ ] 11
+  - [ ] 13
+  - [ ] 18
+  - [ ] 19
+  - [ ] 21
+- Pow
+  - [ ] 1
+  - [ ] 7
+  - [ ] 12
+  - [ ] 13
+  - [ ] 15
+- QLinearConv
+  - [ ] 10
+- QLinearMatMul
+  - [ ] 10
+  - [ ] 21
+- QuantizeLinear
+  - [ ] 10
+  - [ ] 13
+  - [ ] 19
+  - [ ] 21
+- RNN
+  - [ ] 1
+  - [ ] 7
+  - [ ] 14
+  - [ ] 22
+- RandomNormal
+  - [ ] 1
+  - [ ] 22
+- RandomNormalLike
+  - [ ] 1
+  - [ ] 22
+- RandomUniform
+  - [ ] 1
+  - [ ] 22
+- RandomUniformLike
+  - [ ] 1
+  - [ ] 22
+- Range
+  - [ ] 11
+- Reciprocal
+  - [ ] 1
+  - [ ] 6
+  - [ ] 13
+- ReduceL1
+  - [ ] 1
+  - [ ] 11
+  - [ ] 13
+  - [ ] 18
+- ReduceL2
+  - [ ] 1
+  - [ ] 11
+  - [ ] 13
+  - [ ] 18
+- ReduceLogSum
+  - [ ] 1
+  - [ ] 11
+  - [ ] 13
+  - [ ] 18
+- ReduceLogSumExp
+  - [ ] 1
+  - [ ] 11
+  - [ ] 13
+  - [ ] 18
+- ReduceMax
+  - [ ] 1
+  - [ ] 11
+  - [ ] 12
+  - [ ] 13
+  - [ ] 18
+  - [ ] 20
+- ReduceMean
+  - [ ] 1
+  - [ ] 11
+  - [ ] 13
+  - [ ] 18
+- ReduceMin
+  - [ ] 1
+  - [ ] 11
+  - [ ] 12
+  - [ ] 13
+  - [ ] 18
+  - [ ] 20
+- ReduceProd
+  - [ ] 1
+  - [ ] 11
+  - [ ] 13
+  - [ ] 18
+- ReduceSum
+  - [ ] 1
+  - [ ] 11
+  - [ ] 13
+- ReduceSumSquare
+  - [ ] 1
+  - [ ] 11
+  - [ ] 13
+  - [ ] 18
+- RegexFullMatch
+  - [ ] 20
+- Relu
+  - [ ] 1
+  - [ ] 6
+  - [ ] 13
+  - [ ] 14
+- Reshape
+  - [ ] 1
+  - [ ] 5
+  - [ ] 13
+  - [ ] 14
+  - [ ] 19
+  - [ ] 21
+- Resize
+  - [ ] 10
+  - [ ] 11
+  - [ ] 13
+  - [ ] 18
+  - [ ] 19
+- ReverseSequence
+  - [ ] 10
+- RoiAlign
+  - [ ] 10
+  - [ ] 16
+  - [ ] 22
+- Round
+  - [ ] 11
+  - [ ] 22
+- STFT
+  - [ ] 17
+- Scan
+  - [ ] 8
+  - [ ] 9
+  - [ ] 11
+  - [ ] 16
+  - [ ] 19
+  - [ ] 21
+- Scatter
+  - [ ] 9
+  - [ ] 11
+- ScatterElements
+  - [ ] 11
+  - [ ] 13
+  - [ ] 16
+  - [ ] 18
+- ScatterND
+  - [ ] 11
+  - [ ] 13
+  - [ ] 16
+  - [ ] 18
+- Selu
+  - [ ] 1
+  - [ ] 6
+  - [ ] 22
+- SequenceAt
+  - [ ] 11
+- SequenceConstruct
+  - [ ] 11
+- SequenceEmpty
+  - [ ] 11
+- SequenceErase
+  - [ ] 11
+- SequenceInsert
+  - [ ] 11
+- SequenceLength
+  - [ ] 11
+- SequenceMap
+  - [ ] 17
+- Shape
+  - [ ] 1
+  - [ ] 13
+  - [ ] 15
+  - [ ] 19
+  - [ ] 21
+- Shrink
+  - [ ] 9
+- Sigmoid
+  - [ ] 1
+  - [ ] 6
+  - [ ] 13
+- Sign
+  - [ ] 9
+  - [x] 13
+- Sin
+  - [x] 7
+  - [ ] 22
+- Sinh
+  - [x] 9
+  - [ ] 22
+- Size
+  - [ ] 1
+  - [ ] 13
+  - [ ] 19
+  - [ ] 21
+- Slice
+  - [ ] 1
+  - [ ] 10
+  - [ ] 11
+  - [x] 13
+- Softmax
+  - [ ] 1
+  - [ ] 11
+  - [ ] 13
+- SoftmaxCrossEntropyLoss
+  - [ ] 12
+  - [ ] 13
+- Softplus
+  - [ ] 1
+  - [ ] 22
+- Softsign
+  - [ ] 1
+  - [ ] 22
+- SpaceToDepth
+  - [ ] 1
+  - [ ] 13
+- Split
+  - [ ] 1
+  - [ ] 2
+  - [ ] 11
+  - [ ] 13
+  - [ ] 18
+- SplitToSequence
+  - [ ] 11
+- Sqrt
+  - [ ] 1
+  - [ ] 6
+  - [x] 13
+- Squeeze
+  - [ ] 1
+  - [ ] 11
+  - [ ] 13
+  - [ ] 21
+- StringConcat
+  - [ ] 20
+- StringNormalizer
+  - [ ] 10
+- StringSplit
+  - [ ] 20
+- Sub
+  - [ ] 1
+  - [ ] 6
+  - [ ] 7
+  - [ ] 13
+  - [x] 14
+- Sum
+  - [ ] 1
+  - [ ] 6
+  - [ ] 8
+  - [ ] 13
+- Tan
+  - [x] 7
+  - [ ] 22
+- Tanh
+  - [ ] 1
+  - [ ] 6
+  - [x] 13
+- TfIdfVectorizer
+  - [ ] 9
+- ThresholdedRelu
+  - [ ] 10
+  - [ ] 22
+- Tile
+  - [ ] 1
+  - [ ] 6
+  - [ ] 13
+- TopK
+  - [ ] 1
+  - [ ] 10
+  - [ ] 11
+- Transpose
+  - [ ] 1
+  - [ ] 13
+  - [ ] 21
+- Trilu
+  - [ ] 14
+- Unique
+  - [ ] 11
+- Unsqueeze
+  - [ ] 1
+  - [ ] 11
+  - [ ] 13
+  - [ ] 21
+- Upsample
+  - [ ] 1
+  - [ ] 7
+  - [ ] 9
+  - [ ] 10
+- Where
+  - [ ] 9
+  - [x] 16
+- Xor
+  - [ ] 1
+  - [x] 7
+
+# ai.onnx.ml
+
+- ArrayFeatureExtractor
+  - [ ] 1
+- Binarizer
+  - [ ] 1
+- CastMap
+  - [ ] 1
+- CategoryMapper
+  - [ ] 1
+- DictVectorizer
+  - [ ] 1
+- FeatureVectorizer
+  - [ ] 1
+- Imputer
+  - [ ] 1
+- LabelEncoder
+  - [ ] 1
+  - [ ] 2
+  - [ ] 4
+- LinearClassifier
+  - [ ] 1
+- LinearRegressor
+  - [ ] 1
+- Normalizer
+  - [ ] 1
+- OneHotEncoder
+  - [ ] 1
+- SVMClassifier
+  - [ ] 1
+- SVMRegressor
+  - [ ] 1
+- Scaler
+  - [ ] 1
+- TreeEnsemble
+  - [ ] 5
+- TreeEnsembleClassifier
+  - [ ] 1
+  - [ ] 3
+  - [ ] 5
+- TreeEnsembleRegressor
+  - [ ] 1
+  - [ ] 3
+  - [ ] 5
+- ZipMap
+  - [ ] 1
+
+# ai.onnx.preview.training
+
+- Adagrad
+  - [ ] 1
+- Adam
+  - [ ] 1
+- Gradient
+  - [ ] 1
+- Momentum
+  - [ ] 1

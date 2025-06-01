@@ -13,33 +13,6 @@ from onnx.defs import OpSchema, get_all_schemas_with_history
 from onnx.reference import ReferenceEvaluator
 from spox import Tensor, Var, argument
 
-SIGNED_INTEGER_DTYPES = [
-    np.dtype(el)
-    for el in [
-        "int8",
-        "int16",
-        "int32",
-        "int64",
-    ]
-]
-UNSIGNED_INTEGER_DTYPES = [
-    np.dtype(el)
-    for el in [
-        "uint8",
-        "uint16",
-        "uint32",
-        "uint64",
-    ]
-]
-
-FLOAT_DTYPES = [np.dtype(el) for el in ["float16", "float32", "float64"]]
-
-INTEGER_DTYPES = SIGNED_INTEGER_DTYPES + UNSIGNED_INTEGER_DTYPES
-NUMERIC_DTYPES = INTEGER_DTYPES + FLOAT_DTYPES
-NUMERIC_AND_BOOL_DTYPES = NUMERIC_DTYPES + [np.dtype("bool")]
-
-DTYPES = NUMERIC_DTYPES + [np.dtype("str"), np.dtype(bool)]
-
 
 @dataclass
 class Shape:
@@ -229,8 +202,8 @@ class SchemaWrapper:
             "tensor(float16)": np.dtype("float16"),
             "tensor(float)": np.dtype("float32"),
             "tensor(double)": np.dtype("float64"),
-            "tesnsor(string)": np.dtype("str"),
-            "tesnsor(bool)": np.dtype("bool"),
+            "tensor(string)": np.dtype("str"),
+            "tensor(bool)": np.dtype("bool"),
         }
 
         out = {}

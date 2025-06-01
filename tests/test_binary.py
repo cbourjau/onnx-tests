@@ -34,6 +34,14 @@ test_bitwise_and_v18 = make_binary_element_wise_test("BitwiseAnd", 18, op18.bitw
 test_bitwise_or_v18 = make_binary_element_wise_test("BitwiseOr", 18, op18.bitwise_or)
 test_bitwise_xor_v18 = make_binary_element_wise_test("BitwiseXor", 18, op18.bitwise_xor)
 
+# TODO: Overflow should probably be explicit undefined behavior in the ONNX standard, but isn't
+test_bit_shift_left_v11 = make_binary_element_wise_test(
+    "BitShift", 11, lambda x, y: op17.bit_shift(x, y, direction="LEFT")
+)
+test_bit_shift_right_v11 = make_binary_element_wise_test(
+    "BitShift", 11, lambda x, y: op17.bit_shift(x, y, direction="RIGHT")
+)
+
 # Division by zero is not specified.
 # test_div_v14 = make_binary_element_wise_test(h.NUMERIC_DTYPES, op17.div)
 

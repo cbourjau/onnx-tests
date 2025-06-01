@@ -90,6 +90,7 @@ test_ceil_v13 = unary_element_wise_test(
 test_cos_v7 = unary_element_wise_test("Cos", 7, op17.cos, assert_allclose)
 test_cosh_v9 = unary_element_wise_test("Cosh", 9, op17.cos, assert_allclose)
 test_erf_v13 = unary_element_wise_test("Erf", 13, op17.erf, assert_allclose)
+test_exp_v13 = unary_element_wise_test("Exp", 13, op17.exp, assert_allclose)
 test_floor_v13 = unary_element_wise_test(
     "Floor", 13, op17.floor, np.testing.assert_array_equal
 )
@@ -105,7 +106,15 @@ test_isinf_v20 = unary_element_wise_test(
 test_isnan_v13 = unary_element_wise_test(
     "IsNaN", 13, op17.isnan, np.testing.assert_array_equal, param_name="T1"
 )
+test_isnan_v20 = unary_element_wise_test(
+    "IsNaN", 20, op20.isnan, np.testing.assert_array_equal, param_name="T1"
+)
 test_log_v13 = unary_element_wise_test("Log", 13, op17.log, assert_allclose)
+test_neg_v13 = unary_element_wise_test("Neg", 13, op17.neg, assert_allclose)
+test_not_v1 = unary_element_wise_test(
+    "Not", 1, op17.not_, np.testing.assert_array_almost_equal
+)
+
 test_reciprocal_v13 = unary_element_wise_test(
     "Reciprocal", 13, op17.reciprocal, assert_allclose
 )
