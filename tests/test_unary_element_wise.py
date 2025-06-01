@@ -1,4 +1,5 @@
 from collections.abc import Callable
+from typing import Protocol
 
 import hypothesis.extra.numpy as hyn
 import numpy as np
@@ -58,6 +59,28 @@ def unary_element_wise_test(
     return test_function
 
 
+class AxisOp(Protocol):
+    def __call__(self, x: Var, /, *, axis: int) -> Var: ...
+
+
+def unary_element_wise_test_with_axis_param(
+    op_name: str,
+    version: int,
+    op: AxisOp,
+    test: Callable[[np.ndarray, np.ndarray], None] = np.testing.assert_almost_equal,
+    param_name: str = "T",
+) -> Callable:
+    @given(data=st.data())
+    @pytest.mark.parametrize("dtype", dtypes(op_name, version, param_name), ids=str)
+    def test_function(data: st.DataObject, dtype: np.dtype):
+        array = data.draw(arrays(dtype))
+        ndim = array.array.ndim
+        axis = data.draw(st.integers(-ndim, ndim))
+        assert_unary_against_reference(lambda x: op(x, axis=axis), array, test=test)
+
+    return test_function
+
+
 def assert_allclose(actual: np.ndarray, desired: np.ndarray, /):
     """Like `numpy.testing.assert_allclose` but takes dtype into account for relative
     tolerance."""
@@ -94,6 +117,12 @@ test_exp_v13 = unary_element_wise_test("Exp", 13, op17.exp, assert_allclose)
 test_floor_v13 = unary_element_wise_test(
     "Floor", 13, op17.floor, np.testing.assert_array_equal
 )
+test_hard_swish_v13 = unary_element_wise_test(
+    "HardSwish", 14, op17.exp, assert_allclose
+)
+test_hardmax_v13 = unary_element_wise_test_with_axis_param(
+    "Hardmax", 13, op17.hardmax, assert_allclose
+)
 test_identity_v16 = unary_element_wise_test(
     "Identity", 16, op17.identity, np.testing.assert_array_equal, param_name="V"
 )
@@ -110,6 +139,9 @@ test_isnan_v20 = unary_element_wise_test(
     "IsNaN", 20, op20.isnan, np.testing.assert_array_equal, param_name="T1"
 )
 test_log_v13 = unary_element_wise_test("Log", 13, op17.log, assert_allclose)
+test_log_softmax_v13 = unary_element_wise_test_with_axis_param(
+    "LogSoftmax", 13, op17.log_softmax, assert_allclose
+)
 test_neg_v13 = unary_element_wise_test("Neg", 13, op17.neg, assert_allclose)
 test_not_v1 = unary_element_wise_test(
     "Not", 1, op17.not_, np.testing.assert_array_almost_equal
@@ -128,8 +160,36 @@ test_sign_v13 = unary_element_wise_test("Sign", 13, op17.sign, assert_allclose)
 
 test_sin_v7 = unary_element_wise_test("Sin", 7, op17.sin, assert_allclose)
 test_sinh_v9 = unary_element_wise_test("Sinh", 9, op17.sinh, assert_allclose)
+test_softmax_v13 = unary_element_wise_test_with_axis_param(
+    "Softmax", 13, op17.softmax, assert_allclose
+)
 test_sqrt_v13 = unary_element_wise_test("Sqrt", 13, op17.sqrt, assert_allclose)
 test_tan_v7 = unary_element_wise_test("Tan", 7, op17.tan, assert_allclose)
 test_tanh_v13 = unary_element_wise_test("Tanh", 13, op17.tanh, assert_allclose)
 # TODO: Bug in reference implementation of Mish
 test_mish_v18 = unary_element_wise_test("Mish", 18, op18.mish, assert_allclose)
+
+
+@given(data=st.data())
+@pytest.mark.parametrize("dtype", dtypes("HardSigmoid", 6, "T"), ids=str)
+def test_hard_sigmoid_v16(data: st.DataObject, dtype: np.dtype):
+    array = data.draw(arrays(dtype))
+
+    def do(x: Var) -> Var:
+        alpha = data.draw(st.floats(1e-3, 0.3), "alpha")
+        beta = data.draw(st.floats(1e-3, 0.6), "beta")
+        return op17.hard_sigmoid(x, alpha=alpha, beta=beta)
+
+    assert_unary_against_reference(do, array, test=assert_allclose)
+
+
+@given(data=st.data())
+@pytest.mark.parametrize("dtype", dtypes("LeakyRelu", 16, "T"), ids=str)
+def test_leaky_relu_v16(data: st.DataObject, dtype: np.dtype):
+    array = data.draw(arrays(dtype))
+
+    def do(x: Var) -> Var:
+        alpha = data.draw(st.floats(1e-3, 0.1), "alpha")
+        return op17.leaky_relu(x, alpha=alpha)
+
+    assert_unary_against_reference(do, array, test=assert_allclose)
