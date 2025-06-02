@@ -31,17 +31,6 @@ pip = "*"
 setuptools = ">=61"
 setuptools-scm = "*"
 
-[feature.test.dependencies]
-pytest = ">=6"
-pytest-cov = "*"
-pytest-md = "*"
-pytest-emoji = "*"
-mypy = "*"
-[feature.test.tasks]
-test = "pytest"
-test-coverage = "pytest --cov=onnx_tests --cov-report=xml --cov-report=term-missing"
-
-
 [feature.lint.dependencies]
 pre-commit = "*"
 insert-license-header = "*"
@@ -64,8 +53,7 @@ python = "3.11.*"
 python = "3.12.*"
 
 [environments]
-default = ["test"]
-py310 = ["py310", "test"]
-py311 = ["py311", "test"]
-py312 = ["py312", "test"]
+py310 = ["py310"]
+py311 = ["py311"]
+py312 = ["py312"]
 lint = { features = ["lint"], no-default-feature = true }
