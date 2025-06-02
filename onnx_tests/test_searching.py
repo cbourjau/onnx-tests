@@ -51,7 +51,7 @@ def assert_against_reference(
     "dtype", h.SCHEMAS["ai.onnx"]["ArgMax"][13].dtype_constraints["T"], ids=str
 )
 def test_argmax_v13(data, dtype):
-    # TODO: onnxruntime and reference produce yield different results with NaN values
+    # TODO: onnxruntime and reference yield different results with NaN values
     params = make_params(data, dtype)
 
     def do(data: Var) -> Var:
@@ -70,7 +70,7 @@ def test_argmax_v13(data, dtype):
     "dtype", h.SCHEMAS["ai.onnx"]["ArgMax"][13].dtype_constraints["T"], ids=str
 )
 def test_argmin_v13(data, dtype):
-    # TODO: onnxruntime and reference produce yield different results with NaN values
+    # TODO: onnxruntime and reference yield different results with NaN values
     params = make_params(data, dtype)
 
     def do(data: Var) -> Var:

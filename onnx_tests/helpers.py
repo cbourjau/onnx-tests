@@ -147,6 +147,22 @@ def assert_binary_against_reference(
     np.testing.assert_equal(candidate, expected)
 
 
+def assert_allclose(actual: np.ndarray, desired: np.ndarray, /):
+    """Like `numpy.testing.assert_allclose` but takes dtype into account for relative
+    tolerance."""
+    if actual.dtype != desired.dtype:
+        raise TypeError(f"dtypes do not match `{actual.dtype}` != `{desired.dtype}`")
+    kwargs = {}
+    if actual.dtype == np.float16:
+        kwargs = {"rtol": 1e-3}
+    elif actual.dtype == np.float32:
+        kwargs = {"rtol": 1e-5}
+    elif actual.dtype == np.float64:
+        kwargs = {"rtol": 1e-7}
+
+    np.testing.assert_allclose(actual, desired, **kwargs)  # type: ignore
+
+
 Domain = str
 Version = int
 Name = str
