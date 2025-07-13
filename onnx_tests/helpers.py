@@ -1,4 +1,4 @@
-from collections.abc import Callable, Mapping
+from collections.abc import Callable
 from dataclasses import dataclass
 from functools import cache
 from math import prod
@@ -54,9 +54,10 @@ def arrays(
     dtype: np.dtype | st.SearchStrategy[np.dtype],
     shape: tuple[int, ...] | st.SearchStrategy[tuple[int, ...]],
     *,
-    elements: st.SearchStrategy[Any] | Mapping[str, Any] | None = None,
     fill: st.SearchStrategy[Any] | None = None,
     unique: bool = False,
+    allow_nan: bool | None = None,
+    allow_inf: bool | None = None,
 ) -> st.SearchStrategy[ArrayWrapper]:
     def ensure_scalars_are_rank0_arrays(arr: np.ndarray) -> np.ndarray:
         return np.asarray(arr)
@@ -68,8 +69,12 @@ def arrays(
             return np.clip(arr, min_, max_)
         return arr
 
+    # mapping passed to from_dtype
+    elements: dict[str, Any] = {}
+    if allow_nan is not None:
+        elements |= {"allow_nan": allow_nan}
     return (
-        hyn.arrays(dtype, shape, elements=elements, fill=fill, unique=unique)
+        hyn.arrays(dtype, shape, fill=fill, unique=unique, elements=elements)
         .map(clip_very_large_floats)
         .map(ensure_scalars_are_rank0_arrays)
         .map(ArrayWrapper)
