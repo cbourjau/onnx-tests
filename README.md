@@ -21,7 +21,7 @@ This Proof of concept implements such a hypothesis-based test suite for the ONNX
 
 ## State of this project
 
-An overview of the tested operators can be found [here](https://github.com/cbourjau/onnx-tests/blob/main/covered_operators.md).
+An overview of the tested operators can be found [here](https://github.com/cbourjau/onnx-tests/blob/main/report/coverage.md).
 
 A common pattern in property-based testing is to compare candidate-output against a "source-of-truth".
 If the ONNX standard explicitly states that an operator is following NumPy semantics test are written against NumPy.

@@ -6,21 +6,22 @@ platforms = ["osx-arm64", "osx-64", "linux-64", "linux-aarch64", "win-64"]
 
 [tasks]
 postinstall = "pip install --no-build-isolation --no-deps --disable-pip-version-check -e ."
+create-report = "pytest --co --create-report"
 
 [tasks.test-reference]
-cmd = "pytest onnx_tests"
+cmd = "pytest tests"
 env = { "RUN_CANDIDATE" = "onnx_tests.runtime_wrappers.run_reference" }
 [tasks.test-ort]
-cmd = "pytest onnx_tests"
+cmd = "pytest tests"
 env = { "RUN_CANDIDATE" = "onnx_tests.runtime_wrappers.run_ort" }
 
 [dependencies]
 python = ">=3.10"
 hypothesis = ">=6.130.4"
-onnx = ">=1.17.0"
+onnx = ">=1.18.0"
 onnxruntime = ">=1.20.1"
 ndonnx = ">=0.10.1"
-spox = ">=0.12.1"
+spox = ">=0.16"
 pytest = ">=8.3.5"
 numpy = ">=2.2.4"
 mypy = ">=1.15.0"

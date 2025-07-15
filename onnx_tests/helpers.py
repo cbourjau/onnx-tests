@@ -1,7 +1,4 @@
 from collections.abc import Callable
-from dataclasses import dataclass
-from functools import cache
-from math import prod
 from typing import Any
 
 import numpy as np
@@ -9,45 +6,11 @@ import spox
 from hypothesis import strategies as st
 from hypothesis.extra import numpy as hyn
 from onnx.defs import OpSchema, get_all_schemas_with_history
-from spox import Tensor, Var, argument
+from spox import Var
+from spox._future import initializer
 
 from .config import run_candidate
 from .runtime_wrappers import run_reference
-
-
-@dataclass
-class Shape:
-    concrete: tuple[int, ...]
-    dynamic_axes: tuple[int, ...]
-
-    @property
-    def onnx(self) -> tuple[str | None | int, ...]:
-        return tuple(
-            None if i in self.dynamic_axes else side_len
-            for i, side_len in enumerate(self.concrete)
-        )
-
-    def size(self) -> int:
-        if self.concrete:
-            return prod(self.concrete)
-        return 1
-
-
-class ArrayWrapper:
-    array: np.ndarray
-    shape: Shape
-
-    def __init__(self, array: np.ndarray, dynamic_axes=None):
-        self.array = array
-        self.shape = Shape(array.shape, dynamic_axes=dynamic_axes or ())
-
-    def __repr__(self) -> str:
-        return repr(self.array)
-
-    @property
-    @cache
-    def spox_argument(self) -> Var:
-        return argument(Tensor(self.array.dtype, shape=self.shape.onnx))
 
 
 def arrays(
@@ -57,8 +20,9 @@ def arrays(
     fill: st.SearchStrategy[Any] | None = None,
     unique: bool = False,
     allow_nan: bool | None = None,
-    allow_inf: bool | None = None,
-) -> st.SearchStrategy[ArrayWrapper]:
+    max_value: int | float | None = None,
+    min_value: int | float | None = None,
+) -> st.SearchStrategy[np.ndarray]:
     def ensure_scalars_are_rank0_arrays(arr: np.ndarray) -> np.ndarray:
         return np.asarray(arr)
 
@@ -70,84 +34,79 @@ def arrays(
         return arr
 
     # mapping passed to from_dtype
-    elements: dict[str, Any] = {}
+    elements: dict[str, Any] = {"alphabet": st.characters(codec="utf-8")}
     if allow_nan is not None:
-        elements |= {"allow_nan": allow_nan}
+        elements["allow_nan"] = allow_nan
+    if max_value is not None:
+        elements["max_value"] = max_value
+    if min_value is not None:
+        elements["min_value"] = min_value
     return (
         hyn.arrays(dtype, shape, fill=fill, unique=unique, elements=elements)
         .map(clip_very_large_floats)
         .map(ensure_scalars_are_rank0_arrays)
-        .map(ArrayWrapper)
     )
 
 
 @st.composite
 def broadcastable_arrays(
-    draw: st.DrawFn, dtype: np.dtype
-) -> tuple[ArrayWrapper, ArrayWrapper]:
+    draw: st.DrawFn, dtype: np.dtype, **arrays_kwargs
+) -> tuple[np.ndarray, np.ndarray]:
     shapes = draw(hyn.mutually_broadcastable_shapes(num_shapes=2, min_side=0))
 
-    array1 = draw(arrays(dtype, shape=shapes.input_shapes[0]))
-    array2 = draw(arrays(dtype, shape=shapes.input_shapes[1]))
+    array1 = draw(arrays(dtype, shape=shapes.input_shapes[0], **arrays_kwargs))
+    array2 = draw(arrays(dtype, shape=shapes.input_shapes[1], **arrays_kwargs))
 
     return array1, array2
 
 
 @st.composite
 def matmul_shapes(draw: st.DrawFn) -> tuple[tuple[int, ...], tuple[int, ...]]:
-    shapes = draw(hyn.mutually_broadcastable_shapes(signature="(m?,k),(k,n?)->(m?,n?)"))
+    shapes = draw(hyn.mutually_broadcastable_shapes(signature="(m,k),(k,n)->(m,n)"))
 
     # We do our own prepending of broadcastable shapes
     shape1, shape2 = shapes.input_shapes
     shape1 = shape1[-2:]
     shape2 = shape2[-2:]
 
+    # ONNX MatMul requires both arrays to have the same rank (contrary to NumPy)
+    extra_dims = draw(st.integers(min_value=0, max_value=4))
     pre1, pre2 = draw(
-        hyn.mutually_broadcastable_shapes(num_shapes=2, min_side=0)
+        hyn.mutually_broadcastable_shapes(
+            num_shapes=2, min_side=0, min_dims=extra_dims, max_dims=extra_dims
+        )
     ).input_shapes
-    if len(shape1) >= 2:
-        shape1 = pre1 + shape1
-    if len(shape2) >= 2:
-        shape2 = pre2 + shape2
+    shape1 = pre1 + shape1
+    shape2 = pre2 + shape2
+    assert len(shape1) == len(shape2)
     return shape1, shape2
 
 
 def assert_binary_numpy(
     np_fun: Callable[[np.ndarray, np.ndarray], np.ndarray],
     spox_fun: Callable[[Var, Var], Var],
-    arr1: ArrayWrapper,
-    arr2: ArrayWrapper,
+    arr1: np.ndarray,
+    arr2: np.ndarray,
 ):
-    x1, x2 = arr1.spox_argument, arr2.spox_argument
-    model = spox.build({"x1": x1, "x2": x2}, {"res": spox_fun(x1, x2)})
+    res = spox_fun(initializer(arr1), initializer(arr2))
+    model = spox.build({}, {"res": res})
 
-    expected = np_fun(arr1.array, arr2.array)
-    candidate, *_ = run_candidate(model, x1=arr1.array, x2=arr2.array).values()
+    expected = np_fun(arr1, arr2)
+    (candidate,) = run_candidate(model).values()
 
     np.testing.assert_allclose(candidate, expected)
 
 
 def assert_binary_against_reference(
     spox_fun: Callable[[Var, Var], Var],
-    arr1: ArrayWrapper,
-    arr2: ArrayWrapper,
+    arr1: np.ndarray,
+    arr2: np.ndarray,
 ):
-    x1, x2 = arr1.spox_argument, arr2.spox_argument
-    model = spox.build({"x1": x1, "x2": x2}, {"res": spox_fun(x1, x2)})
+    res = spox_fun(initializer(arr1), initializer(arr2))
+    model = spox.build({}, {"res": res})
 
-    x1_arr = arr1.array
-    x2_arr = arr2.array
-    # Reference runtime cannot handle NumPy string types of different width
-    if x1_arr.dtype.kind == "U":
-        x1_arr = x1_arr.astype(object)
-    if x2_arr.dtype.kind == "U":
-        x2_arr = x2_arr.astype(object)
-    kwargs = {
-        "x1": x1_arr,
-        "x2": x2_arr,
-    }
-    expected, *_ = run_reference(model, **kwargs).values()
-    candidate, *_ = run_candidate(model, **kwargs).values()
+    (expected,) = run_reference(model).values()
+    (candidate,) = run_candidate(model).values()
 
     np.testing.assert_equal(candidate, expected)
 

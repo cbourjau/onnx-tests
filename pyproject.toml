@@ -70,7 +70,7 @@ module = ["onnxruntime", "jaxonnxruntime"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
-testpaths = ["onnx_tests"]
+testpaths = ["tests"]
 
 
 [tool.typos]
