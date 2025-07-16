@@ -10,7 +10,7 @@ import spox.opset.ai.onnx.v19 as op19
 import spox.opset.ai.onnx.v20 as op20
 import spox.opset.ai.onnx.v21 as op21
 import spox.opset.ai.onnx.v22 as op22
-from hypothesis import given
+from hypothesis import given, reproduce_failure
 from hypothesis import strategies as st
 
 from onnx_tests import helpers as h
@@ -64,7 +64,9 @@ def make_test(
     version: int,
     strategy_factory: Callable[[np.dtype, ModuleType], st.SearchStrategy[TestCaseDraw]],
     global_namespace: dict[str, Any],
+    *,
     type_var: str = "T",
+    repro_hash: tuple[str, bytes] | None = None,
 ):
     @given(data=st.data())
     @pytest.mark.parametrize(
@@ -82,6 +84,9 @@ def make_test(
             np.testing.assert_array_equal(candidate, expected)
         else:
             h.assert_allclose(candidate, expected)
+
+    if repro_hash is not None:
+        test_fun = reproduce_failure(*repro_hash)(test_fun)
 
     test_name = f"test_{op_name}_{version}"
     if test_name in global_namespace:

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import dataclass
 from types import ModuleType
 from typing import Literal
 
@@ -8,9 +9,19 @@ from hypothesis import strategies as st
 
 from onnx_tests import helpers as h
 from onnx_tests._base_draw import TestCaseDraw
-from onnx_tests._kernel_op import KernelOperation, kernel_operation
+from onnx_tests._kernel_op import kernel_operation
 
 AutoPad = Literal["NOTSET", "SAME_UPPER", "SAME_LOWER", "VALID"]
+
+
+@dataclass
+class ConvKernelOperation:
+    dilations: tuple[int, int]
+    strides: tuple[int, int]
+    pads: list[int] | None
+    auto_pad: str
+    kernel_shape: tuple[int, int]
+    group: int
 
 
 @st.composite
@@ -19,7 +30,7 @@ def conv_2d(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
     b = draw(st.one_of([st.none(), h.arrays(dtype, (w.shape[0],))]))
     inputs = {"X": x, "W": w, "B": b}
     return TestCaseDraw(
-        inputs=inputs, attribute_kwargs=params.attribute_kwargs(), spox_fun=op.conv
+        inputs=inputs, attribute_kwargs=params.__dict__, spox_fun=op.conv
     )
 
 
@@ -30,7 +41,7 @@ def conv_transpose_2d(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestC
     inputs = {"X": x, "W": w, "B": b}
     return TestCaseDraw(
         inputs=inputs,
-        attribute_kwargs=params.attribute_kwargs(),
+        attribute_kwargs=params.__dict__,
         spox_fun=op.conv_transpose,
     )
 
@@ -58,7 +69,7 @@ def conv_integer_2d(
     }
     return TestCaseDraw(
         inputs=inputs,
-        attribute_kwargs=params.attribute_kwargs(),
+        attribute_kwargs=params.__dict__,
         spox_fun=op.conv_transpose,
     )
 
@@ -66,10 +77,11 @@ def conv_integer_2d(
 @st.composite
 def _conv_generic(
     draw: st.DrawFn, dtype_x: np.dtype, dtype_w: np.dtype
-) -> tuple[np.ndarray, np.ndarray, KernelOperation]:
+) -> tuple[np.ndarray, np.ndarray, ConvKernelOperation]:
     kernel_op = draw(kernel_operation())
 
     N = draw(st.integers(min_value=1, max_value=2))
+
     ch_per_group = draw(st.integers(min_value=1, max_value=2))
     group = draw(st.integers(min_value=1, max_value=2))
     C = ch_per_group * group
@@ -82,7 +94,9 @@ def _conv_generic(
         )
     )
 
-    return (x, w, kernel_op)
+    conv_kernel_op = ConvKernelOperation(group=group, **kernel_op.attribute_kwargs())
+
+    return (x, w, conv_kernel_op)
 
 
 __all__ = ["conv_2d", "conv_integer_2d", "conv_transpose_2d"]
