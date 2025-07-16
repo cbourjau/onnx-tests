@@ -70,7 +70,7 @@ def conv_integer_2d(
     return TestCaseDraw(
         inputs=inputs,
         attribute_kwargs=params.__dict__,
-        spox_fun=op.conv_transpose,
+        spox_fun=op.conv_integer,
     )
 
 
