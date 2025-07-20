@@ -34,17 +34,11 @@ import numpy as np
 import spox.opset.ai.onnx.v21 as op
 
 test_case = conv_2d(np.float32, op)
-test_case.inputs
->>> {'X': array([[[[-0.0000000e+00,  1.0000000e-03,  3.1689131e-20],
-         [ 0.0000000e+00,  1.0000000e-07,  0.0000000e+00],
-         [-8.3047269e-21,  5.2521669e+16, -1.2681085e+16],
-         [ 2.0419136e+16, -0.0000000e+00,  1.8446743e+19],
-         [ 5.2909870e+16,  0.0000000e+00, -1.8446743e+19],
-         [ 7.1820572e+16,  0.0000000e+00, -1.1920929e-07]]]],
-      dtype=float32), 'W': array([[[[-3.9690695e+16],
-         [ 4.7631236e+15],
-         [-3.5537421e+16],
-         [ 0.0000000e+00]]]], dtype=float32), 'B': None}
+
+test_case.example().inputs
+>>> {'X': array([[[[0., 0.],
+         [0., 0.],
+         [0., 0.]]]], dtype=float32), 'W': array([[[[0.]]]], dtype=float32), 'B': None}
 
 test_case.attributes_kwargs
 >>> {'dilations': (1, 2), 'strides': (2, 1), 'pads': None, 'auto_pad': 'SAME_UPPER', 'kernel_shape': (4, 1), 'group': 1}
@@ -54,7 +48,26 @@ type(test_case.build_model())
 
 ```
 
-However, Hypothesis strategies are best used in conjunction with pytest. Examples of such a usage can be found in the `tests` folder.
+However, Hypothesis strategies are best used in conjunction with pytest.
+A pytest-based example for obtaining a valid model with a `Conv` operation is given below.
+
+```python
+from hypothesis import given
+from hypothesis import strategies as st
+import spox.opset.ai.onnx.v17 as op17
+
+from onnx_tests.conv import conv_2d
+
+
+@given(data=st.data())
+def test_conv(data: st.DataObject):
+    model = data.draw(
+        conv_2d(dtype=np.dtype("float32"), op=op17),
+    ).build_model()
+	# runtime tests...
+```
+
+Please see the Hypothesis documentation and the content of the `tests` folder for further examples.
 
 ### Conformance test suite
 
