@@ -50,6 +50,22 @@ def atanh(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
 
 
 @st.composite
+def clip(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    shape = hyn.array_shapes(min_dims=0, min_side=0, max_dims=3)
+    array = draw(h.arrays(dtype, shape=shape))
+
+    min = draw(st.one_of(st.none(), h.arrays(dtype, shape=())))
+    max = draw(
+        st.one_of(
+            st.none(),
+            h.arrays(dtype, shape=(), min_value=None if min is None else min[()]),
+        )
+    )
+
+    return TestCaseDraw(inputs=[array, min, max], attribute_kwargs={}, spox_fun=op.clip)
+
+
+@st.composite
 def ceil(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
     return draw(_unary(dtype, op.ceil))
 

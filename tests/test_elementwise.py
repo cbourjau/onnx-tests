@@ -8,6 +8,7 @@ make_test("BitwiseAnd", 18, elementwise_ops.bitwise_and, globals())
 make_test("BitwiseOr", 18, elementwise_ops.bitwise_or, globals())
 make_test("BitwiseXor", 18, elementwise_ops.bitwise_xor, globals())
 make_test("BitShift", 11, elementwise_ops.bit_shift, globals())
+make_test("Clip", 13, elementwise_ops.clip, globals())
 
 make_test("Div", 14, elementwise_ops.div, globals())
 make_test("Equal", 13, elementwise_ops.equal, globals())
@@ -22,7 +23,6 @@ make_test("Mul", 14, elementwise_ops.mul, globals())
 make_test("Or", 7, elementwise_ops.or_, globals())
 make_test("Sub", 14, elementwise_ops.sub, globals())
 make_test("Xor", 7, elementwise_ops.xor, globals())
-
 
 make_test("Abs", 13, elementwise_ops.abs, globals())
 make_test("Acos", 7, elementwise_ops.acos, globals())
