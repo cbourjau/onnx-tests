@@ -1,10 +1,10 @@
-from collections.abc import Callable
+from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from typing import Any
 
 import numpy as np
 import onnx
-import spox
+from spox import Var, build
 from spox._future import initializer
 
 
@@ -12,11 +12,25 @@ from spox._future import initializer
 class TestCaseDraw:
     """Base object encapsulating the drawn state of a test case."""
 
-    inputs: dict[str, np.ndarray | None] | list[np.ndarray | None]
+    inputs: dict[str, np.ndarray | None | list[np.ndarray]] | list[np.ndarray | None]
     attribute_kwargs: dict[str, Any]
-    spox_fun: Callable[..., spox.Var]
+    spox_fun: Callable[..., Var]
 
-    def input_vars(self) -> dict[str, spox.Var | None] | list[spox.Var | None]:
+    def __init__(
+        self,
+        inputs: Mapping[str, np.ndarray | None | list[np.ndarray]]
+        | list[np.ndarray | None],
+        attribute_kwargs: dict[str, Any],
+        spox_fun: Callable[..., Var],
+    ):
+        # Keep mypy happy...
+        self.inputs = dict(inputs.items()) if isinstance(inputs, Mapping) else inputs
+        self.attribute_kwargs = attribute_kwargs
+        self.spox_fun = spox_fun
+
+    def input_vars(
+        self,
+    ) -> dict[str, Var | list[Var] | None] | list[Var | list[Var] | None]:
         """Convert input NumPy arrays into `spox.Var` objects (or leave them as `None`).
 
         This function uses "initializers" which are not bound to a specific opset
@@ -24,9 +38,9 @@ class TestCaseDraw:
         """
         if isinstance(self.inputs, dict):
             return {
-                k: None if v is None else initializer(v) for k, v in self.inputs.items()
+                k: None if v is None else create_vars(v) for k, v in self.inputs.items()
             }
-        return [None if v is None else initializer(v) for v in self.inputs]
+        return [None if v is None else create_vars(v) for v in self.inputs]
 
     def build_model(self) -> onnx.ModelProto:
         input_vars = self.input_vars()
@@ -35,4 +49,10 @@ class TestCaseDraw:
         else:
             res = self.spox_fun(*input_vars, **self.attribute_kwargs)
 
-        return spox.build({}, {"res": res})
+        return build({}, {"res": res})
+
+
+def create_vars(obj: np.ndarray | list[np.ndarray]) -> Var | list[Var]:
+    if isinstance(obj, np.ndarray):
+        return initializer(obj)
+    return [initializer(v) for v in obj]
