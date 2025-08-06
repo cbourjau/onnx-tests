@@ -346,10 +346,10 @@ def _unary(
     dtype_args={},
     with_axis=False,
 ) -> TestCaseDraw:
-    shape = hyn.array_shapes(min_dims=0, min_side=0, max_dims=3)
+    shape = hyn.array_shapes(min_dims=1 if with_axis else 0, min_side=0, max_dims=3)
     array = draw(h.arrays(dtype, shape=shape, **dtype_args))
     attributes = independent_attributes.copy()
     if with_axis:
         ndim = array.ndim
-        attributes["axis"] = draw(st.integers(-ndim, ndim))
+        attributes["axis"] = draw(st.integers(-ndim, ndim - 1))
     return TestCaseDraw(inputs=[array], attribute_kwargs=attributes, spox_fun=spox_fun)
