@@ -14,7 +14,7 @@ class TestCaseDraw:
 
     inputs: dict[str, np.ndarray | None | list[np.ndarray]] | list[np.ndarray | None]
     attribute_kwargs: dict[str, Any]
-    spox_fun: Callable[..., Var]
+    spox_fun: Callable[..., Var | tuple[Var, ...]]
 
     def __init__(
         self,
@@ -49,7 +49,9 @@ class TestCaseDraw:
         else:
             res = self.spox_fun(*input_vars, **self.attribute_kwargs)
 
-        return build({}, {"res": res})
+        if isinstance(res, Var):
+            return build({}, {"res": res})
+        return build({}, {f"res{i}": item for i, item in enumerate(res)})
 
 
 def create_vars(obj: np.ndarray | list[np.ndarray]) -> Var | list[Var]:

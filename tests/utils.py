@@ -76,14 +76,18 @@ def make_test(
         state = data.draw(strategy_factory(dtype, op))
         model = state.build_model()
 
-        (candidate,) = run_candidate(model).values()
-        (expected,) = run_reference(model).values()
+        candidate = run_candidate(model)
+        expected = run_reference(model)
 
-        if expected.dtype.kind in "UO":
-            # Strings must match exactly
-            np.testing.assert_array_equal(candidate, expected)
-        else:
-            h.assert_allclose(candidate, expected)
+        for i, (cand, exp) in enumerate(
+            zip(candidate.values(), expected.values(), strict=True)
+        ):
+            err_msg = f"output {i} did not meet expectation"
+            if exp.dtype.kind in "UO":
+                # Strings must match exactly
+                np.testing.assert_array_equal(cand, exp, err_msg=err_msg)
+            else:
+                h.assert_allclose(cand, exp, err_msg=err_msg)
 
     if repro_hash is not None:
         test_fun = reproduce_failure(*repro_hash)(test_fun)

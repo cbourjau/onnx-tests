@@ -24,3 +24,24 @@ def concat(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
     return TestCaseDraw(
         inputs={"inputs": arrays}, attribute_kwargs={"axis": axis}, spox_fun=op.concat
     )
+
+
+@st.composite
+def compress(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    shape = hyn.array_shapes(min_side=0)
+    arr = draw(h.arrays(dtype=dtype, shape=shape))
+    rank = arr.ndim
+    axis = draw(st.one_of(st.none() | st.integers(-rank, rank - 1)))
+
+    if axis is None:
+        # may be shorter than axis or flattened buffer
+        cond_shape = (draw(st.integers(0, arr.size)),)
+    else:
+        cond_shape = (draw(st.integers(0, arr.shape[axis])),)
+    cond = draw(h.arrays(dtype=np.dtype("bool"), shape=cond_shape))
+
+    return TestCaseDraw(
+        inputs={"input": arr, "condition": cond},
+        attribute_kwargs={"axis": axis},
+        spox_fun=op.compress,
+    )

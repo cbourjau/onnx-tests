@@ -36,6 +36,24 @@ def _argmaxmin(draw: st.DrawFn, dtype: np.dtype, spox_fun: Callable) -> TestCase
 
 
 @st.composite
+def unique(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    shape = hyn.array_shapes(min_side=0)
+    arr = draw(h.arrays(dtype=dtype, shape=shape))
+    rank = arr.ndim
+    axis = draw(st.one_of(st.none() | st.integers(-rank, rank - 1)))
+    sorted = draw(st.sampled_from([0, 1]))
+
+    return TestCaseDraw(
+        inputs={"X": arr},
+        attribute_kwargs={
+            "axis": axis,
+            "sorted": sorted,
+        },
+        spox_fun=op.unique,
+    )
+
+
+@st.composite
 def where(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
     shapes = draw(hyn.mutually_broadcastable_shapes(num_shapes=3))
 

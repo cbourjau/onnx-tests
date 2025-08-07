@@ -67,7 +67,7 @@
 - BitwiseAnd
   - [x] 18
 - BitwiseNot
-  - [ ] 18
+  - [x] 18
 - BitwiseOr
   - [x] 18
 - BitwiseXor
@@ -105,7 +105,7 @@
   - [ ] 18
 - Compress
   - [ ] 9
-  - [ ] 11
+  - [x] 11
 - Concat
   - [ ] 1
   - [ ] 4
@@ -741,7 +741,7 @@
 - Trilu
   - [ ] 14
 - Unique
-  - [ ] 11
+  - [x] 11
 - Unsqueeze
   - [ ] 1
   - [ ] 11

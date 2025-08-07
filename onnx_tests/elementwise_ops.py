@@ -50,6 +50,11 @@ def atanh(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
 
 
 @st.composite
+def bitwise_not(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    return draw(_unary(dtype, op.bitwise_not))
+
+
+@st.composite
 def clip(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
     shape = hyn.array_shapes(min_dims=0, min_side=0, max_dims=3)
     array = draw(h.arrays(dtype, shape=shape))
