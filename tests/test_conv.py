@@ -22,7 +22,7 @@ make_test("Conv", 11, conv_2d, globals())
 @pytest.mark.parametrize(
     "dtype_w", h.SCHEMAS["ai.onnx"]["ConvInteger"][10].dtype_constraints["T2"], ids=str
 )
-def test_conv_integer_10(data: st.DataObject, dtype_x: str, dtype_w: str):
+def test_ConvInteger_10(data: st.DataObject, dtype_x: str, dtype_w: str):  # noqa
     model = data.draw(
         conv_integer_2d(dtype_x=np.dtype(dtype_x), dtype_w=np.dtype(dtype_w), op=op17),
     ).build_model()

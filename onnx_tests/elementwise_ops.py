@@ -114,7 +114,7 @@ def hard_swish(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw
 
 @st.composite
 def hardmax(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
-    return draw(_unary(dtype, op.hardmax, with_axis=True))
+    return draw(_unary(dtype, op.hardmax, with_axis=True, min_dims=1))
 
 
 @st.composite
@@ -139,7 +139,7 @@ def log(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
 
 @st.composite
 def log_softmax(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
-    return draw(_unary(dtype, op.log_softmax, with_axis=True))
+    return draw(_unary(dtype, op.log_softmax, with_axis=True, min_dims=1))
 
 
 @st.composite
@@ -184,7 +184,7 @@ def sinh(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
 
 @st.composite
 def softmax(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
-    return draw(_unary(dtype, op.softmax, with_axis=True))
+    return draw(_unary(dtype, op.softmax, with_axis=True, min_dims=1))
 
 
 @st.composite
@@ -373,9 +373,11 @@ def _unary(
     spox_fun: Callable[..., Var],
     independent_attributes: dict[str, Any] = {},
     dtype_args={},
-    with_axis=False,
+    with_axis: bool = False,
+    min_dims=1,
+    min_side=0,
 ) -> TestCaseDraw:
-    shape = hyn.array_shapes(min_dims=1 if with_axis else 0, min_side=0, max_dims=3)
+    shape = hyn.array_shapes(min_dims=min_dims, min_side=min_side, max_dims=3)
     array = draw(h.arrays(dtype, shape=shape, **dtype_args))
     attributes = independent_attributes.copy()
     if with_axis:

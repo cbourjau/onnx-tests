@@ -132,7 +132,7 @@
   - [x] 11
   - [ ] 22
 - ConvInteger
-  - [ ] 10
+  - [x] 10
 - ConvTranspose
   - [ ] 1
   - [ ] 11
