@@ -55,6 +55,13 @@ def bitwise_not(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDra
 
 
 @st.composite
+def celu(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    tcase = draw(_unary(dtype, op.celu))
+    tcase.attribute_kwargs["alpha"] = draw(st.floats(0.5, 1.5))
+    return tcase
+
+
+@st.composite
 def clip(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
     shape = hyn.array_shapes(min_dims=0, min_side=0, max_dims=3)
     array = draw(h.arrays(dtype, shape=shape))
@@ -269,7 +276,8 @@ def bit_shift(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
             max_shift = shortest_leading_zeros(x)
         else:
             max_shift = shortest_trailing_zeros(x)
-        y = np.minimum(y, np.min(max_shift).astype(dtype))
+        # Ensure that y is an array object
+        y = np.asarray(np.minimum(y, np.min(max_shift).astype(dtype)))
 
     return TestCaseDraw(
         inputs=[x, y], attribute_kwargs={"direction": direction}, spox_fun=op.bit_shift

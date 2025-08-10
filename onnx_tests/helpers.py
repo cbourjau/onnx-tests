@@ -50,14 +50,14 @@ def arrays(
 
 @st.composite
 def broadcastable_arrays(
-    draw: st.DrawFn, dtype: np.dtype, **arrays_kwargs
-) -> tuple[np.ndarray, np.ndarray]:
-    shapes = draw(hyn.mutually_broadcastable_shapes(num_shapes=2, min_side=0))
+    draw: st.DrawFn, dtype: np.dtype, num_shapes: int = 2, **arrays_kwargs
+) -> list[np.ndarray]:
+    shapes = draw(hyn.mutually_broadcastable_shapes(num_shapes=num_shapes, min_side=0))
 
-    array1 = draw(arrays(dtype, shape=shapes.input_shapes[0], **arrays_kwargs))
-    array2 = draw(arrays(dtype, shape=shapes.input_shapes[1], **arrays_kwargs))
-
-    return array1, array2
+    return [
+        draw(arrays(dtype, shape=shape, **arrays_kwargs))
+        for shape in shapes.input_shapes
+    ]
 
 
 @st.composite

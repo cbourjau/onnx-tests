@@ -36,6 +36,27 @@ def _argmaxmin(draw: st.DrawFn, dtype: np.dtype, spox_fun: Callable) -> TestCase
 
 
 @st.composite
+def _maxmin(draw: st.DrawFn, dtype: np.dtype, spox_fun: Callable) -> TestCaseDraw:
+    arrays = draw(h.broadcastable_arrays(dtype, num_shapes=draw(st.integers(1, 5))))
+
+    return TestCaseDraw(
+        inputs={"data_0": arrays},
+        attribute_kwargs={},
+        spox_fun=spox_fun,
+    )
+
+
+@st.composite
+def max(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    return draw(_maxmin(dtype, op.arg_max))
+
+
+@st.composite
+def min(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    return draw(_maxmin(dtype, op.arg_min))
+
+
+@st.composite
 def unique(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
     shape = hyn.array_shapes(min_side=0)
     arr = draw(h.arrays(dtype=dtype, shape=shape))
