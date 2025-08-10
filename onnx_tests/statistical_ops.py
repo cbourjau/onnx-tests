@@ -10,6 +10,24 @@ from onnx_tests._base_draw import TestCaseDraw
 
 
 @st.composite
+def cumsum(
+    draw: st.DrawFn, dtype: np.dtype, dtype_axis: np.dtype, op: ModuleType
+) -> TestCaseDraw:
+    x = draw(h.arrays(dtype, shape=hyn.array_shapes(min_dims=1, min_side=0)))
+    rank = x.ndim
+
+    axis = np.asarray(draw(st.integers(-rank, rank - 1)), dtype_axis)
+    return TestCaseDraw(
+        inputs={"x": x, "axis": axis},
+        attribute_kwargs={
+            "exclusive": draw(st.booleans().map(int)),
+            "reverse": draw(st.booleans().map(int)),
+        },
+        spox_fun=op.cumsum,
+    )
+
+
+@st.composite
 def reduce_l1(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
     return draw(_reduce(dtype, op.reduce_l1))
 
