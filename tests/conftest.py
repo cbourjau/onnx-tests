@@ -53,8 +53,22 @@ def create_report(coverage: dict[str, list[int]]):
     with open(Path(__file__).parent.parent / "report" / "coverage.md", "w") as f:
         for domain, schemas in _get_op_schemas().items():
             print(f"# {domain}", file=f)
+
+            def make_url(opname):
+                base_url = "https://github.com/onnx/onnx/blob/main/docs"
+                if domain == "ai.onnx":
+                    return f"{base_url}/Operators.md#{opname}"
+                elif domain == "ai.onnx.ml":
+                    return f"{base_url}/Operators-ml.md#aionnxml{opname.lower()}"
+                elif domain == "ai.onnx.preview.training":
+                    return f"{base_url}/Operators-ml.md#aionnxpreviewtraining{opname.lower()}"
+                raise NotImplementedError(f"unexpected domain: `{domain}`")
+
             for name, versions in schemas.items():
-                print(f"  - {name}", file=f)
+                print(
+                    f"  - [{name}]({make_url(name)})",
+                    file=f,
+                )
                 for version in versions:
                     covered = name in coverage and version in coverage[name]
                     sigil = "x" if covered else " "
