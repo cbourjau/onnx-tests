@@ -1,80 +1,80 @@
 # ai.onnx
 
-- Abs
+- [Abs](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Abs)
   - [ ] 1
   - [ ] 6
   - [x] 13
-- Acos
+- [Acos](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Acos)
   - [x] 7
   - [ ] 22
-- Acosh
+- [Acosh](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Acosh)
   - [x] 9
   - [ ] 22
-- Add
+- [Add](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Add)
   - [ ] 1
   - [ ] 6
   - [ ] 7
   - [ ] 13
   - [x] 14
-- AffineGrid
+- [AffineGrid](https://github.com/onnx/onnx/blob/main/docs/Operators.md#AffineGrid)
   - [ ] 20
-- And
+- [And](https://github.com/onnx/onnx/blob/main/docs/Operators.md#And)
   - [ ] 1
   - [x] 7
-- ArgMax
-  - [ ] 1
-  - [ ] 11
-  - [ ] 12
-  - [x] 13
-- ArgMin
+- [ArgMax](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ArgMax)
   - [ ] 1
   - [ ] 11
   - [ ] 12
   - [x] 13
-- Asin
+- [ArgMin](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ArgMin)
+  - [ ] 1
+  - [ ] 11
+  - [ ] 12
+  - [x] 13
+- [Asin](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Asin)
   - [x] 7
   - [ ] 22
-- Asinh
+- [Asinh](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Asinh)
   - [x] 9
   - [ ] 22
-- Atan
+- [Atan](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Atan)
   - [x] 7
   - [ ] 22
-- Atanh
+- [Atanh](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Atanh)
   - [x] 9
   - [ ] 22
-- Attention
+- [Attention](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Attention)
   - [ ] 23
-- AveragePool
+- [AveragePool](https://github.com/onnx/onnx/blob/main/docs/Operators.md#AveragePool)
   - [ ] 1
   - [ ] 7
   - [ ] 10
   - [ ] 11
   - [x] 19
   - [ ] 22
-- BatchNormalization
+- [BatchNormalization](https://github.com/onnx/onnx/blob/main/docs/Operators.md#BatchNormalization)
   - [ ] 1
   - [ ] 6
   - [ ] 7
   - [ ] 9
   - [ ] 14
   - [ ] 15
-- Bernoulli
+- [Bernoulli](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Bernoulli)
   - [ ] 15
   - [ ] 22
-- BitShift
+- [BitShift](https://github.com/onnx/onnx/blob/main/docs/Operators.md#BitShift)
   - [x] 11
-- BitwiseAnd
+- [BitwiseAnd](https://github.com/onnx/onnx/blob/main/docs/Operators.md#BitwiseAnd)
   - [x] 18
-- BitwiseNot
+- [BitwiseNot](https://github.com/onnx/onnx/blob/main/docs/Operators.md#BitwiseNot)
   - [x] 18
-- BitwiseOr
+- [BitwiseOr](https://github.com/onnx/onnx/blob/main/docs/Operators.md#BitwiseOr)
   - [x] 18
-- BitwiseXor
+- [BitwiseXor](https://github.com/onnx/onnx/blob/main/docs/Operators.md#BitwiseXor)
   - [x] 18
-- BlackmanWindow
+- [BlackmanWindow](https://github.com/onnx/onnx/blob/main/docs/Operators.md#BlackmanWindow)
   - [ ] 17
-- Cast
+- [Cast](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Cast)
   - [ ] 1
   - [ ] 6
   - [ ] 9
@@ -82,38 +82,38 @@
   - [ ] 19
   - [x] 21
   - [ ] 23
-- CastLike
+- [CastLike](https://github.com/onnx/onnx/blob/main/docs/Operators.md#CastLike)
   - [ ] 15
   - [ ] 19
   - [ ] 21
   - [ ] 23
-- Ceil
+- [Ceil](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Ceil)
   - [ ] 1
   - [ ] 6
   - [x] 13
-- Celu
+- [Celu](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Celu)
   - [x] 12
-- CenterCropPad
+- [CenterCropPad](https://github.com/onnx/onnx/blob/main/docs/Operators.md#CenterCropPad)
   - [ ] 18
-- Clip
+- [Clip](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Clip)
   - [ ] 1
   - [ ] 6
   - [ ] 11
   - [ ] 12
   - [x] 13
-- Col2Im
+- [Col2Im](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Col2Im)
   - [ ] 18
-- Compress
+- [Compress](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Compress)
   - [ ] 9
   - [x] 11
-- Concat
+- [Concat](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Concat)
   - [ ] 1
   - [ ] 4
   - [ ] 11
   - [x] 13
-- ConcatFromSequence
+- [ConcatFromSequence](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ConcatFromSequence)
   - [ ] 11
-- Constant
+- [Constant](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Constant)
   - [ ] 1
   - [ ] 9
   - [ ] 11
@@ -122,56 +122,56 @@
   - [ ] 19
   - [ ] 21
   - [ ] 23
-- ConstantOfShape
+- [ConstantOfShape](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ConstantOfShape)
   - [ ] 9
   - [ ] 20
   - [ ] 21
   - [ ] 23
-- Conv
+- [Conv](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Conv)
   - [ ] 1
   - [x] 11
   - [ ] 22
-- ConvInteger
+- [ConvInteger](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ConvInteger)
   - [x] 10
-- ConvTranspose
+- [ConvTranspose](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ConvTranspose)
   - [ ] 1
   - [ ] 11
   - [ ] 22
-- Cos
+- [Cos](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Cos)
   - [x] 7
   - [ ] 22
-- Cosh
+- [Cosh](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Cosh)
   - [x] 9
   - [ ] 22
-- CumSum
+- [CumSum](https://github.com/onnx/onnx/blob/main/docs/Operators.md#CumSum)
   - [ ] 11
   - [x] 14
-- DFT
+- [DFT](https://github.com/onnx/onnx/blob/main/docs/Operators.md#DFT)
   - [ ] 17
   - [ ] 20
-- DeformConv
+- [DeformConv](https://github.com/onnx/onnx/blob/main/docs/Operators.md#DeformConv)
   - [ ] 19
   - [ ] 22
-- DepthToSpace
+- [DepthToSpace](https://github.com/onnx/onnx/blob/main/docs/Operators.md#DepthToSpace)
   - [ ] 1
   - [ ] 11
   - [ ] 13
-- DequantizeLinear
+- [DequantizeLinear](https://github.com/onnx/onnx/blob/main/docs/Operators.md#DequantizeLinear)
   - [ ] 10
   - [ ] 13
   - [ ] 19
   - [ ] 21
   - [ ] 23
-- Det
+- [Det](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Det)
   - [ ] 11
   - [x] 22
-- Div
+- [Div](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Div)
   - [ ] 1
   - [ ] 6
   - [ ] 7
   - [ ] 13
   - [x] 14
-- Dropout
+- [Dropout](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Dropout)
   - [ ] 1
   - [ ] 6
   - [ ] 7
@@ -179,111 +179,111 @@
   - [ ] 12
   - [ ] 13
   - [ ] 22
-- DynamicQuantizeLinear
+- [DynamicQuantizeLinear](https://github.com/onnx/onnx/blob/main/docs/Operators.md#DynamicQuantizeLinear)
   - [ ] 11
-- Einsum
+- [Einsum](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Einsum)
   - [x] 12
-- Elu
+- [Elu](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Elu)
   - [ ] 1
   - [ ] 6
   - [ ] 22
-- Equal
+- [Equal](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Equal)
   - [ ] 1
   - [ ] 7
   - [ ] 11
   - [x] 13
   - [x] 19
-- Erf
+- [Erf](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Erf)
   - [ ] 9
   - [x] 13
-- Exp
+- [Exp](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Exp)
   - [ ] 1
   - [ ] 6
   - [x] 13
-- Expand
+- [Expand](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Expand)
   - [ ] 8
   - [ ] 13
-- EyeLike
+- [EyeLike](https://github.com/onnx/onnx/blob/main/docs/Operators.md#EyeLike)
   - [ ] 9
   - [ ] 22
-- Flatten
+- [Flatten](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Flatten)
   - [ ] 1
   - [ ] 9
   - [ ] 11
   - [ ] 13
   - [ ] 21
   - [ ] 23
-- Floor
+- [Floor](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Floor)
   - [ ] 1
   - [ ] 6
   - [x] 13
-- GRU
+- [GRU](https://github.com/onnx/onnx/blob/main/docs/Operators.md#GRU)
   - [ ] 1
   - [ ] 3
   - [ ] 7
   - [ ] 14
   - [ ] 22
-- Gather
+- [Gather](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Gather)
   - [ ] 1
   - [ ] 11
   - [ ] 13
-- GatherElements
+- [GatherElements](https://github.com/onnx/onnx/blob/main/docs/Operators.md#GatherElements)
   - [ ] 11
   - [ ] 13
-- GatherND
+- [GatherND](https://github.com/onnx/onnx/blob/main/docs/Operators.md#GatherND)
   - [ ] 11
   - [ ] 12
   - [ ] 13
-- Gelu
+- [Gelu](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Gelu)
   - [ ] 20
-- Gemm
+- [Gemm](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Gemm)
   - [ ] 1
   - [ ] 6
   - [ ] 7
   - [ ] 9
   - [ ] 11
   - [ ] 13
-- GlobalAveragePool
+- [GlobalAveragePool](https://github.com/onnx/onnx/blob/main/docs/Operators.md#GlobalAveragePool)
   - [ ] 1
   - [ ] 22
-- GlobalLpPool
+- [GlobalLpPool](https://github.com/onnx/onnx/blob/main/docs/Operators.md#GlobalLpPool)
   - [ ] 1
   - [ ] 2
   - [ ] 22
-- GlobalMaxPool
+- [GlobalMaxPool](https://github.com/onnx/onnx/blob/main/docs/Operators.md#GlobalMaxPool)
   - [ ] 1
   - [ ] 22
-- Greater
+- [Greater](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Greater)
   - [ ] 1
   - [ ] 7
   - [ ] 9
   - [x] 13
-- GreaterOrEqual
+- [GreaterOrEqual](https://github.com/onnx/onnx/blob/main/docs/Operators.md#GreaterOrEqual)
   - [ ] 12
   - [x] 16
-- GridSample
+- [GridSample](https://github.com/onnx/onnx/blob/main/docs/Operators.md#GridSample)
   - [ ] 16
   - [ ] 20
   - [ ] 22
-- GroupNormalization
+- [GroupNormalization](https://github.com/onnx/onnx/blob/main/docs/Operators.md#GroupNormalization)
   - [ ] 18
   - [ ] 21
-- HammingWindow
+- [HammingWindow](https://github.com/onnx/onnx/blob/main/docs/Operators.md#HammingWindow)
   - [ ] 17
-- HannWindow
+- [HannWindow](https://github.com/onnx/onnx/blob/main/docs/Operators.md#HannWindow)
   - [ ] 17
-- HardSigmoid
+- [HardSigmoid](https://github.com/onnx/onnx/blob/main/docs/Operators.md#HardSigmoid)
   - [ ] 1
   - [x] 6
   - [ ] 22
-- HardSwish
+- [HardSwish](https://github.com/onnx/onnx/blob/main/docs/Operators.md#HardSwish)
   - [x] 14
   - [ ] 22
-- Hardmax
+- [Hardmax](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Hardmax)
   - [ ] 1
   - [ ] 11
   - [x] 13
-- Identity
+- [Identity](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Identity)
   - [ ] 1
   - [ ] 13
   - [ ] 14
@@ -291,7 +291,7 @@
   - [ ] 19
   - [ ] 21
   - [ ] 23
-- If
+- [If](https://github.com/onnx/onnx/blob/main/docs/Operators.md#If)
   - [ ] 1
   - [ ] 11
   - [ ] 13
@@ -299,50 +299,50 @@
   - [ ] 19
   - [ ] 21
   - [ ] 23
-- ImageDecoder
+- [ImageDecoder](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ImageDecoder)
   - [ ] 20
-- InstanceNormalization
+- [InstanceNormalization](https://github.com/onnx/onnx/blob/main/docs/Operators.md#InstanceNormalization)
   - [ ] 1
   - [ ] 6
   - [ ] 22
-- IsInf
+- [IsInf](https://github.com/onnx/onnx/blob/main/docs/Operators.md#IsInf)
   - [x] 10
   - [x] 20
-- IsNaN
+- [IsNaN](https://github.com/onnx/onnx/blob/main/docs/Operators.md#IsNaN)
   - [ ] 9
   - [x] 13
   - [x] 20
-- LRN
+- [LRN](https://github.com/onnx/onnx/blob/main/docs/Operators.md#LRN)
   - [ ] 1
   - [ ] 13
-- LSTM
+- [LSTM](https://github.com/onnx/onnx/blob/main/docs/Operators.md#LSTM)
   - [ ] 1
   - [ ] 7
   - [ ] 14
   - [ ] 22
-- LayerNormalization
+- [LayerNormalization](https://github.com/onnx/onnx/blob/main/docs/Operators.md#LayerNormalization)
   - [ ] 17
-- LeakyRelu
+- [LeakyRelu](https://github.com/onnx/onnx/blob/main/docs/Operators.md#LeakyRelu)
   - [ ] 1
   - [ ] 6
   - [x] 16
-- Less
+- [Less](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Less)
   - [ ] 1
   - [ ] 7
   - [ ] 9
   - [x] 13
-- LessOrEqual
+- [LessOrEqual](https://github.com/onnx/onnx/blob/main/docs/Operators.md#LessOrEqual)
   - [ ] 12
   - [x] 16
-- Log
+- [Log](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Log)
   - [ ] 1
   - [ ] 6
   - [x] 13
-- LogSoftmax
+- [LogSoftmax](https://github.com/onnx/onnx/blob/main/docs/Operators.md#LogSoftmax)
   - [ ] 1
   - [ ] 11
   - [x] 13
-- Loop
+- [Loop](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Loop)
   - [ ] 1
   - [ ] 11
   - [ ] 13
@@ -350,109 +350,109 @@
   - [ ] 19
   - [ ] 21
   - [ ] 23
-- LpNormalization
+- [LpNormalization](https://github.com/onnx/onnx/blob/main/docs/Operators.md#LpNormalization)
   - [ ] 1
   - [ ] 22
-- LpPool
+- [LpPool](https://github.com/onnx/onnx/blob/main/docs/Operators.md#LpPool)
   - [ ] 1
   - [ ] 2
   - [ ] 11
   - [ ] 18
   - [ ] 22
-- MatMul
+- [MatMul](https://github.com/onnx/onnx/blob/main/docs/Operators.md#MatMul)
   - [ ] 1
   - [ ] 9
   - [x] 13
-- MatMulInteger
+- [MatMulInteger](https://github.com/onnx/onnx/blob/main/docs/Operators.md#MatMulInteger)
   - [ ] 10
-- Max
+- [Max](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Max)
   - [ ] 1
   - [ ] 6
   - [ ] 8
   - [ ] 12
   - [x] 13
-- MaxPool
+- [MaxPool](https://github.com/onnx/onnx/blob/main/docs/Operators.md#MaxPool)
   - [ ] 1
   - [ ] 8
   - [ ] 10
   - [ ] 11
   - [ ] 12
   - [ ] 22
-- MaxRoiPool
+- [MaxRoiPool](https://github.com/onnx/onnx/blob/main/docs/Operators.md#MaxRoiPool)
   - [ ] 1
   - [ ] 22
-- MaxUnpool
+- [MaxUnpool](https://github.com/onnx/onnx/blob/main/docs/Operators.md#MaxUnpool)
   - [ ] 9
   - [ ] 11
   - [ ] 22
-- Mean
+- [Mean](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Mean)
   - [ ] 1
   - [ ] 6
   - [ ] 8
   - [ ] 13
-- MeanVarianceNormalization
+- [MeanVarianceNormalization](https://github.com/onnx/onnx/blob/main/docs/Operators.md#MeanVarianceNormalization)
   - [ ] 9
   - [ ] 13
-- MelWeightMatrix
+- [MelWeightMatrix](https://github.com/onnx/onnx/blob/main/docs/Operators.md#MelWeightMatrix)
   - [ ] 17
-- Min
+- [Min](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Min)
   - [ ] 1
   - [ ] 6
   - [ ] 8
   - [ ] 12
   - [x] 13
-- Mish
+- [Mish](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Mish)
   - [x] 18
   - [ ] 22
-- Mod
+- [Mod](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Mod)
   - [ ] 10
   - [x] 13
-- Mul
+- [Mul](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Mul)
   - [ ] 1
   - [ ] 6
   - [ ] 7
   - [ ] 13
   - [x] 14
-- Multinomial
+- [Multinomial](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Multinomial)
   - [ ] 7
   - [ ] 22
-- Neg
+- [Neg](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Neg)
   - [ ] 1
   - [ ] 6
   - [x] 13
-- NegativeLogLikelihoodLoss
+- [NegativeLogLikelihoodLoss](https://github.com/onnx/onnx/blob/main/docs/Operators.md#NegativeLogLikelihoodLoss)
   - [ ] 12
   - [ ] 13
   - [ ] 22
-- NonMaxSuppression
+- [NonMaxSuppression](https://github.com/onnx/onnx/blob/main/docs/Operators.md#NonMaxSuppression)
   - [ ] 10
   - [ ] 11
-- NonZero
+- [NonZero](https://github.com/onnx/onnx/blob/main/docs/Operators.md#NonZero)
   - [ ] 9
   - [ ] 13
-- Not
+- [Not](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Not)
   - [x] 1
-- OneHot
+- [OneHot](https://github.com/onnx/onnx/blob/main/docs/Operators.md#OneHot)
   - [ ] 9
   - [ ] 11
-- Optional
+- [Optional](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Optional)
   - [ ] 15
-- OptionalGetElement
-  - [ ] 15
-  - [ ] 18
-- OptionalHasElement
+- [OptionalGetElement](https://github.com/onnx/onnx/blob/main/docs/Operators.md#OptionalGetElement)
   - [ ] 15
   - [ ] 18
-- Or
+- [OptionalHasElement](https://github.com/onnx/onnx/blob/main/docs/Operators.md#OptionalHasElement)
+  - [ ] 15
+  - [ ] 18
+- [Or](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Or)
   - [ ] 1
   - [x] 7
-- PRelu
+- [PRelu](https://github.com/onnx/onnx/blob/main/docs/Operators.md#PRelu)
   - [ ] 1
   - [ ] 6
   - [ ] 7
   - [ ] 9
   - [ ] 16
-- Pad
+- [Pad](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Pad)
   - [ ] 1
   - [ ] 2
   - [ ] 11
@@ -461,109 +461,109 @@
   - [ ] 19
   - [ ] 21
   - [ ] 23
-- Pow
+- [Pow](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Pow)
   - [ ] 1
   - [ ] 7
   - [ ] 12
   - [ ] 13
   - [ ] 15
-- QLinearConv
+- [QLinearConv](https://github.com/onnx/onnx/blob/main/docs/Operators.md#QLinearConv)
   - [ ] 10
-- QLinearMatMul
+- [QLinearMatMul](https://github.com/onnx/onnx/blob/main/docs/Operators.md#QLinearMatMul)
   - [ ] 10
   - [ ] 21
-- QuantizeLinear
+- [QuantizeLinear](https://github.com/onnx/onnx/blob/main/docs/Operators.md#QuantizeLinear)
   - [ ] 10
   - [ ] 13
   - [ ] 19
   - [ ] 21
   - [ ] 23
-- RMSNormalization
+- [RMSNormalization](https://github.com/onnx/onnx/blob/main/docs/Operators.md#RMSNormalization)
   - [ ] 23
-- RNN
+- [RNN](https://github.com/onnx/onnx/blob/main/docs/Operators.md#RNN)
   - [ ] 1
   - [ ] 7
   - [ ] 14
   - [ ] 22
-- RandomNormal
+- [RandomNormal](https://github.com/onnx/onnx/blob/main/docs/Operators.md#RandomNormal)
   - [ ] 1
   - [ ] 22
-- RandomNormalLike
+- [RandomNormalLike](https://github.com/onnx/onnx/blob/main/docs/Operators.md#RandomNormalLike)
   - [ ] 1
   - [ ] 22
-- RandomUniform
+- [RandomUniform](https://github.com/onnx/onnx/blob/main/docs/Operators.md#RandomUniform)
   - [ ] 1
   - [ ] 22
-- RandomUniformLike
+- [RandomUniformLike](https://github.com/onnx/onnx/blob/main/docs/Operators.md#RandomUniformLike)
   - [ ] 1
   - [ ] 22
-- Range
+- [Range](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Range)
   - [ ] 11
-- Reciprocal
+- [Reciprocal](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Reciprocal)
   - [ ] 1
   - [ ] 6
   - [x] 13
-- ReduceL1
+- [ReduceL1](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ReduceL1)
   - [ ] 1
   - [ ] 11
   - [ ] 13
   - [x] 18
-- ReduceL2
+- [ReduceL2](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ReduceL2)
   - [ ] 1
   - [ ] 11
   - [ ] 13
   - [x] 18
-- ReduceLogSum
+- [ReduceLogSum](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ReduceLogSum)
   - [ ] 1
   - [ ] 11
   - [ ] 13
   - [x] 18
-- ReduceLogSumExp
+- [ReduceLogSumExp](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ReduceLogSumExp)
   - [ ] 1
   - [ ] 11
   - [ ] 13
   - [x] 18
-- ReduceMax
-  - [ ] 1
-  - [ ] 11
-  - [ ] 12
-  - [ ] 13
-  - [x] 18
-  - [x] 20
-- ReduceMean
-  - [ ] 1
-  - [ ] 11
-  - [ ] 13
-  - [x] 18
-- ReduceMin
+- [ReduceMax](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ReduceMax)
   - [ ] 1
   - [ ] 11
   - [ ] 12
   - [ ] 13
   - [x] 18
   - [x] 20
-- ReduceProd
+- [ReduceMean](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ReduceMean)
   - [ ] 1
   - [ ] 11
   - [ ] 13
   - [x] 18
-- ReduceSum
+- [ReduceMin](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ReduceMin)
+  - [ ] 1
+  - [ ] 11
+  - [ ] 12
+  - [ ] 13
+  - [x] 18
+  - [x] 20
+- [ReduceProd](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ReduceProd)
+  - [ ] 1
+  - [ ] 11
+  - [ ] 13
+  - [x] 18
+- [ReduceSum](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ReduceSum)
   - [ ] 1
   - [ ] 11
   - [x] 13
-- ReduceSumSquare
+- [ReduceSumSquare](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ReduceSumSquare)
   - [ ] 1
   - [ ] 11
   - [ ] 13
   - [x] 18
-- RegexFullMatch
+- [RegexFullMatch](https://github.com/onnx/onnx/blob/main/docs/Operators.md#RegexFullMatch)
   - [ ] 20
-- Relu
+- [Relu](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Relu)
   - [ ] 1
   - [ ] 6
   - [ ] 13
   - [ ] 14
-- Reshape
+- [Reshape](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Reshape)
   - [ ] 1
   - [ ] 5
   - [ ] 13
@@ -571,26 +571,26 @@
   - [ ] 19
   - [ ] 21
   - [ ] 23
-- Resize
+- [Resize](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Resize)
   - [ ] 10
   - [ ] 11
   - [ ] 13
   - [ ] 18
   - [ ] 19
-- ReverseSequence
+- [ReverseSequence](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ReverseSequence)
   - [ ] 10
-- RoiAlign
+- [RoiAlign](https://github.com/onnx/onnx/blob/main/docs/Operators.md#RoiAlign)
   - [ ] 10
   - [ ] 16
   - [ ] 22
-- RotaryEmbedding
+- [RotaryEmbedding](https://github.com/onnx/onnx/blob/main/docs/Operators.md#RotaryEmbedding)
   - [ ] 23
-- Round
+- [Round](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Round)
   - [x] 11
   - [ ] 22
-- STFT
+- [STFT](https://github.com/onnx/onnx/blob/main/docs/Operators.md#STFT)
   - [ ] 17
-- Scan
+- [Scan](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Scan)
   - [ ] 8
   - [ ] 9
   - [ ] 11
@@ -598,222 +598,222 @@
   - [ ] 19
   - [ ] 21
   - [ ] 23
-- Scatter
+- [Scatter](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Scatter)
   - [ ] 9
   - [ ] 11
-- ScatterElements
+- [ScatterElements](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ScatterElements)
   - [ ] 11
   - [ ] 13
   - [ ] 16
   - [ ] 18
-- ScatterND
+- [ScatterND](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ScatterND)
   - [ ] 11
   - [ ] 13
   - [ ] 16
   - [ ] 18
-- Selu
+- [Selu](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Selu)
   - [ ] 1
   - [ ] 6
   - [ ] 22
-- SequenceAt
+- [SequenceAt](https://github.com/onnx/onnx/blob/main/docs/Operators.md#SequenceAt)
   - [ ] 11
-- SequenceConstruct
+- [SequenceConstruct](https://github.com/onnx/onnx/blob/main/docs/Operators.md#SequenceConstruct)
   - [ ] 11
-- SequenceEmpty
+- [SequenceEmpty](https://github.com/onnx/onnx/blob/main/docs/Operators.md#SequenceEmpty)
   - [ ] 11
-- SequenceErase
+- [SequenceErase](https://github.com/onnx/onnx/blob/main/docs/Operators.md#SequenceErase)
   - [ ] 11
-- SequenceInsert
+- [SequenceInsert](https://github.com/onnx/onnx/blob/main/docs/Operators.md#SequenceInsert)
   - [ ] 11
-- SequenceLength
+- [SequenceLength](https://github.com/onnx/onnx/blob/main/docs/Operators.md#SequenceLength)
   - [ ] 11
-- SequenceMap
+- [SequenceMap](https://github.com/onnx/onnx/blob/main/docs/Operators.md#SequenceMap)
   - [ ] 17
-- Shape
+- [Shape](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Shape)
   - [ ] 1
   - [ ] 13
   - [ ] 15
   - [ ] 19
   - [ ] 21
   - [ ] 23
-- Shrink
+- [Shrink](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Shrink)
   - [ ] 9
-- Sigmoid
+- [Sigmoid](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Sigmoid)
   - [ ] 1
   - [ ] 6
   - [x] 13
-- Sign
+- [Sign](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Sign)
   - [ ] 9
   - [x] 13
-- Sin
+- [Sin](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Sin)
   - [x] 7
   - [ ] 22
-- Sinh
+- [Sinh](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Sinh)
   - [x] 9
   - [ ] 22
-- Size
+- [Size](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Size)
   - [ ] 1
   - [ ] 13
   - [ ] 19
   - [ ] 21
   - [ ] 23
-- Slice
+- [Slice](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Slice)
   - [ ] 1
   - [ ] 10
   - [ ] 11
   - [x] 13
-- Softmax
+- [Softmax](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Softmax)
   - [ ] 1
   - [ ] 11
   - [x] 13
-- SoftmaxCrossEntropyLoss
+- [SoftmaxCrossEntropyLoss](https://github.com/onnx/onnx/blob/main/docs/Operators.md#SoftmaxCrossEntropyLoss)
   - [ ] 12
   - [ ] 13
-- Softplus
+- [Softplus](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Softplus)
   - [ ] 1
   - [ ] 22
-- Softsign
+- [Softsign](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Softsign)
   - [ ] 1
   - [ ] 22
-- SpaceToDepth
+- [SpaceToDepth](https://github.com/onnx/onnx/blob/main/docs/Operators.md#SpaceToDepth)
   - [ ] 1
   - [ ] 13
-- Split
+- [Split](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Split)
   - [ ] 1
   - [ ] 2
   - [ ] 11
   - [ ] 13
   - [ ] 18
-- SplitToSequence
+- [SplitToSequence](https://github.com/onnx/onnx/blob/main/docs/Operators.md#SplitToSequence)
   - [ ] 11
-- Sqrt
+- [Sqrt](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Sqrt)
   - [ ] 1
   - [ ] 6
   - [x] 13
-- Squeeze
+- [Squeeze](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Squeeze)
   - [ ] 1
   - [ ] 11
   - [ ] 13
   - [ ] 21
   - [ ] 23
-- StringConcat
+- [StringConcat](https://github.com/onnx/onnx/blob/main/docs/Operators.md#StringConcat)
   - [ ] 20
-- StringNormalizer
+- [StringNormalizer](https://github.com/onnx/onnx/blob/main/docs/Operators.md#StringNormalizer)
   - [ ] 10
-- StringSplit
+- [StringSplit](https://github.com/onnx/onnx/blob/main/docs/Operators.md#StringSplit)
   - [ ] 20
-- Sub
+- [Sub](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Sub)
   - [ ] 1
   - [ ] 6
   - [ ] 7
   - [ ] 13
   - [x] 14
-- Sum
+- [Sum](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Sum)
   - [ ] 1
   - [ ] 6
   - [ ] 8
   - [ ] 13
-- Tan
+- [Tan](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Tan)
   - [x] 7
   - [ ] 22
-- Tanh
+- [Tanh](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Tanh)
   - [ ] 1
   - [ ] 6
   - [x] 13
-- TfIdfVectorizer
+- [TfIdfVectorizer](https://github.com/onnx/onnx/blob/main/docs/Operators.md#TfIdfVectorizer)
   - [ ] 9
-- ThresholdedRelu
+- [ThresholdedRelu](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ThresholdedRelu)
   - [ ] 10
   - [ ] 22
-- Tile
+- [Tile](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Tile)
   - [ ] 1
   - [ ] 6
   - [ ] 13
-- TopK
+- [TopK](https://github.com/onnx/onnx/blob/main/docs/Operators.md#TopK)
   - [ ] 1
   - [ ] 10
   - [ ] 11
-- Transpose
+- [Transpose](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Transpose)
   - [ ] 1
   - [ ] 13
   - [ ] 21
   - [ ] 23
-- Trilu
+- [Trilu](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Trilu)
   - [ ] 14
-- Unique
+- [Unique](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Unique)
   - [x] 11
-- Unsqueeze
+- [Unsqueeze](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Unsqueeze)
   - [ ] 1
   - [ ] 11
   - [ ] 13
   - [ ] 21
   - [ ] 23
-- Upsample
+- [Upsample](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Upsample)
   - [ ] 1
   - [ ] 7
   - [ ] 9
   - [ ] 10
-- Where
+- [Where](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Where)
   - [ ] 9
   - [x] 16
-- Xor
+- [Xor](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Xor)
   - [ ] 1
   - [x] 7
 
 # ai.onnx.ml
 
-- ArrayFeatureExtractor
+- [ArrayFeatureExtractor](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxmlarrayfeatureextractor)
   - [ ] 1
-- Binarizer
+- [Binarizer](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxmlbinarizer)
   - [ ] 1
-- CastMap
+- [CastMap](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxmlcastmap)
   - [ ] 1
-- CategoryMapper
+- [CategoryMapper](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxmlcategorymapper)
   - [ ] 1
-- DictVectorizer
+- [DictVectorizer](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxmldictvectorizer)
   - [ ] 1
-- FeatureVectorizer
+- [FeatureVectorizer](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxmlfeaturevectorizer)
   - [ ] 1
-- Imputer
+- [Imputer](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxmlimputer)
   - [ ] 1
-- LabelEncoder
+- [LabelEncoder](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxmllabelencoder)
   - [ ] 1
   - [ ] 2
   - [ ] 4
-- LinearClassifier
+- [LinearClassifier](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxmllinearclassifier)
   - [ ] 1
-- LinearRegressor
+- [LinearRegressor](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxmllinearregressor)
   - [ ] 1
-- Normalizer
+- [Normalizer](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxmlnormalizer)
   - [ ] 1
-- OneHotEncoder
+- [OneHotEncoder](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxmlonehotencoder)
   - [ ] 1
-- SVMClassifier
+- [SVMClassifier](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxmlsvmclassifier)
   - [ ] 1
-- SVMRegressor
+- [SVMRegressor](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxmlsvmregressor)
   - [ ] 1
-- Scaler
+- [Scaler](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxmlscaler)
   - [ ] 1
-- TreeEnsemble
+- [TreeEnsemble](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxmltreeensemble)
   - [ ] 5
-- TreeEnsembleClassifier
+- [TreeEnsembleClassifier](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxmltreeensembleclassifier)
   - [ ] 1
   - [ ] 3
   - [ ] 5
-- TreeEnsembleRegressor
+- [TreeEnsembleRegressor](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxmltreeensembleregressor)
   - [ ] 1
   - [ ] 3
   - [ ] 5
-- ZipMap
+- [ZipMap](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxmlzipmap)
   - [ ] 1
 
 # ai.onnx.preview.training
 
-- Adagrad
+- [Adagrad](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxpreviewtrainingadagrad)
   - [ ] 1
-- Adam
+- [Adam](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxpreviewtrainingadam)
   - [ ] 1
-- Gradient
+- [Gradient](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxpreviewtraininggradient)
   - [ ] 1
-- Momentum
+- [Momentum](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxpreviewtrainingmomentum)
   - [ ] 1
