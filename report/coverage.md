@@ -498,7 +498,7 @@
   - [ ] 1
   - [ ] 22
 - [Range](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Range)
-  - [ ] 11
+  - [x] 11
 - [Reciprocal](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Reciprocal)
   - [ ] 1
   - [ ] 6
