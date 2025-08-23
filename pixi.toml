@@ -26,6 +26,7 @@ pytest = ">=8.3.5"
 numpy = ">=2.2.4"
 mypy = ">=1.15.0"
 ruff = ">=0.11.3"
+ml_dtypes = ">=0.5.1"
 
 [host-dependencies]
 pip = "*"
@@ -46,6 +47,9 @@ typos = "*"
 pre-commit-install = "pre-commit install"
 pre-commit-run = "pre-commit run -a"
 
+[feature.nightlies.tasks]
+install-nightlies = "pip install --pre --no-deps --only-binary :all: --upgrade --timeout=60 -i 'https://test.pypi.org/simple/' --pre onnx"
+
 [feature.py310.dependencies]
 python = "3.10.*"
 [feature.py311.dependencies]
@@ -58,3 +62,4 @@ py310 = ["py310"]
 py311 = ["py311"]
 py312 = ["py312"]
 lint = { features = ["lint"], no-default-feature = true }
+nightlies = ["nightlies"]

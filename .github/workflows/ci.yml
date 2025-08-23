@@ -37,8 +37,11 @@ jobs:
       matrix:
         environment:
           - default
+          - nightlies
         os:
+          - macos-latest
           - ubuntu-latest
+          - windows-latest
     steps:
       - name: Check out branch
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -48,6 +51,12 @@ jobs:
         uses: prefix-dev/setup-pixi@ba3bb36eb2066252b2363392b7739741bb777659 # v0.8.1
         with:
           environments: ${{ matrix.environment }}
+      - name: Update dependencies
+        if: matrix.environment == 'nightlies'
+        run: pixi update -e ${{ matrix.environment }}
+      - name: Install nightlies
+        if: matrix.environment == 'nightlies'
+        run: pixi run -e ${{ matrix.environment }} install-nightlies
       - name: Install repository
         run: pixi run -e ${{ matrix.environment }} postinstall
       - name: Run pytest
@@ -63,7 +72,9 @@ jobs:
         environment:
           - default
         os:
+          - macos-latest
           - ubuntu-latest
+          - windows-latest
     steps:
       - name: Check out branch
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
