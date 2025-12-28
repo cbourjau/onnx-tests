@@ -655,7 +655,7 @@
   - [ ] 1
   - [ ] 13
   - [ ] 19
-  - [ ] 21
+  - [x] 21
   - [ ] 23
 - [Slice](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Slice)
   - [ ] 1
