@@ -1,4 +1,4 @@
-[project]
+[workspace]
 name = "onnx-tests"
 description = "Property-based tests for the ONNX standard"
 channels = ["conda-forge"]
@@ -16,21 +16,19 @@ cmd = "pytest tests"
 env = { "RUN_CANDIDATE" = "onnx_tests.runtime_wrappers.run_ort" }
 
 [dependencies]
-python = ">=3.10"
 hypothesis = ">=6.130.4"
+mypy = ">=1.15.0"
+ndonnx = ">=0.10.1"
+numpy = ">=2.2.4"
 onnx = ">=1.18.0"
 onnxruntime = ">=1.20.1"
-ndonnx = ">=0.10.1"
-spox = ">=0.16"
-pytest = ">=8.3.5"
-numpy = ">=2.2.4"
-mypy = ">=1.15.0"
-ruff = ">=0.11.3"
-
-[host-dependencies]
 pip = "*"
+pytest = ">=8.3.5"
+python = ">=3.10"
+ruff = ">=0.11.3"
 setuptools = ">=61"
 setuptools-scm = "*"
+spox = ">=0.16"
 
 [feature.lint.dependencies]
 pre-commit = "*"
