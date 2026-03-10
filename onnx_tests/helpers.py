@@ -1,6 +1,7 @@
 from collections.abc import Callable
 from typing import Any
 
+import ml_dtypes
 import numpy as np
 import spox
 from hypothesis import strategies as st
@@ -14,7 +15,7 @@ from .runtime_wrappers import run_reference
 
 
 def arrays(
-    dtype: np.dtype | st.SearchStrategy[np.dtype],
+    dtype: np.dtype,
     shape: tuple[int, ...] | st.SearchStrategy[tuple[int, ...]],
     *,
     fill: st.SearchStrategy[Any] | None = None,
@@ -33,6 +34,15 @@ def arrays(
             return np.clip(arr, min_, max_)
         return arr
 
+    def cast_to_non_numpy_dtype(arr: np.ndarray) -> np.ndarray:
+        if dtype == ml_dtypes.bfloat16:
+            return arr.astype(ml_dtypes.bfloat16)
+        return arr
+
+    proxy_dtype = dtype
+    if proxy_dtype == ml_dtypes.bfloat16:
+        proxy_dtype = np.dtype(np.float32)
+
     # mapping passed to from_dtype
     elements: dict[str, Any] = {"alphabet": st.characters(codec="utf-8")}
     if allow_nan is not None:
@@ -42,9 +52,10 @@ def arrays(
     if min_value is not None:
         elements["min_value"] = min_value
     return (
-        hyn.arrays(dtype, shape, fill=fill, unique=unique, elements=elements)
+        hyn.arrays(proxy_dtype, shape, fill=fill, unique=unique, elements=elements)
         .map(clip_very_large_floats)
         .map(ensure_scalars_are_rank0_arrays)
+        .map(cast_to_non_numpy_dtype)
     )
 
 
@@ -152,6 +163,7 @@ class SchemaWrapper:
             "tensor(int16)": np.dtype("int16"),
             "tensor(int32)": np.dtype("int32"),
             "tensor(int64)": np.dtype("int64"),
+            "tensor(bfloat16)": np.dtype(ml_dtypes.bfloat16),
             "tensor(float16)": np.dtype("float16"),
             "tensor(float)": np.dtype("float32"),
             "tensor(double)": np.dtype("float64"),

@@ -66,11 +66,12 @@ def clip(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
     shape = hyn.array_shapes(min_dims=0, min_side=0, max_dims=3)
     array = draw(h.arrays(dtype, shape=shape))
 
-    min = draw(st.one_of(st.none(), h.arrays(dtype, shape=())))
+    min = draw(st.one_of(st.none(), h.arrays(dtype, shape=(), allow_nan=False)))
     max = draw(
         st.one_of(
             st.none(),
-            h.arrays(dtype, shape=(), min_value=None if min is None else min[()]),
+            # use ndarray.item to avoid passing ml_dtypes to here
+            h.arrays(dtype, shape=(), min_value=None if min is None else min.item()),
         )
     )
 

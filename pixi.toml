@@ -29,6 +29,7 @@ ruff = ">=0.11.3"
 setuptools = ">=61"
 setuptools-scm = "*"
 spox = ">=0.16"
+ml_dtypes = ">=0.5.4"
 
 [feature.lint.dependencies]
 pre-commit = "*"

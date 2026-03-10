@@ -1,5 +1,6 @@
 from types import ModuleType
 
+import ml_dtypes
 import numpy as np
 from hypothesis import strategies as st
 from hypothesis.extra import numpy as hyn
@@ -18,7 +19,7 @@ def cast(
         # TODO: The standard is very vague on strings!
         if dtype_out is bool:
             fun = np.vectorize(str)
-        elif dtype_out.kind == "f":
+        elif dtype_out.kind == "f" or dtype_out == ml_dtypes.bfloat16:
             format_spec = draw(st.sampled_from(["e", "E", "f", "F"]))
             fun = np.vectorize(lambda el: format(el, format_spec), otypes=[dtype_in])
         elif dtype_out.kind in "iu":
