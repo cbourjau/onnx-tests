@@ -67,10 +67,15 @@ def clip(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
     array = draw(h.arrays(dtype, shape=shape))
 
     min = draw(st.one_of(st.none(), h.arrays(dtype, shape=())))
+    # can't use min_value = nan as a bound below
+    if isinstance(min, np.ndarray) and np.isnan(min):
+        min_value = None
+    else:
+        min_value = None if min is None else min[()]
     max = draw(
         st.one_of(
             st.none(),
-            h.arrays(dtype, shape=(), min_value=None if min is None else min[()]),
+            h.arrays(dtype, shape=(), min_value=min_value),
         )
     )
 
