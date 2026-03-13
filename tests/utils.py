@@ -82,7 +82,11 @@ def make_test(
         for i, (cand, exp) in enumerate(
             zip(candidate.values(), expected.values(), strict=True)
         ):
-            err_msg = f"output {i} did not meet expectation"
+            err_msg = (
+                f"output `{i}` of `{op_name}` did not meet expectation\n"
+                f"  inputs: `{state.inputs}`\n"
+                f"  attribures: `{state.attribute_kwargs}`"
+            )
             if exp.dtype.kind in "UO":
                 # Strings must match exactly
                 np.testing.assert_array_equal(cand, exp, err_msg=err_msg)
