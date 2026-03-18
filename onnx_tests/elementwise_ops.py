@@ -309,6 +309,9 @@ def div(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
     # discard integer arrays with zeros in the divisor
     if dtype.kind in "iu":
         assume(np.all(test_case.inputs[1] != 0))  # type: ignore
+    # discard overflowing cases
+    if dtype.kind == "i":
+        assume(np.all(test_case.inputs[0] != np.iinfo(dtype).min))  # type: ignore
     return test_case
 
 
