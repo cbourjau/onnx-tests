@@ -342,9 +342,10 @@ def less_or_equal(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseD
 
 @st.composite
 def mod(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    # the fmod attribute seems to be redundant?
     if dtype.kind in "iu":
         # fmod may only be set to 0 for integer data types
-        fmod = draw(st.sampled_from([0, 1]))
+        fmod = 0
     else:
         fmod = 1
     test_case = draw(_binary(dtype, op.mod, attributes={"fmod": fmod}))
