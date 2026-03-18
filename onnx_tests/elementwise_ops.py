@@ -208,6 +208,20 @@ def tanh(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
 
 
 @st.composite
+def max(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    num_shapes = draw(st.integers(1, 4))
+    arrays = draw(h.broadcastable_arrays(dtype, num_shapes=num_shapes))
+    return TestCaseDraw(inputs={"data_0": arrays}, attribute_kwargs={}, spox_fun=op.max)
+
+
+@st.composite
+def min(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    num_shapes = draw(st.integers(1, 4))
+    arrays = draw(h.broadcastable_arrays(dtype, num_shapes=num_shapes))
+    return TestCaseDraw(inputs={"data_0": arrays}, attribute_kwargs={}, spox_fun=op.min)
+
+
+@st.composite
 def mish(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
     return draw(_unary(dtype, op.mish))
 
