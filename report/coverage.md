@@ -389,7 +389,7 @@
   - [ ] 6
   - [ ] 8
   - [ ] 12
-  - [ ] 13
+  - [x] 13
 - [MaxPool](https://github.com/onnx/onnx/blob/main/docs/Operators.md#MaxPool)
   - [ ] 1
   - [ ] 8
@@ -419,7 +419,7 @@
   - [ ] 6
   - [ ] 8
   - [ ] 12
-  - [ ] 13
+  - [x] 13
 - [Mish](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Mish)
   - [x] 18
   - [ ] 22
