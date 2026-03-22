@@ -85,7 +85,7 @@ def make_test(
             err_msg = (
                 f"output `{i}` of `{op_name}` did not meet expectation\n"
                 f"  inputs: `{state.inputs}`\n"
-                f"  attribures: `{state.attribute_kwargs}`"
+                f"  attributes: `{state.attribute_kwargs}`"
             )
             if exp.dtype.kind in "UO":
                 # Strings must match exactly
