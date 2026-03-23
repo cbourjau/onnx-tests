@@ -35,16 +35,17 @@ def cast(
         arr = fun(draw(h.arrays(dtype=dtype_out, shape=shape)))
     elif dtype_in.kind == "f" and dtype_out.kind in "iu":
         # Out-of-range is UB
-        min_val = float(np.asarray(np.iinfo(dtype_out).min, dtype_in))
-        max_val = float(np.asarray(np.iinfo(dtype_out).max, dtype_in))
+        # Create valid arrays and then cast to 'dtype_in'
         arr = draw(
             h.arrays(
-                dtype=dtype_in,
+                dtype=dtype_out,
                 shape=shape,
-                max_value=max_val,
-                min_value=min_val,
                 allow_nan=False,
             )
+        )
+        # After the cast we may end up with `inf` values which we clip away
+        arr = arr.astype(dtype_out).clip(
+            np.iinfo(dtype_out).min, np.iinfo(dtype_out).max
         )
     else:
         # Booleans should work for any float input

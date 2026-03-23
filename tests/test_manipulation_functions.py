@@ -24,6 +24,8 @@ from .utils import make_test
     ids=lambda el: f"from-{el}",
 )
 def test_Cast_21(data: st.DataObject, dtype_in, dtype_out):  # noqa
+    if (dtype_in.kind, dtype_out.kind) in [("b", "U"), ("U", "b")]:
+        raise pytest.skip(reason="string representation of boolean values is undefined")
     state = data.draw(manipulation_functions.cast(dtype_in, dtype_out, op))
     model = state.build_model()
 
