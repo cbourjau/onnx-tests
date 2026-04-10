@@ -1,4 +1,5 @@
 import re
+import warnings
 from pathlib import Path
 from typing import Any
 
@@ -17,6 +18,29 @@ def disable_spox_value_prop():
         yield
 
 
+def _parse_xfails_file(path: Path) -> list[tuple[str, str]]:
+    """Parse an xfails file into (pattern, reason) tuples.
+
+    Lines starting with ``#`` and blank lines are ignored. A pattern
+    may be followed by `` # reason`` to provide a reason for the xfail.
+    """
+    if not path.is_file():
+        return []
+    patterns: list[tuple[str, str]] = []
+    for line in path.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if " # " in line:
+            pattern, reason = line.split(" # ", 1)
+            pattern = pattern.strip()
+        else:
+            pattern = line
+            reason = ""
+        patterns.append((pattern, reason))
+    return patterns
+
+
 def pytest_addoption(parser):
     parser.addoption(
         "--create-report",
@@ -24,9 +48,31 @@ def pytest_addoption(parser):
         default=False,
         help="Create a report for the test coverage of the ONNX standard",
     )
+    parser.addoption(
+        "--xfails-file",
+        action="append",
+        default=[],
+        help="Path to a file with patterns of tests to mark as xfail (use * as wildcard). Can be passed multiple times.",
+    )
 
 
 def pytest_collection_modifyitems(session, config, items):
+    patterns: list[tuple[str, str]] = []
+    for xfails_file in config.getoption("--xfails-file"):
+        patterns.extend(_parse_xfails_file(Path(xfails_file)))
+
+    if patterns:
+        matched: set[str] = set()
+        for item in items:
+            for pattern, reason in patterns:
+                regex = re.escape(pattern).replace(r"\*", ".*")
+                if re.fullmatch(regex, item.nodeid):
+                    item.add_marker(pytest.mark.xfail(reason=reason))
+                    matched.add(pattern)
+                    break
+        for pattern in sorted({p for p, _ in patterns} - matched):
+            warnings.warn(f"xfail pattern did not match any test: {pattern!r}")
+
     if not config.getoption("--create-report"):
         return
 
