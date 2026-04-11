@@ -4,4 +4,5 @@
 # Optional reason after ` # `: pattern # reason
 
 # Unique: ORT crashes (SIGABRT) on some dtypes
-# tests/test_searching.py::test_Unique_11[*] # ORT crashes on Unique
+tests/test_searching.py::test_Unique_11[*] # ORT segfaults on Unique
+tests/test_linalg.py::test_Einsum_12[*] # ORT segfaults on Unique
