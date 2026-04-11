@@ -9,10 +9,10 @@ postinstall = "pip install --no-build-isolation --no-deps --disable-pip-version-
 create-report = "pytest --co --create-report"
 
 [tasks.test-reference]
-cmd = "pytest tests --xfails-file=xfails-reference.txt"
+cmd = "pytest tests -v --xfails-file=xfails-reference.txt"
 env = { "RUN_CANDIDATE" = "onnx_tests.runtime_wrappers.run_reference" }
 [tasks.test-ort]
-cmd = "pytest tests --xfails-file=xfails-reference.txt --xfails-file=xfails-ort.txt"
+cmd = "pytest tests -v --xfails-file=xfails-reference.txt --xfails-file=xfails-ort.txt --skips-file=skips-ort.txt"
 env = { "RUN_CANDIDATE" = "onnx_tests.runtime_wrappers.run_ort" }
 
 [dependencies]

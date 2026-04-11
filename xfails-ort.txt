@@ -117,7 +117,7 @@ tests/test_searching.py::test_ArgMin_13[v17-float16] # ORT ArgMin NaN handling d
 tests/test_searching.py::test_ArgMin_13[v17-float32] # ORT ArgMin NaN handling differs from reference
 tests/test_searching.py::test_ArgMin_13[v17-float64] # ORT ArgMin NaN handling differs from reference
 
-# Unique: covered by xfails-reference.txt (test_Unique_11[*])
+# Unique: skipped via skips-ort.txt (ORT crashes)
 
 # Where: ORT not implemented for some dtypes
 tests/test_searching.py::test_Where_16[v17-uint16] # ORT has not implemented Where for uint16
