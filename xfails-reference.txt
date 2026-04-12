@@ -1,0 +1,18 @@
+# Glob patterns for tests expected to fail with the reference runtime.
+# Optional reason after ` # `: pattern # reason
+#
+# Examples:
+#   tests/test_elementwise.py::test_Add_14[*]
+#   tests/test_elementwise.py::test_Add_14[float16] # no float16 support
+
+tests/test_elementwise.py::test_LogSoftmax_13[*] # np.log writes to read-only array
+tests/test_linalg.py::test_Det_22[v22-float16] # reference impl does not support float16
+tests/test_searching.py::test_Unique_11[*] # reference impl crashes on empty axes and unhashable ndarray keys
+tests/test_statistical.py::test_ReduceLogSum_18[v18-uint32] # reference impl mishandles empty axes with noop_with_empty_axes
+tests/test_statistical.py::test_ReduceLogSum_18[v18-uint64] # reference impl mishandles empty axes with noop_with_empty_axes
+tests/test_statistical.py::test_ReduceLogSum_18[v18-int32] # reference impl mishandles empty axes with noop_with_empty_axes
+tests/test_statistical.py::test_ReduceLogSum_18[v18-int64] # reference impl mishandles empty axes with noop_with_empty_axes
+tests/test_statistical.py::test_ReduceLogSumExp_18[v18-uint32] # reference impl assigns -inf to integer array
+tests/test_statistical.py::test_ReduceLogSumExp_18[v18-uint64] # reference impl assigns -inf to integer array
+tests/test_statistical.py::test_ReduceLogSumExp_18[v18-int32] # reference impl assigns -inf to integer array
+tests/test_statistical.py::test_ReduceLogSumExp_18[v18-int64] # reference impl assigns -inf to integer array

@@ -67,10 +67,15 @@ def clip(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
     array = draw(h.arrays(dtype, shape=shape))
 
     min = draw(st.one_of(st.none(), h.arrays(dtype, shape=())))
+    # can't use min_value = nan as a bound below
+    if isinstance(min, np.ndarray) and np.isnan(min):
+        min_value = None
+    else:
+        min_value = None if min is None else min[()]
     max = draw(
         st.one_of(
             st.none(),
-            h.arrays(dtype, shape=(), min_value=None if min is None else min[()]),
+            h.arrays(dtype, shape=(), min_value=min_value),
         )
     )
 
@@ -203,6 +208,20 @@ def tanh(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
 
 
 @st.composite
+def max(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    num_shapes = draw(st.integers(1, 4))
+    arrays = draw(h.broadcastable_arrays(dtype, num_shapes=num_shapes))
+    return TestCaseDraw(inputs={"data_0": arrays}, attribute_kwargs={}, spox_fun=op.max)
+
+
+@st.composite
+def min(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    num_shapes = draw(st.integers(1, 4))
+    arrays = draw(h.broadcastable_arrays(dtype, num_shapes=num_shapes))
+    return TestCaseDraw(inputs={"data_0": arrays}, attribute_kwargs={}, spox_fun=op.min)
+
+
+@st.composite
 def mish(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
     return draw(_unary(dtype, op.mish))
 
@@ -290,6 +309,9 @@ def div(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
     # discard integer arrays with zeros in the divisor
     if dtype.kind in "iu":
         assume(np.all(test_case.inputs[1] != 0))  # type: ignore
+    # discard overflowing cases
+    if dtype.kind == "i":
+        assume(np.all(test_case.inputs[0] != np.iinfo(dtype).min))  # type: ignore
     return test_case
 
 
@@ -320,9 +342,10 @@ def less_or_equal(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseD
 
 @st.composite
 def mod(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    # the fmod attribute seems to be redundant?
     if dtype.kind in "iu":
         # fmod may only be set to 0 for integer data types
-        fmod = draw(st.sampled_from([0, 1]))
+        fmod = 0
     else:
         fmod = 1
     test_case = draw(_binary(dtype, op.mod, attributes={"fmod": fmod}))

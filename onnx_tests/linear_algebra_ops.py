@@ -19,12 +19,22 @@ def det(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
 @st.composite
 def einsum(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
     # TODO: Add more equations
-    # trace
-    equation = "ii"
+    # trace: the repeated `i` index requires matching dimensions.
     shape = draw(hyn.array_shapes(min_dims=2, min_side=0))
-    arr = draw(h.arrays(dtype, shape))
-    if arr.ndim > 2:
+    if len(shape) > 2:
         equation = draw(st.sampled_from(["i...i", "ii...", "...ii"]))
+    else:
+        equation = "ii"
+    # Fix up the shape so the two `i` dimensions are equal.
+    s = list(shape)
+    if equation in ("ii", "i...i"):
+        s[-1] = s[0]
+    elif equation == "ii...":
+        s[1] = s[0]
+    elif equation == "...ii":
+        s[-1] = s[-2]
+    shape = tuple(s)
+    arr = draw(h.arrays(dtype, shape))
 
     return TestCaseDraw(
         inputs={"Inputs": [arr]},
