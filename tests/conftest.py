@@ -1,4 +1,5 @@
 import re
+import warnings
 from pathlib import Path
 from typing import Any
 
@@ -17,6 +18,29 @@ def disable_spox_value_prop():
         yield
 
 
+def _parse_xfails_file(path: Path) -> list[tuple[str, str]]:
+    """Parse an xfails file into (pattern, reason) tuples.
+
+    Lines starting with ``#`` and blank lines are ignored. A pattern
+    may be followed by `` # reason`` to provide a reason for the xfail.
+    """
+    if not path.is_file():
+        return []
+    patterns: list[tuple[str, str]] = []
+    for line in path.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if " # " in line:
+            pattern, reason = line.split(" # ", 1)
+            pattern = pattern.strip()
+        else:
+            pattern = line
+            reason = ""
+        patterns.append((pattern, reason))
+    return patterns
+
+
 def pytest_addoption(parser):
     parser.addoption(
         "--create-report",
@@ -24,9 +48,52 @@ def pytest_addoption(parser):
         default=False,
         help="Create a report for the test coverage of the ONNX standard",
     )
+    parser.addoption(
+        "--xfails-file",
+        action="append",
+        default=[],
+        help="Path to a file with patterns of tests to mark as xfail (use * as wildcard). Can be passed multiple times.",
+    )
+    parser.addoption(
+        "--skips-file",
+        action="append",
+        default=[],
+        help="Path to a file with patterns of tests to skip (use * as wildcard). Can be passed multiple times.",
+    )
+
+
+def _apply_marker_from_files(config, items, option, marker_factory):
+    """Apply a pytest marker to tests matching patterns from files."""
+    patterns: list[tuple[str, str]] = []
+    for path in config.getoption(option):
+        patterns.extend(_parse_xfails_file(Path(path)))
+
+    if not patterns:
+        return
+
+    matched: set[str] = set()
+    for item in items:
+        for pattern, reason in patterns:
+            regex = re.escape(pattern).replace(r"\*", ".*")
+            if re.fullmatch(regex, item.nodeid):
+                item.add_marker(marker_factory(reason))
+                matched.add(pattern)
+                break
+    for pattern in sorted({p for p, _ in patterns} - matched):
+        warnings.warn(f"{option} pattern did not match any test: {pattern!r}")
 
 
 def pytest_collection_modifyitems(session, config, items):
+    _apply_marker_from_files(
+        config, items, "--skips-file", lambda reason: pytest.mark.skip(reason=reason)
+    )
+    _apply_marker_from_files(
+        config,
+        items,
+        "--xfails-file",
+        lambda reason: pytest.mark.xfail(reason=reason),
+    )
+
     if not config.getoption("--create-report"):
         return
 

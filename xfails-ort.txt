@@ -1,0 +1,204 @@
+# Patterns for tests expected to fail with onnxruntime.
+# Optional reason after ` # `: pattern # reason
+
+# AveragePool: ORT propagates NaN differently with count_include_pad=0
+tests/test_averagepool.py::test_AveragePool_19[*] # ORT propagates NaN differently with count_include_pad=0
+
+# Conv: ORT shape mismatch and no dilation+SAME_UPPER support
+tests/test_conv.py::test_Conv_11[*] # ORT shape mismatch and no dilation+SAME_UPPER support
+
+# ConvInteger: ORT no per-channel quantization and no dilation+SAME_UPPER support
+tests/test_conv.py::test_ConvInteger_10[*] # ORT no per-channel quantization and no dilation+SAME_UPPER support
+
+# Celu: ORT disagrees with reference
+tests/test_elementwise.py::test_Celu_12[v17-float32] # ORT Celu disagrees with reference
+
+# BitShift: ORT has not implemented for uint16
+tests/test_elementwise.py::test_BitShift_11[v17-uint16] # ORT has not implemented BitShift for uint16
+
+# Clip: ORT has not implemented Where for int16/uint16
+tests/test_elementwise.py::test_Clip_13[v17-int16] # ORT has not implemented Where for int16
+tests/test_elementwise.py::test_Clip_13[v17-uint16] # ORT has not implemented Where for uint16
+tests/test_elementwise.py::test_Clip_13[v17-float16] # ORT Clip disagrees with reference for float16
+tests/test_elementwise.py::test_Clip_13[v17-float32] # ORT Clip disagrees with reference for float32
+tests/test_elementwise.py::test_Clip_13[v17-float64] # ORT Clip disagrees with reference for float64
+
+
+# Max/Min: ORT has not implemented for int16/uint16
+tests/test_elementwise.py::test_Max_13[v17-int16] # ORT has not implemented Max for int16
+tests/test_elementwise.py::test_Max_13[v17-uint16] # ORT has not implemented Max for uint16
+tests/test_elementwise.py::test_Min_13[v17-int16] # ORT has not implemented Min for int16
+tests/test_elementwise.py::test_Min_13[v17-uint16] # ORT has not implemented Min for uint16
+
+# Trig/math ops: ORT has not implemented for float64
+tests/test_elementwise.py::test_Acos_7[v17-float64] # ORT has not implemented Acos for float64
+tests/test_elementwise.py::test_Acosh_9[v17-float64] # ORT has not implemented Acosh for float64
+tests/test_elementwise.py::test_Asin_7[v17-float64] # ORT has not implemented Asin for float64
+tests/test_elementwise.py::test_Asinh_9[v17-float64] # ORT has not implemented Asinh for float64
+tests/test_elementwise.py::test_Atan_7[v17-float64] # ORT has not implemented Atan for float64
+tests/test_elementwise.py::test_Atanh_9[v17-float64] # ORT has not implemented Atanh for float64
+tests/test_elementwise.py::test_Cos_7[v17-float64] # ORT has not implemented Cos for float64
+tests/test_elementwise.py::test_Cosh_9[v17-float64] # ORT has not implemented Cosh for float64
+tests/test_elementwise.py::test_Erf_13[v17-float64] # ORT has not implemented Erf for float64
+tests/test_elementwise.py::test_HardSigmoid_6[v17-float64] # ORT has not implemented HardSigmoid for float64
+tests/test_elementwise.py::test_HardSwish_14[v17-float64] # ORT has not implemented HardSwish for float64
+tests/test_elementwise.py::test_Sinh_9[v17-float64] # ORT has not implemented Sinh for float64
+tests/test_elementwise.py::test_Tan_7[v17-float64] # ORT has not implemented Tan for float64
+
+# Hardmax: ORT disagrees on NaN handling
+tests/test_elementwise.py::test_Hardmax_13[v17-float16] # ORT Hardmax NaN handling differs from reference
+tests/test_elementwise.py::test_Hardmax_13[v17-float32] # ORT Hardmax NaN handling differs from reference
+tests/test_elementwise.py::test_Hardmax_13[v17-float64] # ORT has not implemented Hardmax for float64
+
+# LogSoftmax: covered by xfails-reference.txt (test_LogSoftmax_13[*])
+
+# Reciprocal: ORT returns -inf instead of inf for small positive denormals
+tests/test_elementwise.py::test_Reciprocal_13[v17-float32] # ORT Reciprocal sign of inf differs from reference
+
+# Sigmoid: ORT disagrees with reference
+tests/test_elementwise.py::test_Sigmoid_13[v17-float16] # ORT Sigmoid disagrees with reference
+
+# Softmax: ORT disagrees with reference
+tests/test_elementwise.py::test_Softmax_13[v17-float16] # ORT Softmax disagrees with reference
+
+# Mish: ORT disagrees with reference
+tests/test_elementwise.py::test_Mish_18[v18-float16] # ORT Mish disagrees with reference
+
+# Sign: ORT returns 0 for NaN instead of NaN
+tests/test_elementwise.py::test_Sign_13[v17-float16] # ORT Sign returns 0 for NaN instead of NaN
+
+# Tanh: ORT disagrees with reference
+tests/test_elementwise.py::test_Tanh_13[v17-float32] # ORT Tanh disagrees with reference
+
+# Det: ORT issues across dtypes (float16 covered by xfails-reference.txt)
+tests/test_linalg.py::test_Det_22[v22-float32] # ORT Det numerical precision differs from reference
+tests/test_linalg.py::test_Det_22[v22-float64] # ORT has not implemented Det for float64
+
+# Einsum: ORT has not implemented for many dtypes
+tests/test_linalg.py::test_Einsum_12[v17-uint8] # ORT has not implemented Einsum for uint8
+tests/test_linalg.py::test_Einsum_12[v17-uint16] # ORT has not implemented Einsum for uint16
+tests/test_linalg.py::test_Einsum_12[v17-uint32] # ORT has not implemented Einsum for uint32
+tests/test_linalg.py::test_Einsum_12[v17-uint64] # ORT has not implemented Einsum for uint64
+tests/test_linalg.py::test_Einsum_12[v17-int8] # ORT has not implemented Einsum for int8
+tests/test_linalg.py::test_Einsum_12[v17-int16] # ORT has not implemented Einsum for int16
+tests/test_linalg.py::test_Einsum_12[v17-int32] # ORT has not implemented Einsum for int32
+tests/test_linalg.py::test_Einsum_12[v17-int64] # ORT has not implemented Einsum for int64
+tests/test_linalg.py::test_Einsum_12[v17-float16] # ORT has not implemented Einsum for float16
+tests/test_linalg.py::test_Einsum_12[v17-float32] # ORT has not implemented Einsum for float32
+tests/test_linalg.py::test_Einsum_12[v17-float64] # ORT has not implemented Einsum for float64
+
+# MatMul: ORT has not implemented for many dtypes / precision issues
+tests/test_linalg.py::test_MatMul_13[v17-float16] # ORT MatMul precision differs from reference
+tests/test_linalg.py::test_MatMul_13[v17-float32] # ORT has not implemented MatMul for float32 (0-dim)
+tests/test_linalg.py::test_MatMul_13[v17-float64] # ORT has not implemented MatMul for float64
+tests/test_linalg.py::test_MatMul_13[v17-uint32] # ORT has not implemented MatMul for uint32
+tests/test_linalg.py::test_MatMul_13[v17-uint64] # ORT has not implemented MatMul for uint64
+tests/test_linalg.py::test_MatMul_13[v17-int32] # ORT has not implemented MatMul for int32
+tests/test_linalg.py::test_MatMul_13[v17-int64] # ORT has not implemented MatMul for int64
+
+# ArgMax: ORT not implemented for some dtypes / NaN handling differs
+tests/test_searching.py::test_ArgMax_13[v17-uint16] # ORT has not implemented ArgMax for uint16
+tests/test_searching.py::test_ArgMax_13[v17-uint32] # ORT has not implemented ArgMax for uint32
+tests/test_searching.py::test_ArgMax_13[v17-uint64] # ORT has not implemented ArgMax for uint64
+tests/test_searching.py::test_ArgMax_13[v17-int16] # ORT has not implemented ArgMax for int16
+tests/test_searching.py::test_ArgMax_13[v17-float16] # ORT ArgMax NaN handling differs from reference
+tests/test_searching.py::test_ArgMax_13[v17-float32] # ORT ArgMax NaN handling differs from reference
+tests/test_searching.py::test_ArgMax_13[v17-float64] # ORT ArgMax NaN handling differs from reference
+
+# Cast: ORT fails parsing subnormal float strings
+tests/test_manipulation_functions.py::test_Cast_21[from-<U0-to-float64] # ORT Cast string to float64 out of range for subnormals
+
+# ArgMin: ORT not implemented for some dtypes / NaN handling differs
+tests/test_searching.py::test_ArgMin_13[v17-uint16] # ORT has not implemented ArgMin for uint16
+tests/test_searching.py::test_ArgMin_13[v17-uint32] # ORT has not implemented ArgMin for uint32
+tests/test_searching.py::test_ArgMin_13[v17-uint64] # ORT has not implemented ArgMin for uint64
+tests/test_searching.py::test_ArgMin_13[v17-int16] # ORT has not implemented ArgMin for int16
+tests/test_searching.py::test_ArgMin_13[v17-float16] # ORT ArgMin NaN handling differs from reference
+tests/test_searching.py::test_ArgMin_13[v17-float32] # ORT ArgMin NaN handling differs from reference
+tests/test_searching.py::test_ArgMin_13[v17-float64] # ORT ArgMin NaN handling differs from reference
+
+# Unique: skipped via skips-ort.txt (ORT crashes)
+
+# Where: ORT not implemented for some dtypes
+tests/test_searching.py::test_Where_16[v17-uint16] # ORT has not implemented Where for uint16
+tests/test_searching.py::test_Where_16[v17-uint32] # ORT has not implemented Where for uint32
+tests/test_searching.py::test_Where_16[v17-uint64] # ORT has not implemented Where for uint64
+tests/test_searching.py::test_Where_16[v17-int8] # ORT has not implemented Where for int8
+tests/test_searching.py::test_Where_16[v17-int16] # ORT has not implemented Where for int16
+tests/test_searching.py::test_Where_16[v17-bool] # ORT has not implemented Where for bool
+
+# CumSum: ORT not implemented for uint32/uint64
+tests/test_statistical.py::test_CumSum_14[axis-dtype-int32-uint32] # ORT has not implemented CumSum for uint32
+tests/test_statistical.py::test_CumSum_14[axis-dtype-int32-uint64] # ORT has not implemented CumSum for uint64
+tests/test_statistical.py::test_CumSum_14[axis-dtype-int64-uint32] # ORT has not implemented CumSum for uint32
+tests/test_statistical.py::test_CumSum_14[axis-dtype-int64-uint64] # ORT has not implemented CumSum for uint64
+
+# ReduceL1: ORT not implemented for uint32/uint64
+tests/test_statistical.py::test_ReduceL1_18[v18-uint32] # ORT has not implemented ReduceL1 for uint32
+tests/test_statistical.py::test_ReduceL1_18[v18-uint64] # ORT has not implemented ReduceL1 for uint64
+
+# ReduceL2: ORT not implemented or disagrees
+tests/test_statistical.py::test_ReduceL2_18[v18-uint32] # ORT has not implemented ReduceL2 for uint32
+tests/test_statistical.py::test_ReduceL2_18[v18-uint64] # ORT has not implemented ReduceL2 for uint64
+tests/test_statistical.py::test_ReduceL2_18[v18-int32] # ORT ReduceL2 disagrees with reference
+tests/test_statistical.py::test_ReduceL2_18[v18-int64] # ORT ReduceL2 disagrees with reference
+tests/test_statistical.py::test_ReduceL2_18[v18-float16] # ORT ReduceL2 disagrees with reference
+
+# ReduceLogSum: ORT not implemented or disagrees (uint32/uint64/int32/int64 covered by xfails-reference.txt)
+tests/test_statistical.py::test_ReduceLogSum_18[v18-float16] # ORT ReduceLogSum disagrees with reference
+tests/test_statistical.py::test_ReduceLogSum_18[v18-float64] # ORT ReduceLogSum disagrees with reference
+
+# ReduceLogSumExp: ORT disagrees (uint32/uint64/int32/int64 covered by xfails-reference.txt)
+tests/test_statistical.py::test_ReduceLogSumExp_18[v18-float16] # ORT ReduceLogSumExp disagrees with reference
+
+# ReduceMax: ORT not implemented or NaN handling differs
+tests/test_statistical.py::test_ReduceMax_18[v18-uint32] # ORT has not implemented ReduceMax for uint32
+tests/test_statistical.py::test_ReduceMax_18[v18-uint64] # ORT has not implemented ReduceMax for uint64
+tests/test_statistical.py::test_ReduceMax_18[v18-float16] # ORT ReduceMax NaN handling differs from reference
+tests/test_statistical.py::test_ReduceMax_18[v18-float32] # ORT ReduceMax NaN handling differs from reference
+tests/test_statistical.py::test_ReduceMax_18[v18-float64] # ORT ReduceMax NaN handling differs from reference
+tests/test_statistical.py::test_ReduceMax_20[v20-uint32] # ORT has not implemented ReduceMax for uint32
+tests/test_statistical.py::test_ReduceMax_20[v20-uint64] # ORT has not implemented ReduceMax for uint64
+tests/test_statistical.py::test_ReduceMax_20[v20-float16] # ORT ReduceMax NaN handling differs from reference
+tests/test_statistical.py::test_ReduceMax_20[v20-float32] # ORT ReduceMax NaN handling differs from reference
+tests/test_statistical.py::test_ReduceMax_20[v20-float64] # ORT ReduceMax NaN handling differs from reference
+
+# ReduceMean: ORT not implemented or disagrees
+tests/test_statistical.py::test_ReduceMean_18[v18-uint32] # ORT has not implemented ReduceMean for uint32
+tests/test_statistical.py::test_ReduceMean_18[v18-uint64] # ORT has not implemented ReduceMean for uint64
+tests/test_statistical.py::test_ReduceMean_18[v18-float32] # ORT ReduceMean disagrees with reference
+tests/test_statistical.py::test_ReduceMean_18[v18-float64] # ORT ReduceMean disagrees with reference
+
+# ReduceMin: ORT not implemented or NaN handling differs
+tests/test_statistical.py::test_ReduceMin_18[v18-uint32] # ORT has not implemented ReduceMin for uint32
+tests/test_statistical.py::test_ReduceMin_18[v18-uint64] # ORT has not implemented ReduceMin for uint64
+tests/test_statistical.py::test_ReduceMin_18[v18-float16] # ORT ReduceMin NaN handling differs from reference
+tests/test_statistical.py::test_ReduceMin_18[v18-float32] # ORT ReduceMin NaN handling differs from reference
+tests/test_statistical.py::test_ReduceMin_18[v18-float64] # ORT ReduceMin NaN handling differs from reference
+tests/test_statistical.py::test_ReduceMin_20[v20-uint32] # ORT has not implemented ReduceMin for uint32
+tests/test_statistical.py::test_ReduceMin_20[v20-uint64] # ORT has not implemented ReduceMin for uint64
+tests/test_statistical.py::test_ReduceMin_20[v20-float16] # ORT ReduceMin NaN handling differs from reference
+tests/test_statistical.py::test_ReduceMin_20[v20-float32] # ORT ReduceMin NaN handling differs from reference
+tests/test_statistical.py::test_ReduceMin_20[v20-float64] # ORT ReduceMin NaN handling differs from reference
+
+# ReduceProd: ORT not implemented or disagrees
+tests/test_statistical.py::test_ReduceProd_18[v18-uint32] # ORT has not implemented ReduceProd for uint32
+tests/test_statistical.py::test_ReduceProd_18[v18-uint64] # ORT has not implemented ReduceProd for uint64
+tests/test_statistical.py::test_ReduceProd_18[v18-float32] # ORT ReduceProd disagrees with reference
+tests/test_statistical.py::test_ReduceProd_18[v18-float64] # ORT ReduceProd disagrees with reference
+
+# ReduceSum: ORT not implemented or disagrees
+tests/test_statistical.py::test_ReduceSum_13[v17-uint32] # ORT has not implemented ReduceSum for uint32
+tests/test_statistical.py::test_ReduceSum_13[v17-uint64] # ORT has not implemented ReduceSum for uint64
+tests/test_statistical.py::test_ReduceSum_13[v17-float32] # ORT ReduceSum disagrees with reference
+tests/test_statistical.py::test_ReduceSum_13[v17-float64] # ORT ReduceSum disagrees with reference
+
+# ReduceSumSquare: ORT not implemented or disagrees
+tests/test_statistical.py::test_ReduceSumSquare_18[v18-uint32] # ORT has not implemented ReduceSumSquare for uint32
+tests/test_statistical.py::test_ReduceSumSquare_18[v18-uint64] # ORT has not implemented ReduceSumSquare for uint64
+tests/test_statistical.py::test_ReduceSumSquare_18[v18-float16] # ORT ReduceSumSquare disagrees with reference
+tests/test_statistical.py::test_ReduceSumSquare_18[v18-int32] # ORT ReduceSumSquare disagrees with reference
+
+# Erf:
+tests/test_elementwise.py::test_Erf_13[v17-float16]  # ORT has issues with nan inputs
+tests/test_elementwise.py::test_Erf_13[v17-float32]  # ORT has issues with nan inputs
