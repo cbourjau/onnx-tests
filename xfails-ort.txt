@@ -198,3 +198,7 @@ tests/test_statistical.py::test_ReduceSumSquare_18[v18-uint32] # ORT has not imp
 tests/test_statistical.py::test_ReduceSumSquare_18[v18-uint64] # ORT has not implemented ReduceSumSquare for uint64
 tests/test_statistical.py::test_ReduceSumSquare_18[v18-float16] # ORT ReduceSumSquare disagrees with reference
 tests/test_statistical.py::test_ReduceSumSquare_18[v18-int32] # ORT ReduceSumSquare disagrees with reference
+
+# Erf:
+tests/test_elementwise.py::test_Erf_13[v17-float16]  # ORT has issues with nan inputs
+tests/test_elementwise.py::test_Erf_13[v17-float32]  # ORT has issues with nan inputs
