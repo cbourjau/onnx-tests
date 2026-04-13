@@ -73,7 +73,6 @@ ignore_missing_imports = true
 testpaths = ["tests"]
 addopts = "-rfEX"     # failures, errors, and xPass
 
-
 [tool.typos]
 [tool.typos.default.extend-words]
 ND = "ND"
