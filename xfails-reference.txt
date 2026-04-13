@@ -16,3 +16,5 @@ tests/test_statistical.py::test_ReduceLogSumExp_18[v18-uint32] # reference impl 
 tests/test_statistical.py::test_ReduceLogSumExp_18[v18-uint64] # reference impl assigns -inf to integer array
 tests/test_statistical.py::test_ReduceLogSumExp_18[v18-int32] # reference impl assigns -inf to integer array
 tests/test_statistical.py::test_ReduceLogSumExp_18[v18-int64] # reference impl assigns -inf to integer array
+tests/test_elementwise.py::test_Gelu_20[*] # reference impl cannot expand context-dependent function ops without graph inputs
+tests/test_manipulation_functions.py::test_Flatten_13[*] # reference impl cannot reshape zero-size arrays

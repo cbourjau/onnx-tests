@@ -67,3 +67,12 @@ make_test("Mish", 18, elementwise_ops.mish, globals())
 
 make_test("HardSigmoid", 6, elementwise_ops.hard_sigmoid, globals())
 make_test("LeakyRelu", 16, elementwise_ops.leaky_relu, globals())
+
+make_test("Relu", 14, elementwise_ops.relu, globals())
+make_test("Elu", 6, elementwise_ops.elu, globals())
+make_test("Selu", 6, elementwise_ops.selu, globals())
+make_test("Softplus", 1, elementwise_ops.softplus, globals())
+make_test("Softsign", 1, elementwise_ops.softsign, globals())
+make_test("Gelu", 20, elementwise_ops.gelu, globals())
+make_test("ThresholdedRelu", 10, elementwise_ops.thresholded_relu, globals())
+make_test("Shrink", 9, elementwise_ops.shrink, globals())

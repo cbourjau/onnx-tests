@@ -63,6 +63,8 @@
 - [Bernoulli](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Bernoulli)
   - [ ] 15
   - [ ] 22
+- [BitCast](https://github.com/onnx/onnx/blob/main/docs/Operators.md#BitCast)
+  - [ ] 26
 - [BitShift](https://github.com/onnx/onnx/blob/main/docs/Operators.md#BitShift)
   - [x] 11
 - [BitwiseAnd](https://github.com/onnx/onnx/blob/main/docs/Operators.md#BitwiseAnd)
@@ -152,6 +154,8 @@
 - [Cosh](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Cosh)
   - [x] 9
   - [ ] 22
+- [CumProd](https://github.com/onnx/onnx/blob/main/docs/Operators.md#CumProd)
+  - [ ] 26
 - [CumSum](https://github.com/onnx/onnx/blob/main/docs/Operators.md#CumSum)
   - [ ] 11
   - [x] 14
@@ -196,7 +200,7 @@
   - [x] 12
 - [Elu](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Elu)
   - [ ] 1
-  - [ ] 6
+  - [x] 6
   - [ ] 22
 - [Equal](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Equal)
   - [ ] 1
@@ -221,7 +225,7 @@
   - [ ] 1
   - [ ] 9
   - [ ] 11
-  - [ ] 13
+  - [x] 13
   - [ ] 21
   - [ ] 23
   - [ ] 24
@@ -248,7 +252,7 @@
   - [ ] 12
   - [ ] 13
 - [Gelu](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Gelu)
-  - [ ] 20
+  - [x] 20
 - [Gemm](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Gemm)
   - [ ] 1
   - [ ] 6
@@ -585,14 +589,14 @@
   - [ ] 1
   - [ ] 6
   - [ ] 13
-  - [ ] 14
+  - [x] 14
 - [Reshape](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Reshape)
   - [ ] 1
   - [ ] 5
   - [ ] 13
   - [ ] 14
   - [ ] 19
-  - [ ] 21
+  - [x] 21
   - [ ] 23
   - [ ] 24
   - [ ] 25
@@ -640,7 +644,7 @@
   - [ ] 18
 - [Selu](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Selu)
   - [ ] 1
-  - [ ] 6
+  - [x] 6
   - [ ] 22
 - [SequenceAt](https://github.com/onnx/onnx/blob/main/docs/Operators.md#SequenceAt)
   - [ ] 11
@@ -666,7 +670,7 @@
   - [ ] 24
   - [ ] 25
 - [Shrink](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Shrink)
-  - [ ] 9
+  - [x] 9
 - [Sigmoid](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Sigmoid)
   - [ ] 1
   - [ ] 6
@@ -701,10 +705,10 @@
   - [ ] 12
   - [ ] 13
 - [Softplus](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Softplus)
-  - [ ] 1
+  - [x] 1
   - [ ] 22
 - [Softsign](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Softsign)
-  - [ ] 1
+  - [x] 1
   - [ ] 22
 - [SpaceToDepth](https://github.com/onnx/onnx/blob/main/docs/Operators.md#SpaceToDepth)
   - [ ] 1
@@ -725,7 +729,7 @@
 - [Squeeze](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Squeeze)
   - [ ] 1
   - [ ] 11
-  - [ ] 13
+  - [x] 13
   - [ ] 21
   - [ ] 23
   - [ ] 24
@@ -761,7 +765,7 @@
 - [TfIdfVectorizer](https://github.com/onnx/onnx/blob/main/docs/Operators.md#TfIdfVectorizer)
   - [ ] 9
 - [ThresholdedRelu](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ThresholdedRelu)
-  - [ ] 10
+  - [x] 10
   - [ ] 22
 - [Tile](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Tile)
   - [ ] 1
@@ -774,7 +778,7 @@
   - [ ] 24
 - [Transpose](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Transpose)
   - [ ] 1
-  - [ ] 13
+  - [x] 13
   - [ ] 21
   - [ ] 23
   - [ ] 24
@@ -786,7 +790,7 @@
 - [Unsqueeze](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Unsqueeze)
   - [ ] 1
   - [ ] 11
-  - [ ] 13
+  - [x] 13
   - [ ] 21
   - [ ] 23
   - [ ] 24

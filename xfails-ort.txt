@@ -67,6 +67,37 @@ tests/test_elementwise.py::test_Mish_18[v18-float16] # ORT Mish disagrees with r
 # Sign: ORT returns 0 for NaN instead of NaN
 tests/test_elementwise.py::test_Sign_13[v17-float16] # ORT Sign returns 0 for NaN instead of NaN
 
+# Relu: ORT has not implemented for int16/int64
+tests/test_elementwise.py::test_Relu_14[v17-int16] # ORT has not implemented Relu for int16
+tests/test_elementwise.py::test_Relu_14[v17-int64] # ORT has not implemented Relu for int64
+
+# Elu: ORT has not implemented for float16/float64
+tests/test_elementwise.py::test_Elu_6[v17-float16] # ORT has not implemented Elu for float16
+tests/test_elementwise.py::test_Elu_6[v17-float64] # ORT has not implemented Elu for float64
+
+# Selu: ORT disagrees with reference
+tests/test_elementwise.py::test_Selu_6[v17-float16] # ORT Selu disagrees with reference
+tests/test_elementwise.py::test_Selu_6[v17-float32] # ORT Selu disagrees with reference
+tests/test_elementwise.py::test_Selu_6[v17-float64] # ORT has not implemented Selu for float64
+
+# Softplus: ORT disagrees with reference
+tests/test_elementwise.py::test_Softplus_1[v17-float16] # ORT Softplus disagrees with reference
+tests/test_elementwise.py::test_Softplus_1[v17-float32] # ORT Softplus disagrees with reference
+tests/test_elementwise.py::test_Softplus_1[v17-float64] # ORT has not implemented Softplus for float64
+
+# Softsign: ORT has not implemented for float64
+tests/test_elementwise.py::test_Softsign_1[v17-float64] # ORT has not implemented Softsign for float64
+
+# ThresholdedRelu: ORT has not implemented for float64
+tests/test_elementwise.py::test_ThresholdedRelu_10[v17-float64] # ORT has not implemented ThresholdedRelu for float64
+
+# Shrink: ORT has not implemented for some dtypes / disagrees
+tests/test_elementwise.py::test_Shrink_9[v17-uint32] # ORT has not implemented Shrink for uint32
+tests/test_elementwise.py::test_Shrink_9[v17-uint64] # ORT has not implemented Shrink for uint64
+tests/test_elementwise.py::test_Shrink_9[v17-int32] # ORT has not implemented Shrink for int32
+tests/test_elementwise.py::test_Shrink_9[v17-int64] # ORT has not implemented Shrink for int64
+tests/test_elementwise.py::test_Shrink_9[v17-float64] # ORT has not implemented Shrink for float64
+
 # Tanh: ORT disagrees with reference
 tests/test_elementwise.py::test_Tanh_13[v17-float32] # ORT Tanh disagrees with reference
 
@@ -116,8 +147,6 @@ tests/test_searching.py::test_ArgMin_13[v17-int16] # ORT has not implemented Arg
 tests/test_searching.py::test_ArgMin_13[v17-float16] # ORT ArgMin NaN handling differs from reference
 tests/test_searching.py::test_ArgMin_13[v17-float32] # ORT ArgMin NaN handling differs from reference
 tests/test_searching.py::test_ArgMin_13[v17-float64] # ORT ArgMin NaN handling differs from reference
-
-# Unique: skipped via skips-ort.txt (ORT crashes)
 
 # Where: ORT not implemented for some dtypes
 tests/test_searching.py::test_Where_16[v17-uint16] # ORT has not implemented Where for uint16
@@ -184,6 +213,7 @@ tests/test_statistical.py::test_ReduceMin_20[v20-float64] # ORT ReduceMin NaN ha
 # ReduceProd: ORT not implemented or disagrees
 tests/test_statistical.py::test_ReduceProd_18[v18-uint32] # ORT has not implemented ReduceProd for uint32
 tests/test_statistical.py::test_ReduceProd_18[v18-uint64] # ORT has not implemented ReduceProd for uint64
+tests/test_statistical.py::test_ReduceProd_18[v18-float16] # ORT ReduceProd disagrees with reference
 tests/test_statistical.py::test_ReduceProd_18[v18-float32] # ORT ReduceProd disagrees with reference
 tests/test_statistical.py::test_ReduceProd_18[v18-float64] # ORT ReduceProd disagrees with reference
 

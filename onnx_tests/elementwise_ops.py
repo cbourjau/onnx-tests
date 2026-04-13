@@ -244,6 +244,58 @@ def leaky_relu(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw
 
 
 @st.composite
+def relu(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    return draw(_unary(dtype, op.relu))
+
+
+@st.composite
+def elu(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    tcase = draw(_unary(dtype, op.elu))
+    tcase.attribute_kwargs["alpha"] = draw(st.floats(0.5, 2.0))
+    return tcase
+
+
+@st.composite
+def selu(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    tcase = draw(_unary(dtype, op.selu))
+    tcase.attribute_kwargs["alpha"] = draw(st.floats(1.0, 2.0))
+    tcase.attribute_kwargs["gamma"] = draw(st.floats(0.5, 1.5))
+    return tcase
+
+
+@st.composite
+def softplus(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    return draw(_unary(dtype, op.softplus))
+
+
+@st.composite
+def softsign(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    return draw(_unary(dtype, op.softsign))
+
+
+@st.composite
+def gelu(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    tcase = draw(_unary(dtype, op.gelu))
+    tcase.attribute_kwargs["approximate"] = draw(st.sampled_from(["none", "tanh"]))
+    return tcase
+
+
+@st.composite
+def thresholded_relu(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    tcase = draw(_unary(dtype, op.thresholded_relu))
+    tcase.attribute_kwargs["alpha"] = draw(st.floats(0.5, 2.0))
+    return tcase
+
+
+@st.composite
+def shrink(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    tcase = draw(_unary(dtype, op.shrink))
+    tcase.attribute_kwargs["bias"] = draw(st.floats(0.0, 1.0))
+    tcase.attribute_kwargs["lambd"] = draw(st.floats(0.1, 2.0))
+    return tcase
+
+
+@st.composite
 def add(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
     return draw(_binary(dtype, op.add))
 
