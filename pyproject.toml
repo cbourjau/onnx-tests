@@ -71,8 +71,7 @@ ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-rX"
-
+addopts = "-rfEX"     # failures, errors, and xPass
 
 [tool.typos]
 [tool.typos.default.extend-words]

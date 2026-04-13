@@ -1,0 +1,8 @@
+# Patterns for tests to skip with onnxruntime.
+# These tests crash the ORT process (e.g. SIGABRT) rather than raising
+# a Python exception, so they must be skipped entirely.
+# Optional reason after ` # `: pattern # reason
+
+# Unique: ORT crashes (SIGABRT) on some dtypes
+tests/test_searching.py::test_Unique_11[*] # ORT segfaults on Unique
+tests/test_linalg.py::test_Einsum_12[*] # ORT segfaults on Unique

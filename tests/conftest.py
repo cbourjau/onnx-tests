@@ -54,24 +54,45 @@ def pytest_addoption(parser):
         default=[],
         help="Path to a file with patterns of tests to mark as xfail (use * as wildcard). Can be passed multiple times.",
     )
+    parser.addoption(
+        "--skips-file",
+        action="append",
+        default=[],
+        help="Path to a file with patterns of tests to skip (use * as wildcard). Can be passed multiple times.",
+    )
+
+
+def _apply_marker_from_files(config, items, option, marker_factory):
+    """Apply a pytest marker to tests matching patterns from files."""
+    patterns: list[tuple[str, str]] = []
+    for path in config.getoption(option):
+        patterns.extend(_parse_xfails_file(Path(path)))
+
+    if not patterns:
+        return
+
+    matched: set[str] = set()
+    for item in items:
+        for pattern, reason in patterns:
+            regex = re.escape(pattern).replace(r"\*", ".*")
+            if re.fullmatch(regex, item.nodeid):
+                item.add_marker(marker_factory(reason))
+                matched.add(pattern)
+                break
+    for pattern in sorted({p for p, _ in patterns} - matched):
+        warnings.warn(f"{option} pattern did not match any test: {pattern!r}")
 
 
 def pytest_collection_modifyitems(session, config, items):
-    patterns: list[tuple[str, str]] = []
-    for xfails_file in config.getoption("--xfails-file"):
-        patterns.extend(_parse_xfails_file(Path(xfails_file)))
-
-    if patterns:
-        matched: set[str] = set()
-        for item in items:
-            for pattern, reason in patterns:
-                regex = re.escape(pattern).replace(r"\*", ".*")
-                if re.fullmatch(regex, item.nodeid):
-                    item.add_marker(pytest.mark.xfail(reason=reason))
-                    matched.add(pattern)
-                    break
-        for pattern in sorted({p for p, _ in patterns} - matched):
-            warnings.warn(f"xfail pattern did not match any test: {pattern!r}")
+    _apply_marker_from_files(
+        config, items, "--skips-file", lambda reason: pytest.mark.skip(reason=reason)
+    )
+    _apply_marker_from_files(
+        config,
+        items,
+        "--xfails-file",
+        lambda reason: pytest.mark.xfail(reason=reason),
+    )
 
     if not config.getoption("--create-report"):
         return
