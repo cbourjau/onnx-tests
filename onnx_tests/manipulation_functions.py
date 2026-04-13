@@ -401,6 +401,88 @@ def expand(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
 
 
 @st.composite
+def non_zero(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    arr = draw(
+        h.arrays(
+            dtype=dtype, shape=hyn.array_shapes(min_dims=0, min_side=0, max_dims=4)
+        )
+    )
+    return TestCaseDraw(
+        inputs={"X": arr},
+        attribute_kwargs={},
+        spox_fun=op.non_zero,
+    )
+
+
+@st.composite
+def gather_elements(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    arr = draw(
+        h.arrays(
+            dtype=dtype, shape=hyn.array_shapes(min_dims=1, min_side=1, max_dims=4)
+        )
+    )
+    rank = arr.ndim
+    axis = draw(st.integers(min_value=-rank, max_value=rank - 1))
+    axis_size = arr.shape[axis]
+    # indices must have the same rank and same shape on non-axis dims
+    idx_shape = list(arr.shape)
+    idx_shape[axis] = draw(st.integers(min_value=0, max_value=3))
+    idx_dtype = draw(st.sampled_from([np.int32, np.int64]))
+    indices = draw(
+        hyn.arrays(
+            dtype=idx_dtype,
+            shape=tuple(idx_shape),
+            elements=st.integers(min_value=-axis_size, max_value=axis_size - 1),
+        )
+    )
+    return TestCaseDraw(
+        inputs={"data": arr, "indices": indices},
+        attribute_kwargs={"axis": axis},
+        spox_fun=op.gather_elements,
+    )
+
+
+@st.composite
+def depth_to_space(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    blocksize = draw(st.integers(min_value=1, max_value=4))
+    # Input is [N, C, H, W] where C must be divisible by blocksize**2
+    n = draw(st.integers(min_value=1, max_value=2))
+    c_mult = draw(st.integers(min_value=1, max_value=3))
+    c = c_mult * blocksize * blocksize
+    h_val = draw(st.integers(min_value=0, max_value=4))
+    w = draw(st.integers(min_value=0, max_value=4))
+    arr = draw(h.arrays(dtype=dtype, shape=(n, c, h_val, w)))
+
+    attrs: dict[str, int | str] = {"blocksize": blocksize}
+    if draw(st.booleans()):
+        attrs["mode"] = draw(st.sampled_from(["DCR", "CRD"]))
+
+    return TestCaseDraw(
+        inputs={"input": arr},
+        attribute_kwargs=attrs,
+        spox_fun=op.depth_to_space,
+    )
+
+
+@st.composite
+def space_to_depth(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    blocksize = draw(st.integers(min_value=1, max_value=4))
+    # Input is [N, C, H, W] where H and W must be divisible by blocksize
+    n = draw(st.integers(min_value=1, max_value=2))
+    c = draw(st.integers(min_value=1, max_value=4))
+    h_mult = draw(st.integers(min_value=0, max_value=3))
+    w_mult = draw(st.integers(min_value=0, max_value=3))
+    arr = draw(
+        h.arrays(dtype=dtype, shape=(n, c, h_mult * blocksize, w_mult * blocksize))
+    )
+    return TestCaseDraw(
+        inputs={"input": arr},
+        attribute_kwargs={"blocksize": blocksize},
+        spox_fun=op.space_to_depth,
+    )
+
+
+@st.composite
 def transpose(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
     arr = draw(
         h.arrays(

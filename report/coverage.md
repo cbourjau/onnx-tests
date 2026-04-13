@@ -168,7 +168,7 @@
 - [DepthToSpace](https://github.com/onnx/onnx/blob/main/docs/Operators.md#DepthToSpace)
   - [ ] 1
   - [ ] 11
-  - [ ] 13
+  - [x] 13
 - [DequantizeLinear](https://github.com/onnx/onnx/blob/main/docs/Operators.md#DequantizeLinear)
   - [ ] 10
   - [ ] 13
@@ -246,7 +246,7 @@
   - [x] 13
 - [GatherElements](https://github.com/onnx/onnx/blob/main/docs/Operators.md#GatherElements)
   - [ ] 11
-  - [ ] 13
+  - [x] 13
 - [GatherND](https://github.com/onnx/onnx/blob/main/docs/Operators.md#GatherND)
   - [ ] 11
   - [ ] 12
@@ -452,7 +452,7 @@
   - [ ] 11
 - [NonZero](https://github.com/onnx/onnx/blob/main/docs/Operators.md#NonZero)
   - [ ] 9
-  - [ ] 13
+  - [x] 13
 - [Not](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Not)
   - [x] 1
 - [OneHot](https://github.com/onnx/onnx/blob/main/docs/Operators.md#OneHot)
@@ -712,7 +712,7 @@
   - [ ] 22
 - [SpaceToDepth](https://github.com/onnx/onnx/blob/main/docs/Operators.md#SpaceToDepth)
   - [ ] 1
-  - [ ] 13
+  - [x] 13
 - [Split](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Split)
   - [ ] 1
   - [ ] 2

@@ -229,6 +229,29 @@ tests/test_statistical.py::test_ReduceSumSquare_18[v18-uint64] # ORT has not imp
 tests/test_statistical.py::test_ReduceSumSquare_18[v18-float16] # ORT ReduceSumSquare disagrees with reference
 tests/test_statistical.py::test_ReduceSumSquare_18[v18-int32] # ORT ReduceSumSquare disagrees with reference
 
+# DepthToSpace: ORT has not implemented for several dtypes
+tests/test_manipulation_functions.py::test_DepthToSpace_13[v17-uint16] # ORT has not implemented DepthToSpace for uint16
+tests/test_manipulation_functions.py::test_DepthToSpace_13[v17-uint32] # ORT has not implemented DepthToSpace for uint32
+tests/test_manipulation_functions.py::test_DepthToSpace_13[v17-uint64] # ORT has not implemented DepthToSpace for uint64
+tests/test_manipulation_functions.py::test_DepthToSpace_13[v17-int8] # ORT has not implemented DepthToSpace for int8
+tests/test_manipulation_functions.py::test_DepthToSpace_13[v17-int16] # ORT has not implemented DepthToSpace for int16
+tests/test_manipulation_functions.py::test_DepthToSpace_13[v17-int32] # ORT has not implemented DepthToSpace for int32
+tests/test_manipulation_functions.py::test_DepthToSpace_13[v17-int64] # ORT has not implemented DepthToSpace for int64
+tests/test_manipulation_functions.py::test_DepthToSpace_13[v17-<U0] # ORT has not implemented DepthToSpace for string
+tests/test_manipulation_functions.py::test_DepthToSpace_13[v17-bool] # ORT has not implemented DepthToSpace for bool
+
+# SpaceToDepth: ORT has not implemented for several dtypes
+tests/test_manipulation_functions.py::test_SpaceToDepth_13[v17-uint8] # ORT has not implemented SpaceToDepth for uint8
+tests/test_manipulation_functions.py::test_SpaceToDepth_13[v17-uint16] # ORT has not implemented SpaceToDepth for uint16
+tests/test_manipulation_functions.py::test_SpaceToDepth_13[v17-uint32] # ORT has not implemented SpaceToDepth for uint32
+tests/test_manipulation_functions.py::test_SpaceToDepth_13[v17-uint64] # ORT has not implemented SpaceToDepth for uint64
+tests/test_manipulation_functions.py::test_SpaceToDepth_13[v17-int8] # ORT has not implemented SpaceToDepth for int8
+tests/test_manipulation_functions.py::test_SpaceToDepth_13[v17-int16] # ORT has not implemented SpaceToDepth for int16
+tests/test_manipulation_functions.py::test_SpaceToDepth_13[v17-int32] # ORT has not implemented SpaceToDepth for int32
+tests/test_manipulation_functions.py::test_SpaceToDepth_13[v17-int64] # ORT has not implemented SpaceToDepth for int64
+tests/test_manipulation_functions.py::test_SpaceToDepth_13[v17-<U0] # ORT has not implemented SpaceToDepth for string
+tests/test_manipulation_functions.py::test_SpaceToDepth_13[v17-bool] # ORT has not implemented SpaceToDepth for bool
+
 # Trilu: ORT has not implemented for several dtypes
 tests/test_manipulation_functions.py::test_Trilu_14[v17-uint8] # ORT has not implemented Trilu for uint8
 tests/test_manipulation_functions.py::test_Trilu_14[v17-uint16] # ORT has not implemented Trilu for uint16
