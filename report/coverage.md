@@ -412,7 +412,7 @@
   - [ ] 1
   - [ ] 6
   - [ ] 8
-  - [ ] 13
+  - [x] 13
 - [MeanVarianceNormalization](https://github.com/onnx/onnx/blob/main/docs/Operators.md#MeanVarianceNormalization)
   - [ ] 9
   - [ ] 13
@@ -474,7 +474,7 @@
   - [ ] 6
   - [ ] 7
   - [ ] 9
-  - [ ] 16
+  - [x] 16
 - [Pad](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Pad)
   - [ ] 1
   - [ ] 2
@@ -750,7 +750,7 @@
   - [ ] 1
   - [ ] 6
   - [ ] 8
-  - [ ] 13
+  - [x] 13
 - [Swish](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Swish)
   - [ ] 24
 - [Tan](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Tan)

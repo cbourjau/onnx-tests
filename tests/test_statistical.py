@@ -44,3 +44,8 @@ make_test("ReduceMin", 20, strats.reduce_min, globals())
 make_test("ReduceProd", 18, strats.reduce_prod, globals())
 make_test("ReduceSum", 13, strats.reduce_sum, globals())
 make_test("ReduceSumSquare", 18, strats.reduce_sum_square, globals())
+
+make_test("Max", 13, strats.max, globals())
+make_test("Mean", 13, strats.mean, globals())
+make_test("Min", 13, strats.min, globals())
+make_test("Sum", 13, strats.sum, globals())
