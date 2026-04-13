@@ -229,6 +229,24 @@ tests/test_statistical.py::test_ReduceSumSquare_18[v18-uint64] # ORT has not imp
 tests/test_statistical.py::test_ReduceSumSquare_18[v18-float16] # ORT ReduceSumSquare disagrees with reference
 tests/test_statistical.py::test_ReduceSumSquare_18[v18-int32] # ORT ReduceSumSquare disagrees with reference
 
+# Trilu: ORT has not implemented for several dtypes
+tests/test_manipulation_functions.py::test_Trilu_14[v17-uint8] # ORT has not implemented Trilu for uint8
+tests/test_manipulation_functions.py::test_Trilu_14[v17-uint16] # ORT has not implemented Trilu for uint16
+tests/test_manipulation_functions.py::test_Trilu_14[v17-uint32] # ORT has not implemented Trilu for uint32
+tests/test_manipulation_functions.py::test_Trilu_14[v17-uint64] # ORT has not implemented Trilu for uint64
+tests/test_manipulation_functions.py::test_Trilu_14[v17-int8] # ORT has not implemented Trilu for int8
+tests/test_manipulation_functions.py::test_Trilu_14[v17-int16] # ORT has not implemented Trilu for int16
+tests/test_manipulation_functions.py::test_Trilu_14[v17-int32] # ORT has not implemented Trilu for int32
+tests/test_manipulation_functions.py::test_Trilu_14[v17-<U0] # ORT has not implemented Trilu for string
+
+# Pad: ORT has not implemented for some dtypes
+tests/test_manipulation_functions.py::test_Pad_21[v21-uint16] # ORT has not implemented Pad for uint16
+tests/test_manipulation_functions.py::test_Pad_21[v21-int16] # ORT has not implemented Pad for int16
+tests/test_manipulation_functions.py::test_Pad_21[v21-<U0] # ORT has not implemented Pad for string
+
+# Split: ORT rejects splitting a zero-sized dimension
+tests/test_manipulation_functions.py::test_Split_18[*] # ORT rejects splitting a zero-sized dimension
+
 # Erf:
 tests/test_elementwise.py::test_Erf_13[v17-float16]  # ORT has issues with nan inputs
 tests/test_elementwise.py::test_Erf_13[v17-float32]  # ORT has issues with nan inputs

@@ -217,7 +217,7 @@
   - [x] 13
 - [Expand](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Expand)
   - [ ] 8
-  - [ ] 13
+  - [x] 13
 - [EyeLike](https://github.com/onnx/onnx/blob/main/docs/Operators.md#EyeLike)
   - [ ] 9
   - [ ] 22
@@ -243,7 +243,7 @@
 - [Gather](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Gather)
   - [ ] 1
   - [ ] 11
-  - [ ] 13
+  - [x] 13
 - [GatherElements](https://github.com/onnx/onnx/blob/main/docs/Operators.md#GatherElements)
   - [ ] 11
   - [ ] 13
@@ -482,7 +482,7 @@
   - [ ] 13
   - [ ] 18
   - [ ] 19
-  - [ ] 21
+  - [x] 21
   - [ ] 23
   - [ ] 24
   - [ ] 25
@@ -718,7 +718,7 @@
   - [ ] 2
   - [ ] 11
   - [ ] 13
-  - [ ] 18
+  - [x] 18
 - [SplitToSequence](https://github.com/onnx/onnx/blob/main/docs/Operators.md#SplitToSequence)
   - [ ] 11
   - [ ] 24
@@ -770,7 +770,7 @@
 - [Tile](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Tile)
   - [ ] 1
   - [ ] 6
-  - [ ] 13
+  - [x] 13
 - [TopK](https://github.com/onnx/onnx/blob/main/docs/Operators.md#TopK)
   - [ ] 1
   - [ ] 10
@@ -784,7 +784,7 @@
   - [ ] 24
   - [ ] 25
 - [Trilu](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Trilu)
-  - [ ] 14
+  - [x] 14
 - [Unique](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Unique)
   - [x] 11
 - [Unsqueeze](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Unsqueeze)

@@ -224,6 +224,183 @@ def unsqueeze(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
 
 
 @st.composite
+def pad(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    mode = draw(st.sampled_from(["constant", "reflect", "edge", "wrap"]))
+
+    if mode in ("reflect", "edge", "wrap"):
+        min_side = 1
+    else:
+        min_side = 0
+    arr = draw(
+        h.arrays(
+            dtype=dtype,
+            shape=hyn.array_shapes(min_dims=1, min_side=min_side, max_dims=4),
+        )
+    )
+
+    rank = arr.ndim
+    all_axes = list(range(rank))
+
+    if draw(st.booleans()):
+        # Pad a subset of axes
+        axes_list = draw(
+            st.lists(st.sampled_from(all_axes), min_size=1, max_size=rank, unique=True)
+        )
+        # Randomly use negative equivalents
+        axes_list = [a - rank if draw(st.booleans()) else a for a in axes_list]
+        axes = np.array(axes_list, dtype=np.int64)
+        pad_axes = [a % rank for a in axes_list]
+    else:
+        axes = None
+        pad_axes = all_axes
+
+    begins = []
+    ends = []
+    for i in pad_axes:
+        if mode == "reflect":
+            max_pad = arr.shape[i] - 1
+        elif mode in ("edge", "wrap"):
+            max_pad = arr.shape[i]
+        else:
+            max_pad = 3
+        begins.append(draw(st.integers(min_value=0, max_value=max_pad)))
+        ends.append(draw(st.integers(min_value=0, max_value=max_pad)))
+
+    pads = np.array(begins + ends, dtype=np.int64)
+
+    inputs = {"data": arr, "pads": pads}
+    if mode == "constant":
+        if draw(st.booleans()):
+            inputs["constant_value"] = draw(h.arrays(dtype=dtype, shape=()))
+
+    if axes is not None:
+        inputs["axes"] = axes
+
+    return TestCaseDraw(
+        inputs=inputs,
+        attribute_kwargs={"mode": mode},
+        spox_fun=op.pad,
+    )
+
+
+@st.composite
+def trilu(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    arr = draw(
+        h.arrays(
+            dtype=dtype, shape=hyn.array_shapes(min_dims=2, min_side=0, max_dims=4)
+        )
+    )
+    # k can range beyond the matrix dimensions; values outside just give
+    # all-zero or full-copy results, which is still valid.
+    max_dim = max(arr.shape[-2], arr.shape[-1])
+    k = np.array(
+        draw(st.integers(min_value=-max_dim, max_value=max_dim)), dtype=np.int64
+    )
+
+    inputs: dict[str, np.ndarray | None] = {"input": arr}
+    inputs["k"] = k if draw(st.booleans()) else None
+
+    attrs = {}
+    if draw(st.booleans()):
+        attrs["upper"] = draw(st.sampled_from([0, 1]))
+
+    return TestCaseDraw(
+        inputs=inputs,
+        attribute_kwargs=attrs,
+        spox_fun=op.trilu,
+    )
+
+
+@st.composite
+def split(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    arr = draw(
+        h.arrays(
+            dtype=dtype, shape=hyn.array_shapes(min_dims=1, min_side=0, max_dims=4)
+        )
+    )
+    rank = arr.ndim
+    axis = draw(st.integers(min_value=-rank, max_value=rank - 1))
+    axis_size = arr.shape[axis]
+    num_outputs = draw(st.integers(min_value=1, max_value=max(1, axis_size)))
+    return TestCaseDraw(
+        inputs={"input": arr},
+        attribute_kwargs={"axis": axis, "num_outputs": num_outputs},
+        spox_fun=op.split,
+    )
+
+
+@st.composite
+def gather(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    arr = draw(
+        h.arrays(
+            dtype=dtype, shape=hyn.array_shapes(min_dims=1, min_side=0, max_dims=4)
+        )
+    )
+    rank = arr.ndim
+    axis = draw(st.integers(min_value=-rank, max_value=rank - 1))
+    axis_size = arr.shape[axis]
+    idx_dtype = draw(st.sampled_from([np.int32, np.int64]))
+    # Scalars and non-empty indices are only valid when axis_size > 0.
+    # When axis_size == 0, no index value is in bounds so the indices
+    # tensor must itself be empty (rank >= 1 with a zero-sized dim).
+    min_idx_dims = 0 if axis_size > 0 else 1
+    max_idx_side = None if axis_size > 0 else 0
+    idx_shape = draw(
+        hyn.array_shapes(
+            min_dims=min_idx_dims, min_side=0, max_side=max_idx_side, max_dims=3
+        )
+    )
+    indices = draw(
+        hyn.arrays(
+            dtype=idx_dtype,
+            shape=idx_shape,
+            elements=st.integers(min_value=-axis_size, max_value=axis_size - 1),
+        )
+    )
+    return TestCaseDraw(
+        inputs={"data": arr, "indices": indices},
+        attribute_kwargs={"axis": axis},
+        spox_fun=op.gather,
+    )
+
+
+@st.composite
+def tile(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    arr = draw(
+        h.arrays(
+            dtype=dtype, shape=hyn.array_shapes(min_dims=1, min_side=0, max_dims=4)
+        )
+    )
+    repeats = draw(
+        hyn.arrays(
+            dtype=np.int64,
+            shape=(arr.ndim,),
+            elements=st.integers(min_value=0, max_value=3),
+        )
+    )
+    return TestCaseDraw(
+        inputs={"input": arr, "repeats": repeats},
+        attribute_kwargs={},
+        spox_fun=op.tile,
+    )
+
+
+@st.composite
+def expand(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    arr = draw(
+        h.arrays(
+            dtype=dtype, shape=hyn.array_shapes(min_dims=0, min_side=0, max_dims=4)
+        )
+    )
+    target_shape = draw(hyn.broadcastable_shapes(arr.shape, min_side=0))
+    return TestCaseDraw(
+        inputs={"input": arr, "shape": np.array(target_shape, dtype=np.int64)},
+        attribute_kwargs={},
+        spox_fun=op.expand,
+    )
+
+
+@st.composite
 def transpose(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
     arr = draw(
         h.arrays(
