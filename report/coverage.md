@@ -490,7 +490,7 @@
   - [ ] 1
   - [ ] 7
   - [ ] 12
-  - [ ] 13
+  - [x] 13
   - [ ] 15
 - [QLinearConv](https://github.com/onnx/onnx/blob/main/docs/Operators.md#QLinearConv)
   - [ ] 10

@@ -21,3 +21,13 @@ tests/test_manipulation_functions.py::test_Flatten_13[*] # reference impl cannot
 tests/test_manipulation_functions.py::test_Gather_13[*] # reference impl returns wrong output shape for empty indices
 tests/test_manipulation_functions.py::test_NonZero_13[*] # reference impl crashes on 0-d array input
 tests/test_manipulation_functions.py::test_GatherElements_13[*] # reference impl crashes on empty indices
+
+# Pow
+tests/test_elementwise.py::test_Pow_13[int8-int32]   # NumPy raises for integers to negative integer powers
+tests/test_elementwise.py::test_Pow_13[int8-int64]   # NumPy raises for integers to negative integer powers
+tests/test_elementwise.py::test_Pow_13[int16-int32]  # NumPy raises for integers to negative integer powers
+tests/test_elementwise.py::test_Pow_13[int16-int64]  # NumPy raises for integers to negative integer powers
+tests/test_elementwise.py::test_Pow_13[int32-int32]  # NumPy raises for integers to negative integer powers
+tests/test_elementwise.py::test_Pow_13[int32-int64]  # NumPy raises for integers to negative integer powers
+tests/test_elementwise.py::test_Pow_13[int64-int32]  # NumPy raises for integers to negative integer powers
+tests/test_elementwise.py::test_Pow_13[int64-int64]  # NumPy raises for integers to negative integer powers

@@ -1,4 +1,12 @@
+import numpy as np
+import pytest
+import spox.opset.ai.onnx.v17 as op17
+from hypothesis import given
+from hypothesis import strategies as st
+
 from onnx_tests import elementwise_ops
+from onnx_tests import helpers as h
+from onnx_tests.config import run_candidate
 
 from .utils import make_test as make_test
 
@@ -76,3 +84,21 @@ make_test("Softsign", 1, elementwise_ops.softsign, globals())
 make_test("Gelu", 20, elementwise_ops.gelu, globals())
 make_test("ThresholdedRelu", 10, elementwise_ops.thresholded_relu, globals())
 make_test("Shrink", 9, elementwise_ops.shrink, globals())
+
+
+@given(data=st.data())
+@pytest.mark.parametrize(
+    "dtype_x", h.SCHEMAS["ai.onnx"]["Pow"][15].dtype_constraints["T"], ids=str
+)
+@pytest.mark.parametrize(
+    "dtype_y", h.SCHEMAS["ai.onnx"]["Pow"][15].dtype_constraints["T1"], ids=str
+)
+def test_Pow_13(data: st.DataObject, dtype_x: str, dtype_y: str):  # noqa
+    # Pow requires special care due to the two interdependent data types
+    state = data.draw(elementwise_ops.pow(np.dtype(dtype_x), np.dtype(dtype_y), op17))
+    model = state.build_model()
+
+    (expected,) = h.run_reference(model).values()
+    (candidate,) = run_candidate(model).values()
+
+    h.assert_allclose(candidate, expected)
