@@ -41,3 +41,8 @@ def test_Cast_21(data: st.DataObject, dtype_in, dtype_out):  # noqa
 
 make_test("Concat", 13, manipulation_functions.concat, globals())
 make_test("Compress", 11, manipulation_functions.compress, globals())
+make_test("Flatten", 13, manipulation_functions.flatten, globals())
+make_test("Reshape", 21, manipulation_functions.reshape, globals())
+make_test("Squeeze", 13, manipulation_functions.squeeze, globals())
+make_test("Unsqueeze", 13, manipulation_functions.unsqueeze, globals())
+make_test("Transpose", 13, manipulation_functions.transpose, globals())
