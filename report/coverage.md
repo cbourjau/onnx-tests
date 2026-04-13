@@ -225,7 +225,7 @@
   - [ ] 1
   - [ ] 9
   - [ ] 11
-  - [ ] 13
+  - [x] 13
   - [ ] 21
   - [ ] 23
   - [ ] 24
@@ -596,7 +596,7 @@
   - [ ] 13
   - [ ] 14
   - [ ] 19
-  - [ ] 21
+  - [x] 21
   - [ ] 23
   - [ ] 24
   - [ ] 25
@@ -729,7 +729,7 @@
 - [Squeeze](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Squeeze)
   - [ ] 1
   - [ ] 11
-  - [ ] 13
+  - [x] 13
   - [ ] 21
   - [ ] 23
   - [ ] 24
@@ -778,7 +778,7 @@
   - [ ] 24
 - [Transpose](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Transpose)
   - [ ] 1
-  - [ ] 13
+  - [x] 13
   - [ ] 21
   - [ ] 23
   - [ ] 24
@@ -790,7 +790,7 @@
 - [Unsqueeze](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Unsqueeze)
   - [ ] 1
   - [ ] 11
-  - [ ] 13
+  - [x] 13
   - [ ] 21
   - [ ] 23
   - [ ] 24
