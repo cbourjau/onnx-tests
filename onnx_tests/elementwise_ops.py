@@ -11,8 +11,6 @@ from spox import Var
 from onnx_tests import helpers as h
 from onnx_tests._base_draw import TestCaseDraw
 
-# TODO: Add Pow
-
 
 @st.composite
 def abs(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
@@ -411,6 +409,22 @@ def mod(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
 @st.composite
 def mul(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
     return draw(_binary(dtype, op.mul))
+
+
+@st.composite
+def pow(
+    draw: st.DrawFn, dtype_x: np.dtype, dtype_y: np.dtype, op: ModuleType
+) -> TestCaseDraw:
+    shape_x = draw(hyn.array_shapes(min_dims=0, max_dims=3, min_side=0))
+    shape_y = draw(
+        hyn.broadcastable_shapes(shape_x, min_dims=0, max_dims=3, min_side=0)
+    )
+
+    inputs: list = [
+        draw(hyn.arrays(dtype_x, shape_x)),
+        draw(hyn.arrays(dtype_y, shape_y)),
+    ]
+    return TestCaseDraw(inputs=inputs, attribute_kwargs={}, spox_fun=op.pow)
 
 
 @st.composite

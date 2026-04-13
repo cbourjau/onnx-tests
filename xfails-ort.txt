@@ -273,3 +273,34 @@ tests/test_manipulation_functions.py::test_Split_18[*] # ORT rejects splitting a
 # Erf:
 tests/test_elementwise.py::test_Erf_13[v17-float16]  # ORT has issues with nan inputs
 tests/test_elementwise.py::test_Erf_13[v17-float32]  # ORT has issues with nan inputs
+
+# Pow:
+tests/test_elementwise.py::test_Pow_13[uint8-int32]    # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[uint8-int64]    # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[uint8-float16]  # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[uint8-float32]  # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[uint8-float64]  # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[uint16-int32]   # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[uint16-int64]   # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[uint16-float16]  # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[uint16-float32]  # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[uint16-float64]  # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[uint32-int32]    # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[uint32-int64]    # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[uint32-float16]  # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[uint32-float32]  # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[uint32-float64]  # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[uint64-int32]  # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[uint64-int64]  # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[uint64-float16]  # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[uint64-float32]  # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[uint64-float64]  # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[int8-float16]   # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[int8-float32]  # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[int8-float64]  # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[int16-float16]  # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[int16-float32]  # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[int16-float64]  # NOT_IMPLEMENTED
+tests/test_elementwise.py::test_Pow_13[float16-int32]  # ORT and reference differ
+tests/test_elementwise.py::test_Pow_13[float16-int64]  # ORT and reference differ
+tests/test_elementwise.py::test_Pow_13[float32-int32]  # ORT and reference differ
