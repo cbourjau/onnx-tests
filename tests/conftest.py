@@ -5,6 +5,7 @@ from typing import Any
 
 import pytest
 import spox._future
+from hypothesis import settings
 from onnx.defs import OpSchema, get_all_schemas_with_history
 
 
@@ -48,18 +49,38 @@ def pytest_addoption(parser):
         default=False,
         help="Create a report for the test coverage of the ONNX standard",
     )
+
+    parser.addoption(
+        "--hypothesis-max-examples",
+        action="store",
+        default=100,
+        type=int,
+        help="set the Hypothesis max_examples setting",
+    )
+
     parser.addoption(
         "--xfails-file",
         action="append",
         default=[],
         help="Path to a file with patterns of tests to mark as xfail (use * as wildcard). Can be passed multiple times.",
     )
+
     parser.addoption(
         "--skips-file",
         action="append",
         default=[],
         help="Path to a file with patterns of tests to skip (use * as wildcard). Can be passed multiple times.",
     )
+
+
+def pytest_configure(config: pytest.Config):
+    # Hypothesis
+    settings.register_profile(
+        "onnx-tests",
+        max_examples=config.getoption("--hypothesis-max-examples"),
+        deadline=None,
+    )
+    settings.load_profile("onnx-tests")
 
 
 def _apply_marker_from_files(config, items, option, marker_factory):
