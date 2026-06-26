@@ -25,10 +25,10 @@ tests/test_elementwise.py::test_Clip_13[v17-float64] # ORT Clip disagrees with r
 
 
 # Max/Min: ORT has not implemented for int16/uint16
-tests/test_elementwise.py::test_Max_13[v17-int16] # ORT has not implemented Max for int16
-tests/test_elementwise.py::test_Max_13[v17-uint16] # ORT has not implemented Max for uint16
-tests/test_elementwise.py::test_Min_13[v17-int16] # ORT has not implemented Min for int16
-tests/test_elementwise.py::test_Min_13[v17-uint16] # ORT has not implemented Min for uint16
+tests/test_statistical.py::test_Max_13[v17-int16] # ORT has not implemented Max for int16
+tests/test_statistical.py::test_Max_13[v17-uint16] # ORT has not implemented Max for uint16
+tests/test_statistical.py::test_Min_13[v17-int16] # ORT has not implemented Min for int16
+tests/test_statistical.py::test_Min_13[v17-uint16] # ORT has not implemented Min for uint16
 
 # Trig/math ops: ORT has not implemented for float64
 tests/test_elementwise.py::test_Acos_7[v17-float64] # ORT has not implemented Acos for float64
