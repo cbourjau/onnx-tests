@@ -22,8 +22,8 @@ def disable_spox_value_prop():
 def _parse_xfails_file(path: Path) -> list[tuple[str, str]]:
     """Parse an xfails file into (pattern, reason) tuples.
 
-    Lines starting with ``#`` and blank lines are ignored. A pattern
-    may be followed by `` # reason`` to provide a reason for the xfail.
+    Lines starting with ``#`` and blank lines are ignored. A pattern may be followed by
+    `` # reason`` to provide a reason for the xfail.
     """
     if not path.is_file():
         return []
