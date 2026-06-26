@@ -94,6 +94,8 @@
   - [ ] 23
   - [ ] 24
   - [ ] 25
+- [CausalConvWithState](https://github.com/onnx/onnx/blob/main/docs/Operators.md#CausalConvWithState)
+  - [ ] 27
 - [Ceil](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Ceil)
   - [ ] 1
   - [ ] 6
@@ -134,7 +136,7 @@
 - [ConstantOfShape](https://github.com/onnx/onnx/blob/main/docs/Operators.md#ConstantOfShape)
   - [ ] 9
   - [ ] 20
-  - [ ] 21
+  - [x] 21
   - [ ] 23
   - [ ] 24
   - [ ] 25
@@ -219,7 +221,7 @@
   - [ ] 8
   - [x] 13
 - [EyeLike](https://github.com/onnx/onnx/blob/main/docs/Operators.md#EyeLike)
-  - [ ] 9
+  - [x] 9
   - [ ] 22
 - [Flatten](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Flatten)
   - [ ] 1
@@ -355,6 +357,8 @@
 - [LessOrEqual](https://github.com/onnx/onnx/blob/main/docs/Operators.md#LessOrEqual)
   - [ ] 12
   - [x] 16
+- [LinearAttention](https://github.com/onnx/onnx/blob/main/docs/Operators.md#LinearAttention)
+  - [ ] 27
 - [Log](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Log)
   - [ ] 1
   - [ ] 6
@@ -526,6 +530,7 @@
   - [ ] 22
 - [Range](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Range)
   - [ ] 11
+  - [ ] 27
 - [Reciprocal](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Reciprocal)
   - [ ] 1
   - [ ] 6
@@ -854,13 +859,4 @@
 - [ZipMap](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxmlzipmap)
   - [ ] 1
 
-# ai.onnx.preview.training
-
-- [Adagrad](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxpreviewtrainingadagrad)
-  - [ ] 1
-- [Adam](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxpreviewtrainingadam)
-  - [ ] 1
-- [Gradient](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxpreviewtraininggradient)
-  - [ ] 1
-- [Momentum](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxpreviewtrainingmomentum)
-  - [ ] 1
+# ai.onnx.preview
