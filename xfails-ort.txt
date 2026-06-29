@@ -10,9 +10,6 @@ tests/test_conv.py::test_Conv_11[*] # ORT shape mismatch and no dilation+SAME_UP
 # ConvInteger: ORT no per-channel quantization and no dilation+SAME_UPPER support
 tests/test_conv.py::test_ConvInteger_10[*] # ORT no per-channel quantization and no dilation+SAME_UPPER support
 
-# Celu: ORT disagrees with reference
-tests/test_elementwise.py::test_Celu_12[v17-float32] # ORT Celu disagrees with reference
-
 # BitShift: ORT has not implemented for uint16
 tests/test_elementwise.py::test_BitShift_11[v17-uint16] # ORT has not implemented BitShift for uint16
 
@@ -25,10 +22,10 @@ tests/test_elementwise.py::test_Clip_13[v17-float64] # ORT Clip disagrees with r
 
 
 # Max/Min: ORT has not implemented for int16/uint16
-tests/test_elementwise.py::test_Max_13[v17-int16] # ORT has not implemented Max for int16
-tests/test_elementwise.py::test_Max_13[v17-uint16] # ORT has not implemented Max for uint16
-tests/test_elementwise.py::test_Min_13[v17-int16] # ORT has not implemented Min for int16
-tests/test_elementwise.py::test_Min_13[v17-uint16] # ORT has not implemented Min for uint16
+tests/test_statistical.py::test_Max_13[v17-int16] # ORT has not implemented Max for int16
+tests/test_statistical.py::test_Max_13[v17-uint16] # ORT has not implemented Max for uint16
+tests/test_statistical.py::test_Min_13[v17-int16] # ORT has not implemented Min for int16
+tests/test_statistical.py::test_Min_13[v17-uint16] # ORT has not implemented Min for uint16
 
 # Trig/math ops: ORT has not implemented for float64
 tests/test_elementwise.py::test_Acos_7[v17-float64] # ORT has not implemented Acos for float64
@@ -39,6 +36,8 @@ tests/test_elementwise.py::test_Atan_7[v17-float64] # ORT has not implemented At
 tests/test_elementwise.py::test_Atanh_9[v17-float64] # ORT has not implemented Atanh for float64
 tests/test_elementwise.py::test_Cos_7[v17-float64] # ORT has not implemented Cos for float64
 tests/test_elementwise.py::test_Cosh_9[v17-float64] # ORT has not implemented Cosh for float64
+tests/test_elementwise.py::test_Erf_13[v17-float16] # ORT Erf disagrees with reference
+tests/test_elementwise.py::test_Erf_13[v17-float32] # ORT Erf disagrees with reference
 tests/test_elementwise.py::test_Erf_13[v17-float64] # ORT has not implemented Erf for float64
 tests/test_elementwise.py::test_HardSigmoid_6[v17-float64] # ORT has not implemented HardSigmoid for float64
 tests/test_elementwise.py::test_HardSwish_14[v17-float64] # ORT has not implemented HardSwish for float64
@@ -55,11 +54,11 @@ tests/test_elementwise.py::test_Hardmax_13[v17-float64] # ORT has not implemente
 # Reciprocal: ORT returns -inf instead of inf for small positive denormals
 tests/test_elementwise.py::test_Reciprocal_13[v17-float32] # ORT Reciprocal sign of inf differs from reference
 
-# Sigmoid: ORT disagrees with reference
-tests/test_elementwise.py::test_Sigmoid_13[v17-float16] # ORT Sigmoid disagrees with reference
-
 # Softmax: ORT disagrees with reference
 tests/test_elementwise.py::test_Softmax_13[v17-float16] # ORT Softmax disagrees with reference
+
+# Celu: ORT disagrees with reference
+tests/test_elementwise.py::test_Celu_12[v17-float32] # ORT Celu disagrees with reference
 
 # Mish: ORT disagrees with reference
 tests/test_elementwise.py::test_Mish_18[v18-float16] # ORT Mish disagrees with reference
@@ -97,6 +96,13 @@ tests/test_elementwise.py::test_Shrink_9[v17-uint64] # ORT has not implemented S
 tests/test_elementwise.py::test_Shrink_9[v17-int32] # ORT has not implemented Shrink for int32
 tests/test_elementwise.py::test_Shrink_9[v17-int64] # ORT has not implemented Shrink for int64
 tests/test_elementwise.py::test_Shrink_9[v17-float64] # ORT has not implemented Shrink for float64
+
+# PRelu: ORT NaN handling differs, not implemented for uint32/uint64
+tests/test_elementwise.py::test_PRelu_16[v17-float16] # ORT PRelu NaN handling differs from reference
+tests/test_elementwise.py::test_PRelu_16[v17-float32] # ORT PRelu NaN handling differs from reference
+tests/test_elementwise.py::test_PRelu_16[v17-float64] # ORT PRelu NaN handling differs from reference
+tests/test_elementwise.py::test_PRelu_16[v17-uint32] # ORT has not implemented PRelu for uint32
+tests/test_elementwise.py::test_PRelu_16[v17-uint64] # ORT has not implemented PRelu for uint64
 
 # Tanh: ORT disagrees with reference
 tests/test_elementwise.py::test_Tanh_13[v17-float32] # ORT Tanh disagrees with reference
@@ -183,6 +189,7 @@ tests/test_statistical.py::test_ReduceLogSumExp_18[v18-float16] # ORT ReduceLogS
 # ReduceMax: ORT not implemented or NaN handling differs
 tests/test_statistical.py::test_ReduceMax_18[v18-uint32] # ORT has not implemented ReduceMax for uint32
 tests/test_statistical.py::test_ReduceMax_18[v18-uint64] # ORT has not implemented ReduceMax for uint64
+tests/test_statistical.py::test_ReduceMax_18[v18-int64] # ORT ReduceMax truncates int64 to int32
 tests/test_statistical.py::test_ReduceMax_18[v18-float16] # ORT ReduceMax NaN handling differs from reference
 tests/test_statistical.py::test_ReduceMax_18[v18-float32] # ORT ReduceMax NaN handling differs from reference
 tests/test_statistical.py::test_ReduceMax_18[v18-float64] # ORT ReduceMax NaN handling differs from reference
@@ -201,11 +208,13 @@ tests/test_statistical.py::test_ReduceMean_18[v18-float64] # ORT ReduceMean disa
 # ReduceMin: ORT not implemented or NaN handling differs
 tests/test_statistical.py::test_ReduceMin_18[v18-uint32] # ORT has not implemented ReduceMin for uint32
 tests/test_statistical.py::test_ReduceMin_18[v18-uint64] # ORT has not implemented ReduceMin for uint64
+tests/test_statistical.py::test_ReduceMin_18[v18-int64] # ORT ReduceMin truncates int64 to int32
 tests/test_statistical.py::test_ReduceMin_18[v18-float16] # ORT ReduceMin NaN handling differs from reference
 tests/test_statistical.py::test_ReduceMin_18[v18-float32] # ORT ReduceMin NaN handling differs from reference
 tests/test_statistical.py::test_ReduceMin_18[v18-float64] # ORT ReduceMin NaN handling differs from reference
 tests/test_statistical.py::test_ReduceMin_20[v20-uint32] # ORT has not implemented ReduceMin for uint32
 tests/test_statistical.py::test_ReduceMin_20[v20-uint64] # ORT has not implemented ReduceMin for uint64
+tests/test_statistical.py::test_ReduceMin_20[v20-int64] # ORT ReduceMin truncates int64 to int32
 tests/test_statistical.py::test_ReduceMin_20[v20-float16] # ORT ReduceMin NaN handling differs from reference
 tests/test_statistical.py::test_ReduceMin_20[v20-float32] # ORT ReduceMin NaN handling differs from reference
 tests/test_statistical.py::test_ReduceMin_20[v20-float64] # ORT ReduceMin NaN handling differs from reference
@@ -270,9 +279,24 @@ tests/test_manipulation_functions.py::test_Pad_21[v21-<U0] # ORT has not impleme
 # Split: ORT rejects splitting a zero-sized dimension
 tests/test_manipulation_functions.py::test_Split_18[*] # ORT rejects splitting a zero-sized dimension
 
-# Erf:
-tests/test_elementwise.py::test_Erf_13[v17-float16]  # ORT has issues with nan inputs
-tests/test_elementwise.py::test_Erf_13[v17-float32]  # ORT has issues with nan inputs
+# EyeLike: ORT has not implemented EyeLike for many dtype combinations
+tests/test_creation_functions.py::test_EyeLike_9[*-in-int8] # ORT has not implemented EyeLike for int8 input
+tests/test_creation_functions.py::test_EyeLike_9[*-in-int16] # ORT has not implemented EyeLike for int16 input
+tests/test_creation_functions.py::test_EyeLike_9[*-in-uint8] # ORT has not implemented EyeLike for uint8 input
+tests/test_creation_functions.py::test_EyeLike_9[*-in-uint16] # ORT has not implemented EyeLike for uint16 input
+tests/test_creation_functions.py::test_EyeLike_9[*-in-uint32] # ORT has not implemented EyeLike for uint32 input
+tests/test_creation_functions.py::test_EyeLike_9[*-in-bool] # ORT has not implemented EyeLike for bool input
+tests/test_creation_functions.py::test_EyeLike_9[out-int8-*] # ORT has not implemented EyeLike for int8 output
+tests/test_creation_functions.py::test_EyeLike_9[out-int16-*] # ORT has not implemented EyeLike for int16 output
+tests/test_creation_functions.py::test_EyeLike_9[out-uint8-*] # ORT has not implemented EyeLike for uint8 output
+tests/test_creation_functions.py::test_EyeLike_9[out-uint16-*] # ORT has not implemented EyeLike for uint16 output
+tests/test_creation_functions.py::test_EyeLike_9[out-uint32-*] # ORT has not implemented EyeLike for uint32 output
+tests/test_creation_functions.py::test_EyeLike_9[out-bool-*] # ORT has not implemented EyeLike for bool output
+tests/test_creation_functions.py::test_EyeLike_9[out-float16-in-float32] # ORT has not implemented EyeLike for float16 output with float32 input
+tests/test_creation_functions.py::test_EyeLike_9[out-float16-in-float64] # ORT has not implemented EyeLike for float16 output with float64 input
+tests/test_creation_functions.py::test_EyeLike_9[out-float16-in-int32] # ORT has not implemented EyeLike for float16 output with int32 input
+tests/test_creation_functions.py::test_EyeLike_9[out-float16-in-int64] # ORT has not implemented EyeLike for float16 output with int64 input
+tests/test_creation_functions.py::test_EyeLike_9[out-float16-in-uint64] # ORT has not implemented EyeLike for float16 output with uint64 input
 
 # Pow:
 tests/test_elementwise.py::test_Pow_13[uint8-int32]    # NOT_IMPLEMENTED

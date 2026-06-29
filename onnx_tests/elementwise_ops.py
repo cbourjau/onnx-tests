@@ -206,17 +206,12 @@ def tanh(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
 
 
 @st.composite
-def max(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
-    num_shapes = draw(st.integers(1, 4))
-    arrays = draw(h.broadcastable_arrays(dtype, num_shapes=num_shapes))
-    return TestCaseDraw(inputs={"data_0": arrays}, attribute_kwargs={}, spox_fun=op.max)
-
-
-@st.composite
-def min(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
-    num_shapes = draw(st.integers(1, 4))
-    arrays = draw(h.broadcastable_arrays(dtype, num_shapes=num_shapes))
-    return TestCaseDraw(inputs={"data_0": arrays}, attribute_kwargs={}, spox_fun=op.min)
+def prelu(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    shape_x = draw(hyn.array_shapes(min_dims=0, min_side=0))
+    shape_slope = draw(hyn.broadcastable_shapes(shape_x, min_dims=0, min_side=0))
+    x = draw(h.arrays(dtype, shape=shape_x))
+    slope = draw(h.arrays(dtype, shape=shape_slope))
+    return TestCaseDraw(inputs=[x, slope], attribute_kwargs={}, spox_fun=op.prelu)
 
 
 @st.composite

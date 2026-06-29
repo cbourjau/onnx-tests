@@ -105,3 +105,40 @@ def _reduce(draw: st.DrawFn, dtype: np.dtype, spox_fun: Callable) -> TestCaseDra
         },
         spox_fun=spox_fun,
     )
+
+
+@st.composite
+def max(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    return draw(_variadic_reduce(dtype, op.max))
+
+
+@st.composite
+def min(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    return draw(_variadic_reduce(dtype, op.min))
+
+
+@st.composite
+def mean(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    return draw(_variadic_reduce(dtype, op.mean))
+
+
+@st.composite
+def sum(draw: st.DrawFn, dtype: np.dtype, op: ModuleType) -> TestCaseDraw:
+    return draw(_variadic_reduce(dtype, op.sum))
+
+
+@st.composite
+def _variadic_reduce(
+    draw: st.DrawFn, dtype: np.dtype, spox_fun: Callable
+) -> TestCaseDraw:
+    num_shapes = draw(st.integers(1, 5))
+    shapes = draw(
+        hyn.mutually_broadcastable_shapes(num_shapes=num_shapes, min_side=0, min_dims=0)
+    )
+    arrays = [draw(h.arrays(dtype, shape=s)) for s in shapes.input_shapes]
+
+    return TestCaseDraw(
+        inputs={"data_0": arrays},
+        attribute_kwargs={},
+        spox_fun=spox_fun,
+    )
