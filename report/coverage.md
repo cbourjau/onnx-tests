@@ -45,7 +45,7 @@
   - [ ] 22
 - [Attention](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Attention)
   - [ ] 23
-  - [ ] 24
+  - [x] 24
 - [AveragePool](https://github.com/onnx/onnx/blob/main/docs/Operators.md#AveragePool)
   - [ ] 1
   - [ ] 7
@@ -860,3 +860,17 @@
   - [ ] 1
 
 # ai.onnx.preview
+
+- [FlexAttention](https://github.com/onnx/onnx/blob/main/docs/Operators.md#aionnxpreviewflexattention)
+  - [ ] 1
+
+# ai.onnx.preview.training
+
+- [Adagrad](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxpreviewtrainingadagrad)
+  - [ ] 1
+- [Adam](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxpreviewtrainingadam)
+  - [ ] 1
+- [Gradient](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxpreviewtraininggradient)
+  - [ ] 1
+- [Momentum](https://github.com/onnx/onnx/blob/main/docs/Operators-ml.md#aionnxpreviewtrainingmomentum)
+  - [ ] 1

@@ -10,6 +10,8 @@ import spox.opset.ai.onnx.v19 as op19
 import spox.opset.ai.onnx.v20 as op20
 import spox.opset.ai.onnx.v21 as op21
 import spox.opset.ai.onnx.v22 as op22
+import spox.opset.ai.onnx.v23 as op23
+import spox.opset.ai.onnx.v24 as op24
 from hypothesis import given, reproduce_failure
 from hypothesis import strategies as st
 
@@ -32,6 +34,10 @@ def get_opset(version: int):
         op = op21
     elif version <= 22:
         op = op22
+    elif version <= 23:
+        op = op23
+    elif version <= 24:
+        op = op24
     else:
         raise NotImplementedError
     return op

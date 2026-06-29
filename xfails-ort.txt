@@ -298,6 +298,12 @@ tests/test_creation_functions.py::test_EyeLike_9[out-float16-in-int32] # ORT has
 tests/test_creation_functions.py::test_EyeLike_9[out-float16-in-int64] # ORT has not implemented EyeLike for float16 output with int64 input
 tests/test_creation_functions.py::test_EyeLike_9[out-float16-in-uint64] # ORT has not implemented EyeLike for float16 output with uint64 input
 
+# Attention: no-past variants covered by xfails-reference.txt (nonpad_kv_seqlen crash);
+# past variants fail because ORT disagrees with the reference on softcap numerics and NaN propagation.
+tests/test_attention.py::test_Attention_24[past-v24-float16] # ORT disagrees with reference on softcap numerics and NaN propagation
+tests/test_attention.py::test_Attention_24[past-v24-float32] # ORT disagrees with reference on softcap numerics and NaN propagation
+tests/test_attention.py::test_Attention_24[past-v24-float64] # ORT disagrees with reference on softcap numerics and NaN propagation
+
 # Pow:
 tests/test_elementwise.py::test_Pow_13[uint8-int32]    # NOT_IMPLEMENTED
 tests/test_elementwise.py::test_Pow_13[uint8-int64]    # NOT_IMPLEMENTED
