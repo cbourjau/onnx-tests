@@ -36,6 +36,8 @@ tests/test_elementwise.py::test_Atan_7[v17-float64] # ORT has not implemented At
 tests/test_elementwise.py::test_Atanh_9[v17-float64] # ORT has not implemented Atanh for float64
 tests/test_elementwise.py::test_Cos_7[v17-float64] # ORT has not implemented Cos for float64
 tests/test_elementwise.py::test_Cosh_9[v17-float64] # ORT has not implemented Cosh for float64
+tests/test_elementwise.py::test_Erf_13[v17-float16] # ORT Erf disagrees with reference
+tests/test_elementwise.py::test_Erf_13[v17-float32] # ORT Erf disagrees with reference
 tests/test_elementwise.py::test_Erf_13[v17-float64] # ORT has not implemented Erf for float64
 tests/test_elementwise.py::test_HardSigmoid_6[v17-float64] # ORT has not implemented HardSigmoid for float64
 tests/test_elementwise.py::test_HardSwish_14[v17-float64] # ORT has not implemented HardSwish for float64
@@ -54,6 +56,9 @@ tests/test_elementwise.py::test_Reciprocal_13[v17-float32] # ORT Reciprocal sign
 
 # Softmax: ORT disagrees with reference
 tests/test_elementwise.py::test_Softmax_13[v17-float16] # ORT Softmax disagrees with reference
+
+# Celu: ORT disagrees with reference
+tests/test_elementwise.py::test_Celu_12[v17-float32] # ORT Celu disagrees with reference
 
 # Mish: ORT disagrees with reference
 tests/test_elementwise.py::test_Mish_18[v18-float16] # ORT Mish disagrees with reference
@@ -94,6 +99,7 @@ tests/test_elementwise.py::test_Shrink_9[v17-float64] # ORT has not implemented 
 
 # PRelu: ORT NaN handling differs, not implemented for uint32/uint64
 tests/test_elementwise.py::test_PRelu_16[v17-float16] # ORT PRelu NaN handling differs from reference
+tests/test_elementwise.py::test_PRelu_16[v17-float32] # ORT PRelu NaN handling differs from reference
 tests/test_elementwise.py::test_PRelu_16[v17-float64] # ORT PRelu NaN handling differs from reference
 tests/test_elementwise.py::test_PRelu_16[v17-uint32] # ORT has not implemented PRelu for uint32
 tests/test_elementwise.py::test_PRelu_16[v17-uint64] # ORT has not implemented PRelu for uint64
@@ -183,6 +189,7 @@ tests/test_statistical.py::test_ReduceLogSumExp_18[v18-float16] # ORT ReduceLogS
 # ReduceMax: ORT not implemented or NaN handling differs
 tests/test_statistical.py::test_ReduceMax_18[v18-uint32] # ORT has not implemented ReduceMax for uint32
 tests/test_statistical.py::test_ReduceMax_18[v18-uint64] # ORT has not implemented ReduceMax for uint64
+tests/test_statistical.py::test_ReduceMax_18[v18-int64] # ORT ReduceMax truncates int64 to int32
 tests/test_statistical.py::test_ReduceMax_18[v18-float16] # ORT ReduceMax NaN handling differs from reference
 tests/test_statistical.py::test_ReduceMax_18[v18-float32] # ORT ReduceMax NaN handling differs from reference
 tests/test_statistical.py::test_ReduceMax_18[v18-float64] # ORT ReduceMax NaN handling differs from reference
@@ -201,11 +208,13 @@ tests/test_statistical.py::test_ReduceMean_18[v18-float64] # ORT ReduceMean disa
 # ReduceMin: ORT not implemented or NaN handling differs
 tests/test_statistical.py::test_ReduceMin_18[v18-uint32] # ORT has not implemented ReduceMin for uint32
 tests/test_statistical.py::test_ReduceMin_18[v18-uint64] # ORT has not implemented ReduceMin for uint64
+tests/test_statistical.py::test_ReduceMin_18[v18-int64] # ORT ReduceMin truncates int64 to int32
 tests/test_statistical.py::test_ReduceMin_18[v18-float16] # ORT ReduceMin NaN handling differs from reference
 tests/test_statistical.py::test_ReduceMin_18[v18-float32] # ORT ReduceMin NaN handling differs from reference
 tests/test_statistical.py::test_ReduceMin_18[v18-float64] # ORT ReduceMin NaN handling differs from reference
 tests/test_statistical.py::test_ReduceMin_20[v20-uint32] # ORT has not implemented ReduceMin for uint32
 tests/test_statistical.py::test_ReduceMin_20[v20-uint64] # ORT has not implemented ReduceMin for uint64
+tests/test_statistical.py::test_ReduceMin_20[v20-int64] # ORT ReduceMin truncates int64 to int32
 tests/test_statistical.py::test_ReduceMin_20[v20-float16] # ORT ReduceMin NaN handling differs from reference
 tests/test_statistical.py::test_ReduceMin_20[v20-float32] # ORT ReduceMin NaN handling differs from reference
 tests/test_statistical.py::test_ReduceMin_20[v20-float64] # ORT ReduceMin NaN handling differs from reference
