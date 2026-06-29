@@ -98,11 +98,8 @@ tests/test_elementwise.py::test_Shrink_9[v17-int32] # ORT has not implemented Sh
 tests/test_elementwise.py::test_Shrink_9[v17-int64] # ORT has not implemented Shrink for int64
 tests/test_elementwise.py::test_Shrink_9[v17-float64] # ORT has not implemented Shrink for float64
 
-# Mean: ORT has not implemented
-tests/test_elementwise.py::test_Mean_13[v17-float64] # ORT has not implemented Mean for float64
-
 # Sum: ORT disagrees with reference
-tests/test_elementwise.py::test_Sum_13[v17-float16] # ORT Sum disagrees with reference for float16
+tests/test_statistical.py::test_Sum_13[v17-float16] # ORT Sum disagrees with reference for float16
 
 # PRelu: ORT NaN handling differs, not implemented for uint32/uint64
 tests/test_elementwise.py::test_PRelu_16[v17-float16] # ORT PRelu NaN handling differs from reference

@@ -53,7 +53,7 @@ def pytest_addoption(parser):
     parser.addoption(
         "--hypothesis-max-examples",
         action="store",
-        default=100,
+        default=500,
         type=int,
         help="set the Hypothesis max_examples setting",
     )
@@ -84,10 +84,16 @@ def pytest_configure(config: pytest.Config):
 
 
 def _apply_marker_from_files(config, items, option, marker_factory):
-    """Apply a pytest marker to tests matching patterns from files."""
+    """Apply a pytest marker to tests matching patterns from files.
+
+    Note that a warning is raised when xfailing a test in the ort and reference xfail
+    files.
+    """
     patterns: list[tuple[str, str]] = []
+    paths = []
     for path in config.getoption(option):
         patterns.extend(_parse_xfails_file(Path(path)))
+        paths.append(path)
 
     if not patterns:
         return
@@ -100,8 +106,11 @@ def _apply_marker_from_files(config, items, option, marker_factory):
                 item.add_marker(marker_factory(reason))
                 matched.add(pattern)
                 break
+
     for pattern in sorted({p for p, _ in patterns} - matched):
-        warnings.warn(f"{option} pattern did not match any test: {pattern!r}")
+        warnings.warn(
+            f"'{option}' pattern from `{paths}` did not match any test: {pattern!r}"
+        )
 
 
 def pytest_collection_modifyitems(session, config, items):
