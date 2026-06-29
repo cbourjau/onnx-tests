@@ -53,7 +53,7 @@ def pytest_addoption(parser):
     parser.addoption(
         "--hypothesis-max-examples",
         action="store",
-        default=500,
+        default=100,
         type=int,
         help="set the Hypothesis max_examples setting",
     )

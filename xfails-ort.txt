@@ -10,9 +10,6 @@ tests/test_conv.py::test_Conv_11[*] # ORT shape mismatch and no dilation+SAME_UP
 # ConvInteger: ORT no per-channel quantization and no dilation+SAME_UPPER support
 tests/test_conv.py::test_ConvInteger_10[*] # ORT no per-channel quantization and no dilation+SAME_UPPER support
 
-# Celu: ORT disagrees with reference
-tests/test_elementwise.py::test_Celu_12[v17-float32] # ORT Celu disagrees with reference
-
 # BitShift: ORT has not implemented for uint16
 tests/test_elementwise.py::test_BitShift_11[v17-uint16] # ORT has not implemented BitShift for uint16
 
@@ -55,9 +52,6 @@ tests/test_elementwise.py::test_Hardmax_13[v17-float64] # ORT has not implemente
 # Reciprocal: ORT returns -inf instead of inf for small positive denormals
 tests/test_elementwise.py::test_Reciprocal_13[v17-float32] # ORT Reciprocal sign of inf differs from reference
 
-# Sigmoid: ORT disagrees with reference
-tests/test_elementwise.py::test_Sigmoid_13[v17-float16] # ORT Sigmoid disagrees with reference
-
 # Softmax: ORT disagrees with reference
 tests/test_elementwise.py::test_Softmax_13[v17-float16] # ORT Softmax disagrees with reference
 
@@ -97,9 +91,6 @@ tests/test_elementwise.py::test_Shrink_9[v17-uint64] # ORT has not implemented S
 tests/test_elementwise.py::test_Shrink_9[v17-int32] # ORT has not implemented Shrink for int32
 tests/test_elementwise.py::test_Shrink_9[v17-int64] # ORT has not implemented Shrink for int64
 tests/test_elementwise.py::test_Shrink_9[v17-float64] # ORT has not implemented Shrink for float64
-
-# Sum: ORT disagrees with reference
-tests/test_statistical.py::test_Sum_13[v17-float16] # ORT Sum disagrees with reference for float16
 
 # PRelu: ORT NaN handling differs, not implemented for uint32/uint64
 tests/test_elementwise.py::test_PRelu_16[v17-float16] # ORT PRelu NaN handling differs from reference
@@ -278,10 +269,6 @@ tests/test_manipulation_functions.py::test_Pad_21[v21-<U0] # ORT has not impleme
 
 # Split: ORT rejects splitting a zero-sized dimension
 tests/test_manipulation_functions.py::test_Split_18[*] # ORT rejects splitting a zero-sized dimension
-
-# Erf:
-tests/test_elementwise.py::test_Erf_13[v17-float16]  # ORT has issues with nan inputs
-tests/test_elementwise.py::test_Erf_13[v17-float32]  # ORT has issues with nan inputs
 
 # EyeLike: ORT has not implemented EyeLike for many dtype combinations
 tests/test_creation_functions.py::test_EyeLike_9[*-in-int8] # ORT has not implemented EyeLike for int8 input
