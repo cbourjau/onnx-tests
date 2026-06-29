@@ -32,3 +32,8 @@ tests/test_elementwise.py::test_Pow_13[int32-int32]  # NumPy raises for integers
 tests/test_elementwise.py::test_Pow_13[int32-int64]  # NumPy raises for integers to negative integer powers
 tests/test_elementwise.py::test_Pow_13[int64-int32]  # NumPy raises for integers to negative integer powers
 tests/test_elementwise.py::test_Pow_13[int64-int64]  # NumPy raises for integers to negative integer powers
+
+# Attention: only the no-past variants exercise nonpad_kv_seqlen; the past (KV-cache) variants pass.
+tests/test_attention.py::test_Attention_24[no_past-v24-float16] # reference impl crashes on broadcasting nonpad_kv_seqlen padding mask with in-place addition
+tests/test_attention.py::test_Attention_24[no_past-v24-float32] # reference impl crashes on broadcasting nonpad_kv_seqlen padding mask with in-place addition
+tests/test_attention.py::test_Attention_24[no_past-v24-float64] # reference impl crashes on broadcasting nonpad_kv_seqlen padding mask with in-place addition

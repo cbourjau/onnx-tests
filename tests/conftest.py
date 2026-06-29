@@ -159,6 +159,8 @@ def create_report(coverage: dict[str, list[int]]):
                     return f"{base_url}/Operators-ml.md#aionnxml{opname.lower()}"
                 elif domain == "ai.onnx.preview.training":
                     return f"{base_url}/Operators-ml.md#aionnxpreviewtraining{opname.lower()}"
+                elif domain == "ai.onnx.preview":
+                    return f"{base_url}/Operators.md#aionnxpreview{opname.lower()}"
                 raise NotImplementedError(f"unexpected domain: `{domain}`")
 
             for name, versions in schemas.items():
